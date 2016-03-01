@@ -18,7 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_communicate"></activity>
+        <activity android:name=".activity_communicate" />
+        <activity
+            android:name=".activity_manage"
+            android:theme="@style/AppTheme.BrownActionBar"
+            android:label="Manage Step">
+
+        </activity>
     </application>
 
 </manifest>
