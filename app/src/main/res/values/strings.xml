@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">First Step</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Recycler View-->
+    <string name="action_refresh">Settings</string>
+    <string name="action_new">Settings</string>
+    <string name="logo_desc">App logo</string>
+    <string name="activity">Add User</string>
+    <string name="descriptions">You are able to add your users here</string>
+
+    <!-- Add Child Hint Strings -->
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>gender
+    <string name="gender">Gender</string>
+    <string name="Submit">Submit</string>
+    <string name="MoreInfo">Add more Information</string>
+</resources>

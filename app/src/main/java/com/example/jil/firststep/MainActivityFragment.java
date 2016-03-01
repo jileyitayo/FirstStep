@@ -1,0 +1,92 @@
+package com.example.jil.firststep;
+
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.app.Fragment;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.jil.androidrecyclerviewgridview.ItemObject;
+import com.example.jil.androidrecyclerviewgridview.RecyclerViewAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A placeholder fragment containing a simple view.
+ */
+public class MainActivityFragment extends Fragment implements View.OnClickListener {
+
+    private GridLayoutManager lLayout;
+    public final List<ItemObject> rowListItem = getAllItemList();
+
+    //ImageView picImage;
+    //TextView userText;
+    public MainActivityFragment() {
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        getActivity().setTitle("Home");
+        //1 determines the number of grid on a row
+        lLayout = new GridLayoutManager(getActivity(), 1);
+
+        RecyclerView rView = (RecyclerView)view.findViewById(R.id.recycler_view);
+        rView.setHasFixedSize(true);
+        rView.setLayoutManager(lLayout);
+
+        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(getActivity(), rowListItem);
+        rView.setAdapter(rcAdapter);
+
+        //picImage.setOnClickListener(imageViewOnclickListener);
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    private int cardObj(List<ItemObject> rowListItem)
+    {
+        int r = 0;
+        for (ItemObject initList:
+                rowListItem) {
+            if(initList.getName() == "Add Child")
+            {
+                //((OnCardViewClickListener), context).loadAddChildFragment();
+                r = 1;
+            }
+            else if(initList.getName() == "Manage Child")
+            {
+                //((OnCardViewClickListener), context).loadAddChildFragment();
+                r = 2;
+            }
+            else if(initList.getName() == "Contact Doctor")
+            {
+                //((OnCardViewClickListener), context).loadAddChildFragment();
+                r = 3;
+            }
+        }
+        return r;
+    }
+
+    private List<ItemObject> getAllItemList(){
+
+        String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor"};
+        List<ItemObject> allItems = new ArrayList<ItemObject>();
+        allItems.add(new ItemObject("Add Child", R.drawable.child_baby, descriptions[0]));
+        allItems.add(new ItemObject("Manage Child", R.drawable.african_american_children, descriptions[1]));
+        allItems.add(new ItemObject("Contact Doctor", R.drawable.black_mother_child_healthcare_doctor, descriptions[2]));
+        return allItems;
+    }
+
+}
