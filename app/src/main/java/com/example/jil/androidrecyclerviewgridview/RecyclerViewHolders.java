@@ -39,7 +39,6 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
     Fragment newFragment;
     @Override
     public void onClick(View view) {
-        FragmentManager fm;
         switch (getAdapterPosition())
         {
             case 0:

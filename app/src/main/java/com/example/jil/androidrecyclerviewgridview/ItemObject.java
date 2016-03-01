@@ -12,6 +12,10 @@ public class ItemObject {
         this.photo = photo;
         this.description = description;
     }
+    public ItemObject(String name,String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
