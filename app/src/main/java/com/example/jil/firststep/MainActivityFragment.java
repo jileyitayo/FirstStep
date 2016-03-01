@@ -54,7 +54,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
 
     }
-
     private List<ItemObject> getAllItemList(){
 
         String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor"};
@@ -64,5 +63,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         allItems.add(new ItemObject("Contact Doctor", R.drawable.black_mother_child_healthcare_doctor, descriptions[2]));
         return allItems;
     }
+
+
 
 }
