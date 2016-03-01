@@ -55,30 +55,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
     }
 
-    private int cardObj(List<ItemObject> rowListItem)
-    {
-        int r = 0;
-        for (ItemObject initList:
-                rowListItem) {
-            if(initList.getName() == "Add Child")
-            {
-                //((OnCardViewClickListener), context).loadAddChildFragment();
-                r = 1;
-            }
-            else if(initList.getName() == "Manage Child")
-            {
-                //((OnCardViewClickListener), context).loadAddChildFragment();
-                r = 2;
-            }
-            else if(initList.getName() == "Contact Doctor")
-            {
-                //((OnCardViewClickListener), context).loadAddChildFragment();
-                r = 3;
-            }
-        }
-        return r;
-    }
-
     private List<ItemObject> getAllItemList(){
 
         String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor"};

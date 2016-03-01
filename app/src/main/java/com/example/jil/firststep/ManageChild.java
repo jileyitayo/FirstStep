@@ -20,7 +20,7 @@ public class ManageChild extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.card_view, container, false);
-
+        getActivity().setTitle("Manage Child");
         return view;
     }
 }

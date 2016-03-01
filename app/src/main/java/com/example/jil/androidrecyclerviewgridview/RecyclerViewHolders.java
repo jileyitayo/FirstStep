@@ -39,7 +39,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
     Fragment newFragment;
     @Override
     public void onClick(View view) {
-
+        FragmentManager fm;
         switch (getAdapterPosition())
         {
             case 0:
@@ -57,6 +57,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
         }
         FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, newFragment);
+        transaction.addToBackStack("newFragment");
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
 
