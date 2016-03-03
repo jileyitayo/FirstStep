@@ -2,6 +2,7 @@ package com.example.jil.androidrecyclerviewgridview;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -9,6 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jil.firststep.R;
+
+import layout.Add_Child;
+import layout.MainActivityFragment;
+import layout.ManageChild;
+import layout.manage_R_Child;
 
 /**
  * Created by JIL on 01/03/16.
@@ -30,6 +36,7 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
 
     @Override
     public void onClick(View v) {
+        newFragment2 = new manage_R_Child();
         /*
         switch (getAdapterPosition())
         {
@@ -46,12 +53,13 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
                 newFragment2 = new MainActivityFragment();
                 break;
         }
+        */
         FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, newFragment);
+        transaction.replace(R.id.fragmentActManage, newFragment2);
         transaction.addToBackStack("newFragment");
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
-*/
+
         Toast.makeText(v.getContext(), "Clicked at listView Position = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
     }
 }

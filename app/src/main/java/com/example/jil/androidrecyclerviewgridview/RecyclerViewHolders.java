@@ -2,7 +2,6 @@ package com.example.jil.androidrecyclerviewgridview;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jil.firststep.Add_Child;
-import com.example.jil.firststep.MainActivityFragment;
-import com.example.jil.firststep.ManageChild;
+import layout.Add_Child;
+import layout.MainActivityFragment;
 import com.example.jil.firststep.R;
 import com.example.jil.firststep.activity_manage;
-
-import java.util.List;
 
 
 public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragmentManage"
-    tools:context="com.example.jil.firststep.MainActivityFragment"
+    tools:context="layout.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
     <android.support.v7.widget.RecyclerView

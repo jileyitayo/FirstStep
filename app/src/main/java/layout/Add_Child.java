@@ -1,4 +1,4 @@
-package com.example.jil.firststep;
+package layout;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.jil.firststep.R;
 
 /**
  * Created by JIL on 26/02/16.
@@ -25,4 +27,6 @@ Context cxt;
         getActivity().setTitle("New Child");
         return view;
     }
+
+
 }
