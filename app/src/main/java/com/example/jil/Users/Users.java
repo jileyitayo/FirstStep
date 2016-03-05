@@ -57,6 +57,10 @@ public class Users {
     {
         this.username = username;
     }
+    public String getPassword()
+    {
+        return password;
+    }
     public void setPassword(String password)
     {
         this.password = password;
@@ -76,5 +80,9 @@ public class Users {
     public void setPhoneNumber(int phoneNumber)
     {
         this.phoneNo = phoneNumber;
+    }
+    public int getUserCount(int countFromDB)
+    {
+        return countFromDB;
     }
 }

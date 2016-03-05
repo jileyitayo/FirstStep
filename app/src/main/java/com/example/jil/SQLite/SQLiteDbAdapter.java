@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import com.example.jil.Users.Users;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by JIL on 01/02/16.
  */
@@ -25,8 +29,8 @@ public class SQLiteDbAdapter {
 
     /**
      *This inserts the following parameters into the database
-     * @param firstName
-     * @param lastName
+     * @param //firstName
+     * @param //lastName
      * @param username
      * @param phone
      * @param password
@@ -35,7 +39,7 @@ public class SQLiteDbAdapter {
      */
 
     //Insert User to DB
-    public long Insert(String firstName, String lastName, String email, int phone, String username, String password)
+    private long Insert(String username, String password,String email,int phone)
     {
         Users user = new Users();
         long newRowId = 0;
@@ -51,12 +55,14 @@ public class SQLiteDbAdapter {
             // Gets the data repository in write mode
 // Create a new map of values, where column names are the keys
             ContentValues contentValues = new ContentValues();
-            contentValues.put(jilDBHelper.FIRST_NAME, firstName);
-            contentValues.put(jilDBHelper.LAST_NAME, lastName);
+            //contentValues.put(jilDBHelper.FIRST_NAME, firstName);
+            //contentValues.put(jilDBHelper.LAST_NAME, lastName);
             contentValues.put(jilDBHelper.EMAIL_ADDRESS, email);
             contentValues.put(jilDBHelper.PHONE, phone);
             contentValues.put(jilDBHelper.USERNAME, username);
             contentValues.put(jilDBHelper.PASSWORD, password);
+            contentValues.put(jilDBHelper.CREATED_AT, getDateTime());
+            contentValues.put(jilDBHelper.UPDATED_AT, getDateTime());
 
 // Insert the new row, returning the primary key value of the new row
             newRowId = db.insert(
@@ -64,12 +70,13 @@ public class SQLiteDbAdapter {
                     null,
                     contentValues);
         }
+        //user.setId((int)newRowId);
         return newRowId;
     }
 
 
 // Get User details from the database
-    public Users readDBData(String[] projection)
+    private Users readDBData(String[] projection)
     {
         SQLiteDatabase db = jilDBHelper.getReadableDatabase();
         Users newUser = new Users();
@@ -99,8 +106,8 @@ public class SQLiteDbAdapter {
             int index1 =  cursor.getColumnIndex(jilDBHelper.USER_ID);
             long cid = cursor.getInt(index1);
 
-            int index2 =  cursor.getColumnIndex(jilDBHelper.FIRST_NAME);
-            String firstname = cursor.getString(index2);
+            //int index2 =  cursor.getColumnIndex(jilDBHelper.FIRST_NAME);
+            //String firstname = cursor.getString(index2);
 
             int index3 =  cursor.getColumnIndex(jilDBHelper.USERNAME);
             String username = cursor.getString(index3);
@@ -115,7 +122,7 @@ public class SQLiteDbAdapter {
             int phone = cursor.getInt(index6);
 
 
-            buffer.append(cid + " " + firstname +" " + email +  " " + phone + " " + username + " " + password + "\n");
+            //buffer.append(cid + " " + firstname +" " + email +  " " + phone + " " + username + " " + password + "\n");
             newUser = new Users(cid, username, password, email, phone);
         }
 
@@ -173,8 +180,10 @@ public class SQLiteDbAdapter {
         db.delete(jilDBHelper.TABLE_NAME,jilDBHelper.USERNAME + " = ? ", selectionArgs);
     }
 
-    public void DeleteUser(String userName)
+    public void DeleteUser(Users user)
     {
+        String userName = user.getUsername();
+
         SQLiteDatabase db = jilDBHelper.getWritableDatabase();
 
         // Specify arguments in placeholder order.
@@ -203,7 +212,12 @@ public class SQLiteDbAdapter {
                 selectionArgs);
     }
 
-
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 
     //This is the class in charge of Creating database and updating Database based on the version
     static class JilDBHelper extends SQLiteOpenHelper {
@@ -218,6 +232,8 @@ public class SQLiteDbAdapter {
         private static final String EMAIL_ADDRESS = "email";
         private static final String PHONE = "phoneNumber";
         private static final String PASSWORD = "password";
+        private static final String CREATED_AT = "created_at";
+        private static final String UPDATED_AT = "updated_at";
         private static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE "
                         + TABLE_NAME
@@ -227,9 +243,11 @@ public class SQLiteDbAdapter {
                  //       + LAST_NAME + " VARCHAR(32), "
                         + USERNAME + " VARCHAR(20), "
                         + EMAIL_ADDRESS + " VARCHAR(100), "
-                        + LAST_NAME + " VARCHAR(32), "
+                  //      + LAST_NAME + " VARCHAR(32), "
                         + PASSWORD + " VARCHAR(32), "
                         + PHONE + " VARCHAR(15), "
+                        + CREATED_AT + "DATETIME"
+                        + UPDATED_AT + "DATETIME"
                         + " );";
 
         private static final String SQL_DELETE_ENTRIES =
