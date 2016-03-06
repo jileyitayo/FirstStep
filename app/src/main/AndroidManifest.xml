@@ -15,10 +15,22 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity_communicate" />
+        <activity
+            android:name=".activity_manage"
+            android:label="Manage Step"
+            android:theme="@style/AppTheme.BrownActionBar"></activity>
+        <activity
+            android:name=".Login_Activity"
+            android:label="Login"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_communicate"></activity>
     </application>
 
 </manifest>

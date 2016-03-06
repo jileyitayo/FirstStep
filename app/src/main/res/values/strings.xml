@@ -15,4 +15,31 @@
     <string name="gender">Gender</string>
     <string name="Submit">Submit</string>
     <string name="MoreInfo">Add more Information</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sh_first_name">Jerry</string>
+    <string name="sh_last_name">Markinson</string>gender
+    <string name="gender_det">"Age: "</string>
+    <string name="sh_gender">Male</string>
+    <string name="dOB_det">"Date Of Birth: "</string>
+    <string name="sh_dOB">"23/1/2015"</string>
+    <string name="sh_MoreInfo">More Information</string>
+
+    <!-- Login Layout Strings -->
+    <string name="usernameHint">"Username"</string>
+    <string name="passwordHint">"Password</string>
+    <string name="confirmPasswordHint">"Confirm Password</string>
+    <string name="emailHint">"Email Address"</string>
+    <string name="phoneNoHint">"Phone Number"</string>
+    <string name="welcomeUser">Welcome</string>
+    <string name="firstTimeLogin">First Time Login</string>
+    <string name="error_field_confirmed_required">Passwords dont Match</string>
+    <string name="error_field_required">This field is required!</string>
+    <string name="error_field__phone_required">Enter ValidPhone Number!</string>
+    <string name="error_invalid_password">Password is too short!</string>
+    <string name="error_invalid_usernane">Username Required</string>
+    <string name="error_invalid_email">Email not Valid</string>
+    error_invalid_email
+    <string name="loginUser">Login</string>
 </resources>

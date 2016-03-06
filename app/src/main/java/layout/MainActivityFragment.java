@@ -1,4 +1,4 @@
-package com.example.jil.firststep;
+package layout;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
 import com.example.jil.androidrecyclerviewgridview.RecyclerViewAdapter;
+import com.example.jil.firststep.R;
 
 import java.util.ArrayList;
 import java.util.List;

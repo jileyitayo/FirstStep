@@ -2,44 +2,41 @@ package com.example.jil.firststep;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import layout.MainActivityFragment;
+import layout.ManageChild;
 
-public class MainActivity extends AppCompatActivity {
+public class activity_manage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_activity_manage);
+        Toolbar toolbarBrown = (Toolbar) findViewById(R.id.toolbarBrown);
+        setSupportActionBar(toolbarBrown);
+        FloatingActionButton newChild = (FloatingActionButton) findViewById(R.id.newChild);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        newChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "This allows you to add new child", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-
-//Fragments starts from here
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         //initialize what the fragment should be;
         //MainActivityFragment mainActivityFragment = new MainActivityFragment();
-        ft.add(R.id.fragment, new MainActivityFragment());
+        ft.add(R.id.fragmentActManage, new ManageChild());
         ft.commit();
 
     }
@@ -65,25 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-/*
-    public void setFragment(Fragment frag, String tag)
-    {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.container);
-        if(fragment == null)
-        {
-            ft.add(R.id.container, frag, tag);
-        } else {
-            ft.replace(R.id.container, frag, tag);
-        }
-
-        ft.addToBackStack(null);
-        ft.commit();
-
-    }
-    */
 
 
 }
