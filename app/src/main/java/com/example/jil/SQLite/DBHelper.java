@@ -11,6 +11,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "HEALTH";
     public static final int DB_VERSION = 1;
 
+    //User Table Definition
     private static final String TEXT_TYPE = " TEXT";
     private static final String REAL_TYPE = " REAL";
     private static final String NUMERIC_TYPE = " NUMERIC";

@@ -11,8 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import layout.Add_Child;
 import layout.MainActivityFragment;
+
+import com.example.jil.firststep.AddChild_Activity;
 import com.example.jil.firststep.R;
 import com.example.jil.firststep.activity_manage;
 
@@ -40,8 +41,8 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
         switch (getAdapterPosition())
         {
             case 0:
-                newFragment = new Add_Child();
-                insertFragment();
+                intent = new Intent(activity, AddChild_Activity.class);
+                activity.startActivity(intent);
                 break;
             case 1:
                 //newFragment = new ManageChild();

@@ -25,4 +25,25 @@ public class DBTables {
         public static final String[] ALL_COLUMNS =
                 {USER_ID, USERNAME, PASSWORD, EMAIL_ADDRESS, PHONE, CREATED_AT, UPDATED_AT};
     }
+
+    public static abstract class Children implements BaseColumns {
+        public static final String TABLE_NAME = "ChildDB";
+        public static final String CHILD_ID = "child_id";
+        public static final String FIRST_NAME = "first_name";
+        public static final String LAST_NAME = "last_name";
+        public static final String GENDER = "gender";
+        public static final String DOB = "date_of_birth";
+        public static final String MOREINFO_COUNT = "more_info_Count";
+        public static final String USER_ID = "added_by_user_id";
+        public static final String USERNAME = "added_by_username";
+        //public static final String USERNAME = "username";
+        //public static final String EMAIL_ADDRESS = "email";
+        //public static final String PHONE = "phoneNumber";
+        //public static final String PASSWORD = "password";
+        public static final String CREATED_AT = "created_at";
+        public static final String UPDATED_AT = "updated_at";
+        //public static final String PRIMARY_KEY = "PRIMARY KEY (" + USER_ID + ")";
+        public static final String[] ALL_COLUMNS =
+                {CHILD_ID, FIRST_NAME, LAST_NAME, GENDER, DOB,MOREINFO_COUNT, USER_ID, USERNAME, CREATED_AT, UPDATED_AT};
+    }
 }

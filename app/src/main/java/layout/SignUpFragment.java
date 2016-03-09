@@ -56,9 +56,6 @@ public class SignUpFragment extends Fragment {
                 if (TextUtils.isEmpty(username.getText().toString())) {
                     username.setError(getString(R.string.error_invalid_usernane));
                 }
-                else if (TextUtils.isEmpty(emailAddress.getText().toString()) || !isEmailValid(emailAddress.getText().toString())) {
-                    emailAddress.setError(getString(R.string.error_invalid_email));
-                }
 /*
                 else if (!TextUtils.isEmpty(phoneNo.getText().toString())) {
                     phoneNo.setError(getString(R.string.error_field__phone_required));
@@ -74,6 +71,9 @@ public class SignUpFragment extends Fragment {
 
                 else if (TextUtils.isEmpty(confirmPassword.getText().toString())) {
                     confirmPassword.setError(getString(R.string.error_field_required));
+                }
+                else if (TextUtils.isEmpty(emailAddress.getText().toString()) || !isEmailValid(emailAddress.getText().toString())) {
+                    emailAddress.setError(getString(R.string.error_invalid_email));
                 }
                 else
                 {

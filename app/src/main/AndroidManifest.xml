@@ -22,7 +22,7 @@
         <activity
             android:name=".activity_manage"
             android:label="Manage Step"
-            android:theme="@style/AppTheme.BrownActionBar"></activity>
+            android:theme="@style/AppTheme.BrownActionBar" />
         <activity
             android:name=".Login_Activity"
             android:label="Login"
@@ -30,6 +30,15 @@
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddChild_Activity"
+            android:label="New Child"
+            android:theme="@style/AppTheme.GreenActionBar"></activity>
+        <activity android:name=".More_Info"
+            android:label="Add More Information"
+            android:theme="@style/AppTheme.BluishActionBar">
+
         </activity>
     </application>
 

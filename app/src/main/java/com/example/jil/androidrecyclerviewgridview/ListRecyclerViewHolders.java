@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.jil.firststep.R;
 
-import layout.Add_Child;
 import layout.MainActivityFragment;
 import layout.ManageChild;
 import layout.manage_R_Child;

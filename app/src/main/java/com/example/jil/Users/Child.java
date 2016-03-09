@@ -12,14 +12,36 @@ public class Child {
     private String dateOfBirth;
     private String gender;
     private String moreInfo;
-    private Users id;
+    private Users user;
 
     public Child(String firstName, String lastName, Users id)
     {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.user = id;
         this.child_id = 0;
+    }
+
+    public Child()
+    {
+
+    }
+    public long getUserId()
+    {
+        return user.getId();
+    }
+    public void setUserId(long id)
+    {
+        user.setId(id);
+    }
+
+    public String getUsername()
+    {
+        return user.getUsername();
+    }
+    public void setUsername(String username)
+    {
+        user.setUsername(username);
     }
 
     public String getfirstName()
@@ -73,11 +95,6 @@ public class Child {
     public void setChild_id(int child_id)
     {
         this.child_id = child_id;
-    }
-
-    public Users getUser_id()
-    {
-        return id;
     }
 
 }

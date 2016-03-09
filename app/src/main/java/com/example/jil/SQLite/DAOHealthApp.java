@@ -44,7 +44,7 @@ public class DAOHealthApp {
         return database.insert(DBTables.HealthUsers.TABLE_NAME, null, contentValues);
     }
 
-    //Get User from DB
+    //Get 1 User from DB
     public Users getUsers(String username, String password)
     {
         Users existingUser = new Users(username, password);

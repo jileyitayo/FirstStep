@@ -29,7 +29,7 @@
     <!-- Login Layout Strings -->
     <string name="usernameHint">"Username"</string>
     <string name="passwordHint">"Password</string>
-    <string name="confirmPasswordHint">"Confirm Password</string>
+    <string name="confirmPasswordHint">"Confirm Password"</string>
     <string name="emailHint">"Email Address"</string>
     <string name="phoneNoHint">"Phone Number"</string>
     <string name="welcomeUser">Welcome</string>
@@ -40,6 +40,14 @@
     <string name="error_invalid_password">Password is too short!</string>
     <string name="error_invalid_usernane">Username Required</string>
     <string name="error_invalid_email">Email not Valid</string>
-    error_invalid_email
+    <string name="showDateDialog">" Click to Set Date of Birth! "</string>
+    <string name="dOBa">Select Date of Birth : </string>
     <string name="loginUser">Login</string>
+
+    <!-- Add Child Strings -->
+    <string name="firstName_add">"Enter First Name"</string>
+    <string name="lastName_add">"Enter Last Name</string>
+    <string name="gender_add">"Enter Gender"</string>
+    <string name="dOB_add">"Select Date of Birth"</string>
+
 </resources>
