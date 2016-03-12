@@ -1,6 +1,7 @@
 package layout;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,5 +44,6 @@ public class manage_R_Child extends Fragment {
     {
             public void respond(String data);
     }
+
 
 }

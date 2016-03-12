@@ -27,6 +27,23 @@ public class DBHelper extends SQLiteOpenHelper {
             + DBTables.HealthUsers.CREATED_AT + TEXT_TYPE + ", "
             + DBTables.HealthUsers.UPDATED_AT + TEXT_TYPE
             + ");";
+    private static final String CREATE_CHILDDB_TABLE = "CREATE TABLE "
+            + DBTables.Children.TABLE_NAME
+            + " ("
+            + DBTables.Children.CHILD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + DBTables.Children.FIRST_NAME + TEXT_TYPE + ", "
+            + DBTables.Children.LAST_NAME + TEXT_TYPE + ", "
+            + DBTables.Children.GENDER + TEXT_TYPE + ", "
+            + DBTables.Children.DOB + TEXT_TYPE + ", "
+            + DBTables.Children.MOREINFO_COUNT + TEXT_TYPE + ", "
+            + DBTables.Children.USER_ID + TEXT_TYPE + ", "
+            + DBTables.Children.USERNAME + TEXT_TYPE + ", "
+            + DBTables.Children.CREATED_AT + TEXT_TYPE + ", "
+            + DBTables.Children.UPDATED_AT + TEXT_TYPE
+            + ");";
+
+    private static final String DELETE_CHILDDB_TABLE = "DROP TABLE IF EXISTS " + DBTables.Children.TABLE_NAME;
+
 
     private static final String DELETE_HEALTHDB_TABLE = "DROP TABLE IF EXISTS " + DBTables.HealthUsers.TABLE_NAME;
 
@@ -36,10 +53,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_HEALTHDB_TABLE);
+        db.execSQL(CREATE_CHILDDB_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(CREATE_HEALTHDB_TABLE);
+        db.execSQL(DELETE_CHILDDB_TABLE);
+        db.execSQL(DELETE_HEALTHDB_TABLE);
         onCreate(db);
     }
 }

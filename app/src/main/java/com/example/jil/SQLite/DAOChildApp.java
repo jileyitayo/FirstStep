@@ -18,17 +18,17 @@ import java.util.List;
  */
 public class DAOChildApp {
     private SQLiteDatabase database;
-    private ChildDBHelper childDbHelper;
+    private DBHelper dbHelper;
 
     public DAOChildApp(Context context) {
-        childDbHelper = new ChildDBHelper(context);
+        dbHelper = new DBHelper(context);
         // Gets the data repository in write mode
-        database = childDbHelper.getWritableDatabase();
+        database = dbHelper.getWritableDatabase();
     }
 
     //close any db object
     public void close() {
-        childDbHelper.close();
+        dbHelper.close();
     }
 
     //Insert Users to DB
@@ -43,8 +43,8 @@ public class DAOChildApp {
         contentValues.put(DBTables.Children.MOREINFO_COUNT, "");
         contentValues.put(DBTables.Children.USER_ID, user.getId()); // gets userid for the user that added the child
         contentValues.put(DBTables.Children.USERNAME, user.getUsername());
-        contentValues.put(DBTables.HealthUsers.CREATED_AT, getDateTime());
-        contentValues.put(DBTables.HealthUsers.UPDATED_AT, getDateTime());
+        contentValues.put(DBTables.Children.CREATED_AT, getDateTime());
+        contentValues.put(DBTables.Children.UPDATED_AT, getDateTime());
         return database.insert(DBTables.Children.TABLE_NAME, null, contentValues);
     }
 
@@ -65,19 +65,23 @@ public class DAOChildApp {
     }
 
     //Get 1 User from DB
-    public Child getSingleChild(String fName, String LName)
-    {
+    public Child getSingleChild(String fName, String LName) {
         Child existingUser = new Child();
         //arguments are
         String[] selectionArgs = {fName, LName};
-        Cursor cursor =
-                database.query(DBTables.Children.TABLE_NAME, DBTables.Children.ALL_COLUMNS,
-                        DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?"  , selectionArgs, null, null, null);
+        Cursor cursor = null;
+        cursor = database.query(DBTables.Children.TABLE_NAME, DBTables.Children.ALL_COLUMNS,
+                DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?", selectionArgs, null, null, null);
         cursor.moveToFirst();
-        existingUser = cursorToChildren(cursor);
-        cursor.close();
+        if (cursor != null)
+        {
+            if(cursor.moveToFirst()) {
+                existingUser = cursorToChildren(cursor);
+            }
+        }
         return existingUser;
     }
+
     public int getChildRowCount() {
         String countQuery = "SELECT  * FROM " + DBTables.Children.TABLE_NAME;
         Cursor cursor = database.rawQuery(countQuery, null);
@@ -86,11 +90,14 @@ public class DAOChildApp {
         return count;
     }
 
-    public boolean isChildPresent(Child getChild12)
-    {
+    public boolean isChildPresent(Child getChild12) {
+        long childid = 0;
         Child formChild = getChild12;
         formChild = getSingleChild(getChild12.getfirstName(), getChild12.getLastName());
-        long childid = formChild.getChild_Id();
+        if(formChild == null)
+            childid = 0;
+        else
+        childid = formChild.getChild_Id();
 
         return (childid > 0);
     }
@@ -105,7 +112,7 @@ public class DAOChildApp {
     private Child cursorToChildren(Cursor cursor) {
         Child existingChild = new Child();
 
-        existingChild.setChild_id(cursor.getInt(cursor.getColumnIndex(DBTables.Children.CHILD_ID)));
+        existingChild.setChild_id(cursor.getLong(cursor.getColumnIndex(DBTables.Children.CHILD_ID)));
         existingChild.setFirstName(cursor.getString(cursor.getColumnIndex(DBTables.Children.FIRST_NAME)));
         existingChild.setLastName(cursor.getString(cursor.getColumnIndex(DBTables.Children.LAST_NAME)));
         existingChild.setGender(cursor.getString(cursor.getColumnIndex(DBTables.Children.GENDER)));
