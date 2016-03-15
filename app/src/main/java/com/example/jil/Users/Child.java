@@ -1,5 +1,6 @@
 package com.example.jil.Users;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**

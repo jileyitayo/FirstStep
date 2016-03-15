@@ -22,6 +22,7 @@ public class activity_manage extends AppCompatActivity {
         setContentView(R.layout.activity_activity_manage);
         Toolbar toolbarBrown = (Toolbar) findViewById(R.id.toolbarBrown);
         setSupportActionBar(toolbarBrown);
+        /*
         FloatingActionButton newChild = (FloatingActionButton) findViewById(R.id.newChild);
 
         newChild.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +33,7 @@ public class activity_manage extends AppCompatActivity {
                 activity_manage.this.startActivity(intent);
             }
         });
-
+*/
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 

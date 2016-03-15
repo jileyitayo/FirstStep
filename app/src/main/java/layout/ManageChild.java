@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -68,6 +69,7 @@ public class  ManageChild extends Fragment{
     {
         String[] descriptions = {"No Detail Found"};
         List<ItemObject> allItems = new ArrayList<ItemObject>();
+        Child child1 = new Child();
         allItems.add(new ItemObject("No Child Name Found", descriptions[0]));
         return allItems;
     }
@@ -76,8 +78,9 @@ public class  ManageChild extends Fragment{
         String[] descriptions = getChildListDesc();
         String[] firstName = getChildFN();
         String[] lastname = getChildLN();
+        List<Child> children = getChildren();
         List<ItemObject> allItems = new ArrayList<ItemObject>();
-        for(int i = 0; i < firstName.length; i++) {
+        for(int i = 0; i < children.size(); i++) {
             allItems.add(new ItemObject(firstName[i] + " " + lastname[i], descriptions[i]));
         }
 

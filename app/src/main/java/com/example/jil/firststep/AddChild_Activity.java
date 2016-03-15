@@ -3,6 +3,7 @@ package com.example.jil.firststep;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,13 +57,13 @@ public class AddChild_Activity extends AppCompatActivity {
 
         this.setTitle("New Child");
 
+        FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit);
         final Calendar cal = Calendar.getInstance();
         year_a = cal.get(Calendar.YEAR);
         month_a = cal.get(Calendar.MONTH);
         day_a = cal.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
 
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -45,7 +45,9 @@
             android:theme="@style/AppTheme.BluishActionBar">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".AddChild_Activity"/>
         </activity>
-        <activity android:name=".ChildInfoFull">
+        <activity android:name=".ChildInfoFull"
+            android:label="Child Info Full"
+            android:theme="@style/AppTheme.BluishActionBar">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_manage"/>
         </activity>
     </application>
