@@ -4,28 +4,24 @@
     android:layout_height="match_parent"
     tools:context="layout.manage_childFull"
     android:id="@+id/manageFullFrag"
-    android:padding="10dp">
+    >
 
     <!-- TODO: Update blank fragment layout -->
-
-    <!-- First name and Last name-->
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sh_first_name"
-        android:id="@+id/sh_first_name"
-        android:textSize="25sp"/>
-
-    <TextView
-        android:layout_marginStart="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sh_last_name"
+        android:id="@+id/toolbarContainer"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/sh_first_name"
-        android:textSize="25sp"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <!-- Other details -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarBluish"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="?attr/colorPrimary"
+            />
+    </android.support.design.widget.AppBarLayout>
+    <!-- First name and Last name-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,9 +29,10 @@
         android:text="@string/gender_det"
         android:id="@+id/textView"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/sh_first_name"
-        android:layout_alignEnd="@+id/sh_first_name" />
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_below="@+id/toolbarContainer"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,8 +40,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sh_gender"
         android:id="@+id/child_age"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignStart="@+id/sh_last_name" />
+        android:layout_above="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,8 +50,9 @@
         android:text="@string/dOB_det"
         android:id="@+id/textView2"
         android:textStyle="bold"
-        android:layout_alignTop="@+id/child_age"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <TextView
         android:layout_marginStart="5dp"
@@ -73,10 +71,18 @@
         android:layout_height="wrap_content"
         android:text="@string/sh_MoreInfo"
         android:id="@+id/more_Info"
-        android:layout_marginTop="30dp"
         android:textSize="20sp"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/sh_first_name" />
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/child_age" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="30dp"
+        android:paddingEnd="3dp"
+        android:layout_below="@id/more_Info">
+
+    </android.support.v7.widget.RecyclerView>
 
 
 

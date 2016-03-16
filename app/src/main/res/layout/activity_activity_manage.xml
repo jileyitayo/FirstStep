@@ -39,7 +39,7 @@
 
 
         </FrameLayout>
-
+<!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/newChild"
         android:layout_width="wrap_content"
@@ -47,6 +47,7 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_input_add" />
+        -->
 </android.support.design.widget.CoordinatorLayout>
 
 

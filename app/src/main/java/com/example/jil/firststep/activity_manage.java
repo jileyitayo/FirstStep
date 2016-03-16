@@ -2,6 +2,7 @@ package com.example.jil.firststep;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,22 +22,25 @@ public class activity_manage extends AppCompatActivity {
         setContentView(R.layout.activity_activity_manage);
         Toolbar toolbarBrown = (Toolbar) findViewById(R.id.toolbarBrown);
         setSupportActionBar(toolbarBrown);
+        /*
         FloatingActionButton newChild = (FloatingActionButton) findViewById(R.id.newChild);
 
         newChild.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This allows you to add new child", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                intent = new Intent(activity_manage.this, AddChild_Activity.class);
+                activity_manage.this.startActivity(intent);
             }
         });
-
+*/
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         //initialize what the fragment should be;
         //MainActivityFragment mainActivityFragment = new MainActivityFragment();
         ft.add(R.id.fragmentActManage, new ManageChild());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 
     }

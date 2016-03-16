@@ -22,7 +22,9 @@
         <activity
             android:name=".activity_manage"
             android:label="Manage Step"
-            android:theme="@style/AppTheme.BrownActionBar"></activity>
+            android:theme="@style/AppTheme.BrownActionBar" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"/>
+        </activity>
         <activity
             android:name=".Login_Activity"
             android:label="Login"
@@ -30,6 +32,23 @@
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddChild_Activity"
+            android:label="New Child"
+            android:theme="@style/AppTheme.GreenActionBar" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"/>
+        </activity>
+        <activity
+            android:name=".More_Info"
+            android:label="Add More Information"
+            android:theme="@style/AppTheme.BluishActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".AddChild_Activity"/>
+        </activity>
+        <activity android:name=".ChildInfoFull"
+            android:label="Child Info Full"
+            android:theme="@style/AppTheme.BluishActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_manage"/>
         </activity>
     </application>
 

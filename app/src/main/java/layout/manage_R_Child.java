@@ -1,6 +1,7 @@
 package layout;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class manage_R_Child extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_child_full, container, false);
         getActivity().setTitle("First Name");
-        child_Name = (TextView)view.findViewById(R.id.sh_first_name);
+        //child_Name = (TextView)view.findViewById(R.id.sh_first_name);
         child_Age = (TextView)view.findViewById(R.id.child_age);
         child_DOB = (TextView)view.findViewById(R.id.child_dOB);
         return view;
@@ -36,12 +37,13 @@ public class manage_R_Child extends Fragment {
 
     public void changeData(String data)
     {
-        child_Name.setText(data);
+    //    child_Name.setText(data);
     }
 
     public interface Communicator
     {
             public void respond(String data);
     }
+
 
 }
