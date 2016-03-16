@@ -59,4 +59,8 @@
 
     </string-array>
 
+
+    <string name="alert_dialog_two_buttons_title">More Information</string>
+    <string name="alert_dialog_ok">Submit</string>
+    <string name="alert_dialog_cancel">Cancel</string>
 </resources>

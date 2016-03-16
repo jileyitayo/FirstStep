@@ -2,7 +2,7 @@ package com.example.jil.firststep;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +12,12 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.jil.Dialog.MyMoreInfoDialog;
 import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.SQLite.DAOHealthApp;
 import com.example.jil.Users.Child;
@@ -26,8 +25,7 @@ import com.example.jil.Users.Users;
 
 import java.util.Calendar;
 
-public class AddChild_Activity extends AppCompatActivity {
-
+public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDialog.NoticeDialogListener{
     Child child = new Child();
     Button btnShowDate, btnSubmit, btnMoreInfo;
     EditText etFirstName, etLastName, etGender;
@@ -38,6 +36,7 @@ public class AddChild_Activity extends AppCompatActivity {
     DAOHealthApp healthApp;
     TextView tvDate;
     Users owner = new Users();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class AddChild_Activity extends AppCompatActivity {
         etFirstName = (EditText) findViewById(R.id.ETFName);
         etLastName = (EditText) findViewById(R.id.ETLName);
         etGender = (EditText) findViewById(R.id.ETgender);
-
         this.setTitle("New Child");
 
         FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit);
@@ -74,8 +72,7 @@ public class AddChild_Activity extends AppCompatActivity {
                     etFirstName.setError(getString(R.string.firstName_add));
                 } else if (TextUtils.isEmpty(etLastName.getText().toString())) {
                     etLastName.setError(getString(R.string.lastName_add));
-                }
-                else if (TextUtils.isEmpty(etGender.getText().toString())) {
+                } else if (TextUtils.isEmpty(etGender.getText().toString())) {
                     etGender.setError(getString(R.string.gender_add));
                 }
                  /*
@@ -105,8 +102,10 @@ public class AddChild_Activity extends AppCompatActivity {
         btnMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddChild_Activity.this, More_Info.class);
-                AddChild_Activity.this.startActivity(intent);
+                //Intent intent = new Intent(AddChild_Activity.this, More_Info.class);
+                //AddChild_Activity.this.startActivity(intent);
+                //showEditDialog();
+                showNoticeDialog();
             }
         });
 
@@ -122,8 +121,7 @@ public class AddChild_Activity extends AppCompatActivity {
         });
     }
 
-    public void clearEtValues()
-    {
+    public void clearEtValues() {
         tvDate.setText("");
         etFirstName.setText("");
         etLastName.setText("");
@@ -182,5 +180,65 @@ public class AddChild_Activity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /*
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialog editNameDialog = new EditNameDialog();
+        editNameDialog.show(fm, "fragment_edit_name");
+    }
+
+    private void showDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialog editNameDialog = new EditNameDialog();
+        editNameDialog.show(fm, "fragment_edit_name");
+    }
+
+    public Dialog dialogSetup() {
+        //Preparing views
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.activity_child_info_full, null);
+        //layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
+        final EditText InfoTitle = (EditText) layout.findViewById(R.id.txt_your_name);
+        final EditText infoDetails = (EditText) layout.findViewById(R.id.txt_your_name2);
+
+        //Building dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Child Information");
+        builder.setView(layout);
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //save info where you want it
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        return dialog;
+    }
+
+    */
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new MyMoreInfoDialog();
+        dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
