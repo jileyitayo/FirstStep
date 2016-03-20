@@ -1,12 +1,13 @@
 package com.example.jil.Users;
 
+import com.example.jil.androidrecyclerviewgridview.ItemObject;
+
 /**
  * Created by JIL on 15/03/16.
  */
 public class MoreInformationModel {
     private long info_id;
-    private String info_title;
-    private String info_details;
+    ItemObject object = new ItemObject();
     private Users user = new Users();
     private Child child = new Child();
 
@@ -17,6 +18,16 @@ public class MoreInformationModel {
 
     public MoreInformationModel() {
 
+    }
+
+    public long getInfo_id()
+    {
+        return info_id;
+    }
+
+    public void setInfo_id(long id)
+    {
+        this.info_id = id;
     }
 
     public String getUsername() {
@@ -34,25 +45,28 @@ public class MoreInformationModel {
 
     public void setChildname(String childFirstname, String childLastName) {
         child.setFirstName(childFirstname);
-        child.setFirstName(childLastName);
+        child.setLastName(childLastName);
     }
 
     public String getInfo_title() {
-        return info_title;
+        return object.getName();
     }
 
-    public void setInfo_id(String info_title1) {
-        this.info_title = info_title1;
+    public void setInfo_title(String info_title1) {
+        this.object.setName(info_title1);
     }
 
     public String getInfo_details() {
-        return info_details;
+        return object.getDescription();
     }
 
     public void setInfo_details(String info_details1) {
-        this.info_details = info_details1;
+        this.object.setDescription(info_details1);
     }
 
-
+    public Child getChild()
+    {
+        return child;
+    }
 
 }

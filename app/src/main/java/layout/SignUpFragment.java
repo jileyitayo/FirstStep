@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.jil.SQLite.DAOHealthApp;
@@ -32,26 +34,42 @@ public class SignUpFragment extends Fragment {
 
     EditText username, emailAddress, phoneNo;
     Button btnSubmit;
+    String role = "Parent";
     private EditText password, confirmPassword;
     DAOHealthApp daoHealthApp;
+    private CheckBox chkRole;
     Users firstTimeUser = new Users();
+    SharedPreferences pref;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.first_time_login_layout, container, false);
         daoHealthApp = new DAOHealthApp(this.getActivity());
-
+        pref = getActivity().getSharedPreferences("loginRole", 0);
         username = (EditText) view.findViewById(R.id.LUsername);
         password = (EditText) view.findViewById(R.id.LPassword);
         confirmPassword = (EditText) view.findViewById(R.id.LConfirmPassword);
         emailAddress = (EditText) view.findViewById(R.id.LEmail);
         //phoneNo = (EditText) view.findViewById(R.id.LPhone);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmitLogin);
+        chkRole = (CheckBox) view.findViewById(R.id.chkIos);
 
+        chkRole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    role = "Doctor";
+                }
+                else
+                {
+                    role = "Parent";
+                }
+            }
+        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstTimeUser = getUserFromLayout(username.getText().toString(), password.getText().toString(), emailAddress.getText().toString());
+                firstTimeUser = getUserFromLayout(username.getText().toString(), password.getText().toString(), emailAddress.getText().toString(), role);
 
                 if (TextUtils.isEmpty(username.getText().toString())) {
                     username.setError(getString(R.string.error_invalid_usernane));
@@ -83,7 +101,16 @@ public class SignUpFragment extends Fragment {
                         long insertedUser = daoHealthApp.InsertUser(firstTimeUser);
                         if(insertedUser > 0)
                         {
-                            Snackbar.make(v, "Successfully Added " + firstTimeUser.getUsername() + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("username", firstTimeUser.getUsername());
+                            editor.putString("role", firstTimeUser.getRole());
+                            editor.apply();
+                            Snackbar.make(v, "Added Successfully!", Snackbar.LENGTH_LONG)
+                                    .setAction("No", null).show();
+                            /*Snackbar.make(v, "Successfully Added " + firstTimeUser.getUsername() + "!", Snackbar.LENGTH_LONG)
+                            .setAction("Submit", null)
+                                .show();*/
+
                             getActivity().finish();
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             getActivity().startActivity(intent);
@@ -105,7 +132,7 @@ public class SignUpFragment extends Fragment {
         return view;
     }
 
-    private Users getUserFromLayout(String username, String password, String emailAddress) {
+    private Users getUserFromLayout(String username, String password, String emailAddress, String role) {
         int newPhoneNo = 0;
         Users users = new Users();
         /*
@@ -121,6 +148,7 @@ public class SignUpFragment extends Fragment {
         users.setUsername(username);
         users.setPassword(password);
         users.setEmailAddress(emailAddress);
+        users.setRole(role);
         return users;
     }
 

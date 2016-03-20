@@ -2,12 +2,44 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jil.firststep">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <permission android:name="com.example.jil.firststep.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.jil.firststep.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+        </receiver>
+        <!--
+        <service
+            android:name="com.example.jil.firststep.MyGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.example.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -18,38 +50,49 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_communicate" />
+        <activity android:name=".activity_Schedules" />
         <activity
             android:name=".activity_manage"
             android:label="Manage Step"
-            android:theme="@style/AppTheme.BrownActionBar" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"/>
+            android:theme="@style/AppTheme.BrownActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".Login_Activity"
             android:label="Login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".AddChild_Activity"
             android:label="New Child"
-            android:theme="@style/AppTheme.GreenActionBar" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"/>
+            android:theme="@style/AppTheme.GreenActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".More_Info"
             android:label="Add More Information"
             android:theme="@style/AppTheme.BluishActionBar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".AddChild_Activity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AddChild_Activity" />
         </activity>
-        <activity android:name=".ChildInfoFull"
+        <activity
+            android:name=".ChildInfoFull"
             android:label="Child Info Full"
             android:theme="@style/AppTheme.BluishActionBar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_manage"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity_manage" />
         </activity>
+        <activity android:name=".ViewMoreInfo" />
     </application>
 
 </manifest>

@@ -19,10 +19,14 @@ import java.util.List;
 public class DAOChildApp {
     private SQLiteDatabase database;
     private DBHelper dbHelper;
+    Context activityContext;
+    private DAOMoreInformation moreInformation;
+    List<DAOMoreInformation> mylist = new ArrayList<>();
 
     public DAOChildApp(Context context) {
         dbHelper = new DBHelper(context);
         // Gets the data repository in write mode
+        activityContext = context;
         database = dbHelper.getWritableDatabase();
     }
 
@@ -33,6 +37,7 @@ public class DAOChildApp {
 
     //Insert Users to DB
     public long InsertChild(Child child, Users user) {
+        moreInformation = new DAOMoreInformation(activityContext);
         // Gets the data repository in write mode
         // Create a new map of values, where column names are the keys
         ContentValues contentValues = new ContentValues();
@@ -40,7 +45,7 @@ public class DAOChildApp {
         contentValues.put(DBTables.Children.LAST_NAME, child.getLastName());
         contentValues.put(DBTables.Children.GENDER, child.getGender());
         contentValues.put(DBTables.Children.DOB, child.getDateOfBirth());
-        contentValues.put(DBTables.Children.MOREINFO_COUNT, "");
+        contentValues.put(DBTables.Children.MOREINFO_COUNT, moreInformation.ChildInfoCount(child));
         contentValues.put(DBTables.Children.USER_ID, user.getId()); // gets userid for the user that added the child
         contentValues.put(DBTables.Children.USERNAME, user.getUsername());
         contentValues.put(DBTables.Children.CREATED_AT, getDateTime());
@@ -62,6 +67,25 @@ public class DAOChildApp {
         }
         cursor.close();
         return childrenList;
+    }
+
+    public int ChildInfoCount(Child child)
+    {
+        List<Child> childrenInfoList = new ArrayList<>();
+
+        String[] selectionArgs = {child.getfirstName(), child.getLastName()};
+        Cursor cursor =
+                database.query(DBTables.Children.TABLE_NAME, DBTables.Children.ALL_COLUMNS,
+                        DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?", selectionArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Child existingChild = cursorToChildren(cursor);
+            childrenInfoList.add(existingChild);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return childrenInfoList.size();
     }
 
     //Get 1 User from DB
@@ -88,6 +112,14 @@ public class DAOChildApp {
         int count = cursor.getCount();
         cursor.close();
         return count;
+    }
+
+    public boolean deleteChild(Child child)
+    {
+        moreInformation = new DAOMoreInformation(activityContext);
+        String[] selectionArgs = {child.getfirstName(), child.getLastName()};
+        moreInformation.deleteChildInfo(child);
+        return  database.delete(DBTables.Children.TABLE_NAME, DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?", selectionArgs) > 0;
     }
 
     public boolean isChildPresent(Child getChild12) {

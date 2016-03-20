@@ -9,7 +9,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,30 +78,43 @@
                 android:inputType="textEmailAddress"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
-<!--
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/LPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/phoneNoHint"
-                android:inputType="phone"
-                android:textSize="16sp" />
-        </android.support.design.widget.TextInputLayout>
--->
+                    <EditText
+                        android:id="@+id/LPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/phoneNoHint"
+                        android:inputType="phone"
+                        android:textSize="16sp" />
+                </android.support.design.widget.TextInputLayout>
+        -->
+
+        <CheckBox
+            android:id="@+id/chkIos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/role"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:layout_gravity="right" />
+
         <Button
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginTop="10dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/Submit"
             android:id="@+id/btnSubmitLogin"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
+</ScrollView>
+
 
 
 </android.support.design.widget.CoordinatorLayout>

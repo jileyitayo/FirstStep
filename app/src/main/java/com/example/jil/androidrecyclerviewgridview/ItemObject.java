@@ -1,10 +1,13 @@
 package com.example.jil.androidrecyclerviewgridview;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.jil.Users.Child;
 
 import java.io.Serializable;
 
-public class ItemObject implements Serializable{
+public class ItemObject implements Serializable {
 
     private String name;
     private int photo;
@@ -23,7 +26,6 @@ public class ItemObject implements Serializable{
     {
 
     }
-
     public String getName() {
         return name;
     }
@@ -46,4 +48,5 @@ public class ItemObject implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

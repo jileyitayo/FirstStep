@@ -8,6 +8,7 @@ public class Users {
     private String password;
     private String emailAddress;
     private int phoneNo;
+    private String Role;
     private long id;
 
     public Users(String username, String password)
@@ -48,7 +49,14 @@ public class Users {
     {
         this.id = id;
     }
-
+    public String getRole()
+    {
+        return Role;
+    }
+    public void setRole(String role)
+    {
+        this.Role = role;
+    }
     public String getUsername()
     {
         return username;

@@ -17,13 +17,14 @@ public class DBTables {
         //private static final String LAST_NAME = "last_name";
         public static final String USERNAME = "username";
         public static final String EMAIL_ADDRESS = "email";
+        public static final String ROLE = "role";
         public static final String PHONE = "phoneNumber";
         public static final String PASSWORD = "password";
         public static final String CREATED_AT = "created_at";
         public static final String UPDATED_AT = "updated_at";
         //public static final String PRIMARY_KEY = "PRIMARY KEY (" + USER_ID + ")";
         public static final String[] ALL_COLUMNS =
-                {USER_ID, USERNAME, PASSWORD, EMAIL_ADDRESS, PHONE, CREATED_AT, UPDATED_AT};
+                {USER_ID, USERNAME, PASSWORD, EMAIL_ADDRESS, PHONE, ROLE, CREATED_AT, UPDATED_AT};
     }
 
     public static abstract class Children implements BaseColumns {
@@ -53,12 +54,38 @@ public class DBTables {
         public static final String INFO_TITLE = "child_info_title";
         public static final String INFO_DETAILS = "child_info_details";
         public static final String CHILD_ID = "child_id";
-        public static final String USER_ID = "added_by_user_id";
+        public static final String CHILD_FIRST_NAME = "child_first_name";
+        public static final String CHILD_LAST_NAME = "child_last_name";
         public static final String USERNAME = "added_by_username";
         public static final String CREATED_AT = "created_at";
         public static final String UPDATED_AT = "updated_at";
         public static final String[] ALL_COLUMNS =
-                {INFO_ID, INFO_TITLE, INFO_DETAILS, CHILD_ID, USER_ID, USERNAME, CREATED_AT, UPDATED_AT};
+                {INFO_ID, INFO_TITLE, INFO_DETAILS, CHILD_ID, CHILD_FIRST_NAME, CHILD_LAST_NAME, USERNAME, CREATED_AT, UPDATED_AT};
     }
 
+    public static abstract class SchedulesAlarm implements BaseColumns {
+        public static final String TABLE_NAME = "SchedulesDB";
+        public static final String SCHEDULES_ID = "schedule_id";
+        public static final String SCHEDULE_TITLE = "schedule_title";
+        public static final String SCHEDULE_NOTE = "schedule_note";
+        public static final String USER_ID = "added_by_user_id";
+        public static final String USERNAME = "added_by_username";
+        public static final String CHILD_ID = "child_id";
+        public static final String CHILD_FIRST_NAME = "child_first_name";
+        public static final String CHILD_LAST_NAME = "child_last_name";
+        public static final String DATEOFSCHEDULE = "schedule_date";
+        public static final String TIMEOFSCHEDULE = "schedule_time";
+        public static final String CREATED_AT = "created_at";
+        public static final String UPDATED_AT = "updated_at";
+        public static final String[] ALL_COLUMNS =
+                {SCHEDULES_ID, SCHEDULE_TITLE, SCHEDULE_NOTE, USER_ID, USERNAME, CHILD_ID, CHILD_FIRST_NAME, CHILD_LAST_NAME, DATEOFSCHEDULE, TIMEOFSCHEDULE, CREATED_AT, UPDATED_AT};
+    }
+    public static abstract class MoreinfoMini implements BaseColumns {
+        public static final String TABLE_NAME = "infominiDB";
+        public static final String infoTitle = "title_id1";
+        public static final String infoDetails = "infoDetails1";
+
+        public static final String[] ALL_COLUMNS =
+                {infoTitle, infoDetails};
+    }
 }

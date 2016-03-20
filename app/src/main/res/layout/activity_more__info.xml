@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:popupTheme="@style/AppTheme.PopupOverlay"
-    tools:context="com.example.jil.firststep.More_Info">
+    android:fitsSystemWindows="true"
+    tools:context="com.example.jil.firststep.More_Info"
+    app:popupTheme="@style/AppTheme.PopupOverlay">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,4 +27,50 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- Information name EditText -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarContainer">
+
+        <EditText
+            android:id="@+id/ETitle"
+            android:layout_height="wrap_content"
+            android:hint="@string/infoTitle"
+            android:textSize="20sp"
+            android:layout_width="match_parent">
+        </EditText>
+
+    </android.support.design.widget.TextInputLayout>
+    <!-- Information Details EditText -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_info_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_info_title">
+
+        <EditText
+            android:id="@+id/ETDetails"
+            android:layout_height="wrap_content"
+            android:hint="@string/infoDetails"
+            android:textSize="20sp"
+            android:layout_width="match_parent">
+        </EditText>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFF"
+        android:id="@+id/btnMoreInfoFull"
+        android:background="#0ba647"
+        android:fillViewport="false"
+        android:layout_below="@+id/input_info_details" />
+
+
 </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

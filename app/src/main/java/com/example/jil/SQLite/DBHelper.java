@@ -24,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + DBTables.HealthUsers.PASSWORD + TEXT_TYPE + ", "
             + DBTables.HealthUsers.EMAIL_ADDRESS + TEXT_TYPE + ", "
             + DBTables.HealthUsers.PHONE + TEXT_TYPE + ", "
+            + DBTables.HealthUsers.ROLE + TEXT_TYPE + ", "
             + DBTables.HealthUsers.CREATED_AT + TEXT_TYPE + ", "
             + DBTables.HealthUsers.UPDATED_AT + TEXT_TYPE
             + ");";
@@ -42,21 +43,47 @@ public class DBHelper extends SQLiteOpenHelper {
             + DBTables.Children.UPDATED_AT + TEXT_TYPE
             + ");";
     private static final String CREATE_CHILD_MOREINFO_DB_TABLE = "CREATE TABLE "
-            + DBTables.Children.TABLE_NAME
+            + DBTables.MoreInfo.TABLE_NAME
             + " ("
             + DBTables.MoreInfo.INFO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + DBTables.MoreInfo.INFO_TITLE + TEXT_TYPE + ", "
             + DBTables.MoreInfo.INFO_DETAILS + TEXT_TYPE + ", "
             + DBTables.MoreInfo.CHILD_ID + TEXT_TYPE + ", "
-            + DBTables.MoreInfo.USER_ID + TEXT_TYPE + ", "
+            + DBTables.MoreInfo.CHILD_FIRST_NAME + TEXT_TYPE + ", "
+            + DBTables.MoreInfo.CHILD_LAST_NAME + TEXT_TYPE + ", "
             + DBTables.MoreInfo.USERNAME + TEXT_TYPE + ", "
             + DBTables.MoreInfo.CREATED_AT + TEXT_TYPE + ", "
             + DBTables.MoreInfo.UPDATED_AT + TEXT_TYPE
             + ");";
 
+    private static final String CREATE_CHILD_SCHEDULE_DB_TABLE = "CREATE TABLE "
+            + DBTables.SchedulesAlarm.TABLE_NAME
+            + " ("
+            + DBTables.SchedulesAlarm.SCHEDULES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + DBTables.SchedulesAlarm.SCHEDULE_TITLE + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.SCHEDULE_NOTE + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.USER_ID + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.USERNAME + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.CHILD_ID + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.CHILD_FIRST_NAME + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.CHILD_LAST_NAME + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.DATEOFSCHEDULE + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.TIMEOFSCHEDULE + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.CREATED_AT + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.UPDATED_AT + TEXT_TYPE
+            + ");";
+
+    private static final String CREATE_MoreinfoMini_DB_TABLE = "CREATE TABLE "
+            + DBTables.MoreinfoMini.TABLE_NAME
+            + " ("
+            + DBTables.MoreinfoMini.infoTitle + TEXT_TYPE + ", "
+            + DBTables.MoreinfoMini.infoDetails + TEXT_TYPE
+            + ");";
     private static final String DELETE_CHILDDB_TABLE = "DROP TABLE IF EXISTS " + DBTables.Children.TABLE_NAME;
     private static final String DELETE_CHILD_MOREINFO_DB_TABLE = "DROP TABLE IF EXISTS " + DBTables.MoreInfo.TABLE_NAME;
     private static final String DELETE_HEALTHDB_TABLE = "DROP TABLE IF EXISTS " + DBTables.HealthUsers.TABLE_NAME;
+    private static final String DELETE_CHILD_SCHEDULE_TABLE = "DROP TABLE IF EXISTS " + DBTables.SchedulesAlarm.TABLE_NAME;
+    private static final String DELETE_MOREINFOMINI_TABLE = "DROP TABLE IF EXISTS " + DBTables.MoreinfoMini.TABLE_NAME;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -66,12 +93,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_HEALTHDB_TABLE);
         db.execSQL(CREATE_CHILDDB_TABLE);
         db.execSQL(CREATE_CHILD_MOREINFO_DB_TABLE);
+        db.execSQL(CREATE_CHILD_SCHEDULE_DB_TABLE);
+        db.execSQL(CREATE_MoreinfoMini_DB_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DELETE_CHILDDB_TABLE);
         db.execSQL(DELETE_HEALTHDB_TABLE);
         db.execSQL(DELETE_CHILD_MOREINFO_DB_TABLE);
+        db.execSQL(DELETE_CHILD_SCHEDULE_TABLE);
+        db.execSQL(DELETE_MOREINFOMINI_TABLE);
         onCreate(db);
     }
 }

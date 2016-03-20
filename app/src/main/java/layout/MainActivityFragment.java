@@ -3,6 +3,7 @@ package layout;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,8 +28,8 @@ import java.util.List;
 public class MainActivityFragment extends Fragment implements View.OnClickListener {
 
     private GridLayoutManager lLayout;
-    public final List<ItemObject> rowListItem = getAllItemList();
-
+    public List<ItemObject> rowListItem = new ArrayList<>();
+    SharedPreferences pref;
     //ImageView picImage;
     //TextView userText;
     public MainActivityFragment() {
@@ -38,9 +39,17 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        getActivity().setTitle("Home");
+        pref = getActivity().getSharedPreferences("loginRole", 0);
+        String userRole = pref.getString("role", "missing Role");
+        String username = pref.getString("username", "missing Username");
+        getActivity().setTitle(username);
+        if (userRole.equals("Doctor")) {
+            rowListItem = getAllItemListDoctors();
+        } else {
+            rowListItem = getAllItemList();
+        }
         //1 determines the number of grid on a row
-        lLayout = new GridLayoutManager(getActivity(), 1);
+        lLayout = new GridLayoutManager(getActivity(), 3);
 
         RecyclerView rView = (RecyclerView)view.findViewById(R.id.recycler_view);
         rView.setHasFixedSize(true);
@@ -48,8 +57,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
         RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(getActivity(), rowListItem);
         rView.setAdapter(rcAdapter);
-
-        //picImage.setOnClickListener(imageViewOnclickListener);
         return view;
     }
 
@@ -59,11 +66,22 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
     private List<ItemObject> getAllItemList(){
 
-        String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor"};
+        String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor", "View your schedules and add Reminders"};
         List<ItemObject> allItems = new ArrayList<ItemObject>();
         allItems.add(new ItemObject("Add Child", R.drawable.child_baby, descriptions[0]));
         allItems.add(new ItemObject("Manage Child", R.drawable.african_american_children, descriptions[1]));
         allItems.add(new ItemObject("Contact Doctor", R.drawable.black_mother_child_healthcare_doctor, descriptions[2]));
+        allItems.add(new ItemObject("View Schedules", R.drawable.group_4, descriptions[3]));
+        return allItems;
+    }
+
+    private List<ItemObject> getAllItemListDoctors(){
+
+        String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor", "View your schedules and add Reminders"};
+        List<ItemObject> allItems = new ArrayList<ItemObject>();
+        allItems.add(new ItemObject("View Children", R.drawable.african_american_children, descriptions[1]));
+        allItems.add(new ItemObject("Contact Patients", R.drawable.black_mother_child_healthcare_doctor, descriptions[2]));
+        allItems.add(new ItemObject("Set Schedules", R.drawable.group_4, descriptions[3]));
         return allItems;
     }
 

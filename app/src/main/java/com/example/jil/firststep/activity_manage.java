@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,9 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.jil.Dialog.MyMoreInfoDialog;
+import com.example.jil.SQLite.DAOChildApp;
+import com.example.jil.SQLite.DAOMoreInformation;
+import com.example.jil.androidrecyclerviewgridview.ItemObject;
+
 import layout.ManageChild;
 
-public class activity_manage extends AppCompatActivity {
+public class activity_manage extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +28,6 @@ public class activity_manage extends AppCompatActivity {
         setContentView(R.layout.activity_activity_manage);
         Toolbar toolbarBrown = (Toolbar) findViewById(R.id.toolbarBrown);
         setSupportActionBar(toolbarBrown);
-        /*
-        FloatingActionButton newChild = (FloatingActionButton) findViewById(R.id.newChild);
-
-        newChild.setOnClickListener(new View.OnClickListener() {
-            Intent intent;
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(activity_manage.this, AddChild_Activity.class);
-                activity_manage.this.startActivity(intent);
-            }
-        });
-*/
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
@@ -65,7 +59,11 @@ public class activity_manage extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
-
-
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new MyMoreInfoDialog();
+        dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
+    }
 }
