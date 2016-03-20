@@ -78,8 +78,9 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="30dp"
+        android:paddingStart="3dp"
         android:paddingEnd="3dp"
+        android:id="@+id/mChild_info_list"
         android:layout_below="@id/more_Info">
 
     </android.support.v7.widget.RecyclerView>

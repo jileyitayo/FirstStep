@@ -11,7 +11,7 @@ public class Child {
     private String lastName;
     private long child_id;
     private String dateOfBirth;
-    private String gender;
+    private String gender, weight;
     private String moreInfo;
     private Users user = new Users();
 
@@ -44,6 +44,13 @@ public class Child {
             user.setUsername(username);
         }
         user.setUsername(username);
+    }
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     public String getfirstName() {

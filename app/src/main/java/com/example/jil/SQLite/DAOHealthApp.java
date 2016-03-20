@@ -39,6 +39,7 @@ public class DAOHealthApp {
             contentValues.put(DBTables.HealthUsers.PHONE, user.getPhoneNumber());
             contentValues.put(DBTables.HealthUsers.USERNAME, user.getUsername());
             contentValues.put(DBTables.HealthUsers.PASSWORD, user.getPassword());
+            contentValues.put(DBTables.HealthUsers.ROLE, user.getRole());
             contentValues.put(DBTables.HealthUsers.CREATED_AT, getDateTime());
             contentValues.put(DBTables.HealthUsers.UPDATED_AT, getDateTime());
         return database.insert(DBTables.HealthUsers.TABLE_NAME, null, contentValues);
@@ -147,6 +148,7 @@ public class DAOHealthApp {
         existingUser.setPassword(cursor.getString(cursor.getColumnIndex(DBTables.HealthUsers.PASSWORD)));
         existingUser.setEmailAddress(cursor.getString(cursor.getColumnIndex(DBTables.HealthUsers.EMAIL_ADDRESS)));
         existingUser.setPhoneNumber(cursor.getInt(cursor.getColumnIndex(DBTables.HealthUsers.PHONE)));
+        existingUser.setRole(cursor.getString(cursor.getColumnIndex(DBTables.HealthUsers.ROLE)));
         // here we convert int to boolean
         //existingUser.setIsreported(cursor.getInt(cursor.getColumnIndex(DBtables.TextReport.COLUMN_ISREPOETED)) > 0);
         return existingUser;

@@ -2,6 +2,8 @@ package com.example.jil.firststep;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
 
 //Fragments starts from here
 
@@ -42,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
         ft.add(R.id.fragment, new MainActivityFragment());
         ft.commit();
 
+    }
+
+    @Override
+    protected void onResume() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        //initialize what the fragment should be;
+        //MainActivityFragment mainActivityFragment = new MainActivityFragment();
+        ft.add(R.id.fragment, new MainActivityFragment());
+        ft.commit();
+        super.onResume();
     }
 
     @Override

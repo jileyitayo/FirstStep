@@ -2,41 +2,68 @@ package com.example.jil.firststep;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jil.Dialog.MyMoreInfoDialog;
 import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.SQLite.DAOHealthApp;
+import com.example.jil.SQLite.DAOInfoMini;
+import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.Users.Child;
+import com.example.jil.Users.MoreInformationModel;
 import com.example.jil.Users.Users;
+import com.example.jil.androidrecyclerviewgridview.ItemObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDialog.NoticeDialogListener{
+import layout.MainActivityFragment;
+
+public class AddChild_Activity extends AppCompatActivity {
     Child child = new Child();
-    Button btnShowDate, btnSubmit, btnMoreInfo;
-    EditText etFirstName, etLastName, etGender;
+    Button btnShowDate, btnMoreInfo, btnMoreInfoFull;
+    EditText etFirstName, etLastName, etWeight;
+    String etGender;
     int year_a, month_a, day_a;
-    //Spinner spinGender;
+    Spinner spinGender;
     static final int DIALOG_ID = 0;
     DAOChildApp childApp;
     DAOHealthApp healthApp;
+    DAOInfoMini mini;
+    MoreInformationModel infoModel = new MoreInformationModel();
+    DAOMoreInformation moreInformation;
+    List<ItemObject> myList = new ArrayList<>();
+    ItemObject object = new ItemObject();
     TextView tvDate;
     Users owner = new Users();
-
+    //SharedPreferences mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +74,15 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         childApp = new DAOChildApp(this);
         healthApp = new DAOHealthApp(this);
+        moreInformation = new DAOMoreInformation(this);
+        mini = new DAOInfoMini(this);
         owner = healthApp.getExistingUsers();
-        //spinGender = (Spinner) findViewById(R.id.spinnerGender);
+        spinGender = (Spinner) findViewById(R.id.spinnerGender);
         tvDate = (TextView) findViewById(R.id.lblDate);
         etFirstName = (EditText) findViewById(R.id.ETFName);
         etLastName = (EditText) findViewById(R.id.ETLName);
-        etGender = (EditText) findViewById(R.id.ETgender);
+        etWeight = (EditText) findViewById(R.id.ETWeight);
         this.setTitle("New Child");
-
         FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit);
         final Calendar cal = Calendar.getInstance();
         year_a = cal.get(Calendar.YEAR);
@@ -67,34 +95,53 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
             @Override
             public void onClick(View v) {
                 //String.valueOf(spinGender.getSelectedItem())
-                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString(), etLastName.getText().toString(), etGender.getText().toString(), tvDate.getText().toString());
+                etGender = String.valueOf(spinGender.getSelectedItem());
+                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString(), etLastName.getText().toString(), etGender, etWeight.getText().toString(), tvDate.getText().toString());
                 if (TextUtils.isEmpty(etFirstName.getText().toString())) {
                     etFirstName.setError(getString(R.string.firstName_add));
                 } else if (TextUtils.isEmpty(etLastName.getText().toString())) {
                     etLastName.setError(getString(R.string.lastName_add));
-                } else if (TextUtils.isEmpty(etGender.getText().toString())) {
-                    etGender.setError(getString(R.string.gender_add));
-                }
-                 /*
-                else if(!spinGender.isSelected()){
-                    Snackbar.make(v, getString(R.string.gender_add) + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
-                */
-                else if (tvDate.getText().toString().isEmpty()) {
+                } else if (tvDate.getText().toString().isEmpty()) {
                     Snackbar.make(v, getString(R.string.dOB_add), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 } else {
-                    if (!childApp.isChildPresent(child)) {
-                        //unsuccessful
-                        long insertedUser = childApp.InsertChild(child, owner);
-                        if (insertedUser > 0) {
-                            Snackbar.make(v, "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                            clearEtValues();
-                        } else {
-                            Snackbar.make(v, "Not Successfull!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    final View view = v;
+                    new AsyncTask<Void, Void, Long>()
+                    {
+                        long insertedUser;
+                        @Override
+                        protected Long doInBackground(Void... params) {
+
+                            if (!childApp.isChildPresent(child)) {
+                                myList = mini.getAll();
+                                for (ItemObject object: myList)
+                                {
+                                    if(!(object == null)) {
+                                        infoModel.setInfo_title(object.getName());
+                                        infoModel.setInfo_details(object.getDescription());
+                                        moreInformation.InsertInfo(infoModel, child, owner);
+                                    }
+                                }
+                                //unsuccessful
+                                insertedUser = childApp.InsertChild(child, owner);
+
+                            }
+                            return insertedUser;
                         }
 
+                        @Override
+                        protected void onPostExecute(Long message) {
+                            if (insertedUser > 0) {
+                                //message = "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!";
+                                Snackbar.make(view, "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                clearEtValues();
+                                mini.delete();
+                            } else {
+                                Snackbar.make(view, "Not Successfull!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            }
+                            super.onPostExecute(message);
+                        }
+                    }.execute(null,null,null);
 
-                    }
                 }
 
             }
@@ -102,13 +149,26 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
         btnMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(AddChild_Activity.this, More_Info.class);
-                //AddChild_Activity.this.startActivity(intent);
-                //showEditDialog();
-                showNoticeDialog();
+                Intent intent = new Intent(AddChild_Activity.this, More_Info.class);
+                AddChild_Activity.this.startActivity(intent);
             }
         });
 
+        btnMoreInfoFull = (Button) findViewById(R.id.btnMoreInfoFull);
+        btnMoreInfoFull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddChild_Activity.this, ViewMoreInfo.class);
+                AddChild_Activity.this.startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        mini.delete();
+        super.onDestroy();
     }
 
     public void showDialogOnButtonClick() {
@@ -125,12 +185,12 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
         tvDate.setText("");
         etFirstName.setText("");
         etLastName.setText("");
-        etGender.setText("");
+        etWeight.setText("");
         //spinGender.setSelected(false);
     }
 
 
-    private Child getChildFromLayout(long userid, String username, String firstName, String lastName, String gender, String DOB) {
+    private Child getChildFromLayout(long userid, String username, String firstName, String lastName, String gender, String Weight, String DOB) {
         Child child1 = new Child();
         child1.setFirstName(firstName);
         child1.setLastName(lastName);
@@ -138,6 +198,7 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
         child1.setDateOfBirth(DOB);
         child1.setUserId(userid);
         child1.setUsername(username);
+        child1.setWeight(Weight);
         return child1;
     }
 
@@ -182,49 +243,32 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-    private void showEditDialog() {
-        FragmentManager fm = getSupportFragmentManager();
-        EditNameDialog editNameDialog = new EditNameDialog();
-        editNameDialog.show(fm, "fragment_edit_name");
+    private String[] getChildInfoTitle() {
+        moreInformation = new DAOMoreInformation(this);
+        List<MoreInformationModel> alist = moreInformation.getAllChildInfo();
+        String[] list = new String[alist.size()];
+
+        for (int i = 0; i < alist.size(); i++) {
+            String title = alist.get(i).getInfo_title();
+            list[i] = title;
+        }
+        moreInformation.close();
+        return list;
     }
 
-    private void showDialog() {
-        FragmentManager fm = getSupportFragmentManager();
-        EditNameDialog editNameDialog = new EditNameDialog();
-        editNameDialog.show(fm, "fragment_edit_name");
+    private String[] getChildInfoDetails() {
+        moreInformation = new DAOMoreInformation(this);
+        List<MoreInformationModel> alist = moreInformation.getAllChildInfo();
+        String[] list = new String[alist.size()];
+
+        for (int i = 0; i < alist.size(); i++) {
+            String details = alist.get(i).getInfo_details();
+            list[i] = details;
+        }
+        moreInformation.close();
+        return list;
     }
 
-    public Dialog dialogSetup() {
-        //Preparing views
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.activity_child_info_full, null);
-        //layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
-        final EditText InfoTitle = (EditText) layout.findViewById(R.id.txt_your_name);
-        final EditText infoDetails = (EditText) layout.findViewById(R.id.txt_your_name2);
-
-        //Building dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Child Information");
-        builder.setView(layout);
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                //save info where you want it
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        return dialog;
-    }
-
-    */
 
     public void showNoticeDialog() {
         // Create an instance of the dialog fragment and show it
@@ -232,13 +276,82 @@ public class AddChild_Activity extends AppCompatActivity implements MyMoreInfoDi
         dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-
+    public void showInfoDialog(android.app.DialogFragment dialog1) {
+        // Create an instance of the dialog fragment and show it
+        //android.app.DialogFragment dialog1 = new AddedInfoList();
+        dialog1.show(getFragmentManager(), "D_DialogFragment");
     }
 
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    /*
+        private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
+            private String resp;
+
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    // Do your long operations here and return the result
+                    myList = mini.getAll();
+
+                    //unsuccessful
+                    long insertedUser = childApp.InsertChild(child, owner);
+                    if (insertedUser > 0) {
+                        for (ItemObject object: myList)
+                        {
+                            if(!(object == null)) {
+                                infoModel.setInfo_title(object.getName());
+                                infoModel.setInfo_details(object.getDescription());
+                                moreInformation.InsertInfo(infoModel, child, owner);
+                            }
+                        }
+                        Snackbar.make(, "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        clearEtValues();
+                        mini.delete();
+                    } else {
+                        Snackbar.make(v, "Not Successfull!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    resp = e.getMessage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    resp = e.getMessage();
+                }
+                return resp;
+            }
+
+            /*
+             * (non-Javadoc)
+             *
+             * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+             */
+    //  @Override
+    protected void onPostExecute(String result) {
+        // execution of result of Long time consuming operation
+        //   finalResult.setText(result);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.os.AsyncTask#onPreExecute()
+     */
+    // @Override
+    protected void onPreExecute() {
+        // Things to be done before execution of long running operation. For
+        // example showing ProgessDialog
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.os.AsyncTask#onProgressUpdate(Progress[])
+     */
+    // @Override
+    protected void onProgressUpdate(String... text) {
+        // finalResult.setText(text[0]);
+        // Things to be done while execution of long running operation is in
+        // progress. For example updating ProgessDialog
     }
 }
+

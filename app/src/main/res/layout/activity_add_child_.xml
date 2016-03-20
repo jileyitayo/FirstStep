@@ -75,7 +75,7 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <!-- Gender EditText -->
+                <!-- Gender EditText
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/input_gender"
@@ -93,20 +93,38 @@
                     </EditText>
 
                 </android.support.design.widget.TextInputLayout>
-                <!--
+-->
                 <Spinner
                     android:id="@+id/spinnerGender"
+                    android:layout_below="@+id/input_last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/gender"
+                    android:prompt="@string/gender_prompt" />
 
-                    android:prompt="@string/gender_prompt" />-->
+                <!-- Weight name EditText -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/spinnerGender">
+
+                    <EditText
+                        android:id="@+id/ETWeight"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/weight"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_width="match_parent">
+                    </EditText>
+
+                </android.support.design.widget.TextInputLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:layout_below="@+id/input_gender"
+                    android:layout_below="@+id/input_weight"
                     android:layout_marginTop="15dp"
                     android:textColor="#165379"
                     android:id="@+id/bD"
@@ -124,7 +142,7 @@
                     android:background="@color/colorAccent"
                     android:id="@+id/btnShowDate"
                     android:padding="3dp"
-                    android:layout_below="@+id/input_gender"
+                    android:layout_below="@+id/input_weight"
                     android:layout_toEndOf="@+id/bD" />
 
                 <TextView
@@ -151,13 +169,16 @@
                     android:background="#04af45"
                     android:fillViewport="false" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_list_view"
-                    android:layout_marginTop="5dp"
+                <Button
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/btnMoreInfo"
-                    android:scrollbars="vertical" />
+                    android:layout_height="wrap_content"
+                    android:text="Show Information Added"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/btnMoreInfo"
+                    android:textColor="#FFF"
+                    android:id="@+id/btnMoreInfoFull"
+                    android:background="#0462af"
+                    android:fillViewport="false" />
             </RelativeLayout>
 
 

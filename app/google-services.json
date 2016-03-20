@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_id": "first-step-407b8",
+    "project_number": "452894393183",
+    "name": "First Step"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452894393183:android:e25e56fe35ec83c0",
+        "client_id": "android:com.example.jil",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.example.jil",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

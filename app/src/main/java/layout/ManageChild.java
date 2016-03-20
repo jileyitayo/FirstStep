@@ -65,6 +65,14 @@ public class  ManageChild extends Fragment{
         return view;
     }
 
+    @Override
+    public void onResume() {
+        this.onCreate(null);
+        super.onResume();
+    }
+
+
+
     private List<ItemObject> getAllItemList()
     {
         String[] descriptions = {"No Detail Found"};
