@@ -15,6 +15,8 @@ import android.widget.Toast;
 import layout.MainActivityFragment;
 
 import com.example.jil.firststep.AddChild_Activity;
+import com.example.jil.firststep.ChatActivity;
+import com.example.jil.firststep.ContactDoctor;
 import com.example.jil.firststep.R;
 import com.example.jil.firststep.activity_Schedules;
 import com.example.jil.firststep.activity_manage;
@@ -62,7 +64,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                     break;
 
                 case 2:
-
+                    activity.startActivity(new Intent(activity, ContactDoctor.class));
                     break;
 
                 case 3:
@@ -88,7 +90,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                     break;
 
                 case 2:
-
+                    activity.startActivity(new Intent(activity, ContactDoctor.class));
                     break;
 
                 case 3:
