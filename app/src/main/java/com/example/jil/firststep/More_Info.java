@@ -11,8 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.jil.SQLite.DAOInfoMini;
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
@@ -29,6 +32,8 @@ public class More_Info extends AppCompatActivity {
     ItemObject itemObject = new ItemObject();
     LinearLayoutManager linearLayout;
     DAOInfoMini infoMini;
+    Spinner spinInfo;
+    String etTitle;
     //SharedPreferences mSettings;
 
     @Override
@@ -42,22 +47,43 @@ public class More_Info extends AppCompatActivity {
         etitle = (EditText) findViewById(R.id.ETitle);
         edetails = (EditText) findViewById(R.id.ETDetails);
         bSave = (Button) findViewById(R.id.btnMoreInfoFull);
+        spinInfo = (Spinner) findViewById(R.id.spinnerInformation);
         infoMini = new DAOInfoMini(this);
        // mSettings = getSharedPreferences("jil", 0);
+        String[] infos = spinInfo.getResources().getStringArray(R.array.installed_information);
+        spinInfo.setSelection(0);
+        spinInfo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position > 0){
+                    etTitle = String.valueOf(spinInfo.getSelectedItem());
+                    etitle.setText(parent.getSelectedItem().toString().trim());
+                    edetails.setFocusable(true);
+                }else{
+                    etitle.setText("");
+                    Toast.makeText(More_Info.this, "Select a title or type in the title", Toast.LENGTH_LONG).show();
+                }
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(etitle.getText().toString())) {
+                if (TextUtils.isEmpty(etitle.getText().toString().trim())) {
                     etitle.setError(getString(R.string.error_info_title));
-                } else if (TextUtils.isEmpty(edetails.getText().toString())) {
+                } else if (TextUtils.isEmpty(edetails.getText().toString().trim())) {
                     edetails.setError(getString(R.string.error_info_details));
                 }
                 else
                 {
-                    itemObject.setName(etitle.getText().toString());
-                    itemObject.setDescription(edetails.getText().toString());
+                    itemObject.setName(etitle.getText().toString().trim());
+                    itemObject.setDescription(edetails.getText().toString().trim());
                     if((itemObject == null)) {
                         Snackbar.make(v, "Input Title and Details of Child Information!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     }

@@ -12,12 +12,14 @@ import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toolbar;
 
 import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.Users.Child;
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
 import com.example.jil.androidrecyclerviewgridview.ListRecyclerViewAdapter;
+import com.example.jil.androidrecyclerviewgridview.ListRecyclerViewHolders;
 import com.example.jil.androidrecyclerviewgridview.RecyclerViewAdapter;
 import com.example.jil.firststep.R;
 
@@ -33,7 +35,7 @@ import java.util.List;
 /**
  * Created by JIL on 27/02/16.
  */
-public class  ManageChild extends Fragment{
+public class  ManageChild extends Fragment implements ListRecyclerViewHolders.MyListerner{
 
     manage_R_Child.Communicator communicator;
     DAOChildApp childApp;
@@ -42,6 +44,7 @@ public class  ManageChild extends Fragment{
     private LinearLayoutManager linearLayout;
     public final List<ItemObject> rowListItem = getAllItemList();
     FragmentManager newFm = getFragmentManager();
+    ListRecyclerViewAdapter recyclerViewAdapterAdapter;
     public ManageChild()
     {
 
@@ -60,7 +63,7 @@ public class  ManageChild extends Fragment{
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recycler_list_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayout);
-        ListRecyclerViewAdapter recyclerViewAdapterAdapter = new ListRecyclerViewAdapter(getActivity(), getAllItemList2());
+        recyclerViewAdapterAdapter = new ListRecyclerViewAdapter(getActivity(), getAllItemList2());
         recyclerView.setAdapter(recyclerViewAdapterAdapter);
         return view;
     }
@@ -226,4 +229,14 @@ return diff;
     }
 
 
+    @Override
+    public void updateListView(List<ItemObject> itemObjects) {
+        recyclerViewAdapterAdapter = new ListRecyclerViewAdapter(getActivity(), getAllItemList2());
+        recyclerViewAdapterAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateList() {
+        recyclerViewAdapterAdapter.notifyDataSetChanged();
+    }
 }

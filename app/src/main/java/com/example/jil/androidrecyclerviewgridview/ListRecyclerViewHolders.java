@@ -22,6 +22,7 @@ import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.Users.Child;
 import com.example.jil.firststep.ChildInfoFull;
 import com.example.jil.firststep.R;
+import com.example.jil.firststep.activity_manage;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,14 +43,24 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
     public TextView childDesc;
     public ImageButton childDelete;
     private List<ItemObject> itemList = Collections.emptyList();
+
+    public interface MyListerner
+    {
+        public void updateListView(List<ItemObject> itemObjects);
+        public void updateList();
+    }
+
     Fragment newFragment2;
+
     public ListRecyclerViewHolders(View itemView, Activity activity,List<ItemObject> newItemList) {
         super(itemView);
         itemView.setOnClickListener(this);
         this.activity = activity;
         itemList = newItemList;
+        //myListerner = (MyListerner) this.activity;
         childName = (TextView)itemView.findViewById(R.id.child_name);
         childDesc = (TextView)itemView.findViewById(R.id.child_description);
+
         //preferences  = activity.getSharedPreferences("ChildName", 0);
         childDelete = (ImageButton)itemView.findViewById(R.id.deleteImageButton);
         childDelete.setOnClickListener(this);
@@ -76,7 +87,13 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
             builder.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     itemList.remove(getAdapterPosition());
+                    //myListerner.updateListView(itemList);
+                    //myListerner = setOnclickDeleteListener(myListerner, activity);
+                    //myListerner.updateList();
+                    activity.finish();
                     childApp.deleteChild(child);
+                    activity.startActivity(new Intent(activity, activity_manage.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+
                 }
             });
             builder.show();

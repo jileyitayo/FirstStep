@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.jil.SQLite.DAOInfoMini;
 import com.example.jil.firststep.ChildInfoFull;
 import com.example.jil.firststep.R;
+import com.example.jil.firststep.ViewMoreInfo;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,11 +50,13 @@ public class MoreInfoHldr extends RecyclerView.ViewHolder implements View.OnClic
         {
             case R.id.deleteImageButton:
                 boolean j;
+                activity.finish();
                 j = min.delete(itemList.get(getAdapterPosition()).getName(), itemList.get(getAdapterPosition()).getDescription());
                 if(j)
                 {
                     Snackbar.make(v, "Successfull! deleted", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 }
+                activity.startActivity(new Intent(activity, ViewMoreInfo.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 break;
             case R.id.editImageButton:
 

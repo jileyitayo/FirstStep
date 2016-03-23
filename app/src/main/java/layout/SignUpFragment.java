@@ -69,9 +69,9 @@ public class SignUpFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstTimeUser = getUserFromLayout(username.getText().toString(), password.getText().toString(), emailAddress.getText().toString(), role);
+                firstTimeUser = getUserFromLayout(username.getText().toString().trim(), password.getText().toString().trim(), emailAddress.getText().toString().trim(), role);
 
-                if (TextUtils.isEmpty(username.getText().toString())) {
+                if (TextUtils.isEmpty(username.getText().toString().trim())) {
                     username.setError(getString(R.string.error_invalid_usernane));
                 }
 /*
@@ -79,18 +79,18 @@ public class SignUpFragment extends Fragment {
                     phoneNo.setError(getString(R.string.error_field__phone_required));
                 }
 */
-                else if (TextUtils.isEmpty(password.getText().toString()) || !isPasswordValid(password.getText().toString())) {
+                else if (TextUtils.isEmpty(password.getText().toString().trim()) || !isPasswordValid(password.getText().toString().trim())) {
                     password.setError(getString(R.string.error_invalid_password));
                 }
 
-                else if (!isPasswordConfirmed(password.getText().toString(), confirmPassword.getText().toString())) {
+                else if (!isPasswordConfirmed(password.getText().toString().trim(), confirmPassword.getText().toString().trim())) {
                     confirmPassword.setError(getString(R.string.error_field_confirmed_required));
                 }
 
-                else if (TextUtils.isEmpty(confirmPassword.getText().toString())) {
+                else if (TextUtils.isEmpty(confirmPassword.getText().toString().trim())) {
                     confirmPassword.setError(getString(R.string.error_field_required));
                 }
-                else if (TextUtils.isEmpty(emailAddress.getText().toString()) || !isEmailValid(emailAddress.getText().toString())) {
+                else if (TextUtils.isEmpty(emailAddress.getText().toString().trim()) || !isEmailValid(emailAddress.getText().toString().trim())) {
                     emailAddress.setError(getString(R.string.error_invalid_email));
                 }
                 else
@@ -103,6 +103,7 @@ public class SignUpFragment extends Fragment {
                         {
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("username", firstTimeUser.getUsername());
+                            editor.putString("email", firstTimeUser.getEmailAddress());
                             editor.putString("role", firstTimeUser.getRole());
                             editor.apply();
                             Snackbar.make(v, "Added Successfully!", Snackbar.LENGTH_LONG)

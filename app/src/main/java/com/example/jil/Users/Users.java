@@ -1,9 +1,11 @@
 package com.example.jil.Users;
 
+import java.io.Serializable;
+
 /**
  * Created by JIL on 03/03/16.
  */
-public class Users {
+public class Users implements Serializable {
     private String username;
     private String password;
     private String emailAddress;

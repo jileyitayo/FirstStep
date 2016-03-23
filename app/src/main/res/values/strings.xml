@@ -21,9 +21,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sh_first_name">Jerry</string>
     <string name="sh_last_name">Markinson</string>gender
-    <string name="gender_det">"Age: "</string>
+    <string name="age_det">"Age: "</string>
     <string name="sh_gender">Male</string>
-    <string name="dOB_det">"Date Of Birth: "</string>
+    <string name="gender_det">"Gender: "</string>
     <string name="sh_dOB">"23/1/2015"</string>
     <string name="sh_MoreInfo">More Information</string>
 
@@ -70,4 +70,15 @@
 
     <string name="error_info_title">Enter Info Title</string>
     <string name="error_info_details">Enter Info Details</string>
+
+    <!-- Spinner information -->
+    <string name="information_prompt">Select Information or Input Information Title</string>
+    <string-array name="installed_information">
+        <item>Select Information or Input Information Title</item>
+        <item>Height</item>
+        <item>Weight</item>
+        <item>Genotype</item>
+        <item>Blood Group</item>
+        <item>Health Condition</item>
+    </string-array>
 </resources>

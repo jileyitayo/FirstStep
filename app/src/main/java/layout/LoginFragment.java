@@ -57,6 +57,7 @@ public class LoginFragment extends Fragment {
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("username", existingUser.getUsername());
                             editor.putString("role", existingUser.getRole());
+                            editor.putString("email", existingUser.getEmailAddress());
                             editor.apply();
                             getActivity().finish();
                             Intent intent = new Intent(getActivity(), MainActivity.class);

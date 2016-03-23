@@ -31,5 +31,18 @@
         android:layout_below="@+id/editText_email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp" />
+    <!--
+         <android.support.v7.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/listView_chat_Users"
+         android:background="@android:color/transparent"
+         android:divider="@drawable/separator"
+         android:dividerHeight="0dp"
+         android:scrollbars="none"
+         android:stackFromBottom="true"
+         android:transcriptMode="alwaysScroll"
+         />
+         -->
 
 </RelativeLayout>
