@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/gender_det"
+        android:text="@string/age_det"
         android:id="@+id/textView"
         android:textStyle="bold"
         android:layout_marginTop="15dp"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/dOB_det"
+        android:text="@string/gender_det"
         android:id="@+id/textView2"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sh_dOB"
-        android:id="@+id/child_dOB"
+        android:id="@+id/child_gender"
         android:layout_alignTop="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
 
@@ -73,7 +73,8 @@
         android:id="@+id/more_Info"
         android:textSize="20sp"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/child_age" />
+        android:layout_marginBottom="10dp"
+        android:layout_alignStart="@+id/textView2" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

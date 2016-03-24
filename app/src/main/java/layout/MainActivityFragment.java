@@ -42,7 +42,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         pref = getActivity().getSharedPreferences("loginRole", 0);
         String userRole = pref.getString("role", "missing Role");
         String username = pref.getString("username", "missing Username");
-        getActivity().setTitle(username);
+        getActivity().setTitle(username.toUpperCase());
         if (userRole.equals("Doctor")) {
             rowListItem = getAllItemListDoctors();
         } else {

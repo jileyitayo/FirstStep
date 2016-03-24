@@ -81,7 +81,7 @@ public class AddChild_Activity extends AppCompatActivity {
         tvDate = (TextView) findViewById(R.id.lblDate);
         etFirstName = (EditText) findViewById(R.id.ETFName);
         etLastName = (EditText) findViewById(R.id.ETLName);
-        etWeight = (EditText) findViewById(R.id.ETWeight);
+        //etWeight = (EditText) findViewById(R.id.ETWeight);
         this.setTitle("New Child");
         FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit);
         final Calendar cal = Calendar.getInstance();
@@ -96,10 +96,10 @@ public class AddChild_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 //String.valueOf(spinGender.getSelectedItem())
                 etGender = String.valueOf(spinGender.getSelectedItem());
-                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString(), etLastName.getText().toString(), etGender, etWeight.getText().toString(), tvDate.getText().toString());
-                if (TextUtils.isEmpty(etFirstName.getText().toString())) {
+                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(), etGender, etWeight.getText().toString().trim(), tvDate.getText().toString().trim());
+                if (TextUtils.isEmpty(etFirstName.getText().toString().trim())) {
                     etFirstName.setError(getString(R.string.firstName_add));
-                } else if (TextUtils.isEmpty(etLastName.getText().toString())) {
+                } else if (TextUtils.isEmpty(etLastName.getText().toString().trim())) {
                     etLastName.setError(getString(R.string.lastName_add));
                 } else if (tvDate.getText().toString().isEmpty()) {
                     Snackbar.make(v, getString(R.string.dOB_add), Snackbar.LENGTH_LONG).setAction("Action", null).show();

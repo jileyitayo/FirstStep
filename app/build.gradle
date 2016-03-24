@@ -30,7 +30,6 @@ dependencies {
     compile 'com.wdullaer:materialdatetimepicker:2.2.0'
     compile 'com.google.android.gms:play-services-gcm:8.3.0'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
-    compile 'com.google.android.gms:play-services:8.3.0'
 }
 apply plugin: 'com.google.gms.google-services'
 

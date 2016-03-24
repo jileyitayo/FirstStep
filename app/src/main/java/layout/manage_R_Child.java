@@ -51,7 +51,7 @@ public class manage_R_Child extends Fragment {
 
         //child_Name = (TextView)view.findViewById(R.id.sh_first_name);
         child_Age = (TextView)view.findViewById(R.id.child_age);
-        child_DOB = (TextView)view.findViewById(R.id.child_dOB);
+        child_DOB = (TextView)view.findViewById(R.id.child_gender);
         linearLayout = new LinearLayoutManager(getActivity());
         /*
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_list_view_info);

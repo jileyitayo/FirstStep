@@ -1,9 +1,16 @@
 package com.example.jil.Users;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * Created by JIL on 03/03/16.
  */
-public class Users {
+public class Users implements Serializable {
     private String username;
     private String password;
     private String emailAddress;
@@ -92,5 +99,42 @@ public class Users {
     public int getUserCount(int countFromDB)
     {
         return countFromDB;
+    }
+
+    public static Users fromJson(JSONObject jsonObject)
+    {
+        Users users = new Users();
+        // Deserialize json into object fields
+        try {
+            users.username = jsonObject.getString("username");
+            users.emailAddress = jsonObject.getString("email");
+            users.Role = jsonObject.getString("role");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        // Return new object
+        return users;
+    }
+
+    public static ArrayList<Users> fromJson(JSONArray jsonArray) {
+        JSONObject usersJson;
+        ArrayList<Users> listOfUsers = new ArrayList<Users>(jsonArray.length());
+        // Process each result in json array, decode and convert to business object
+        for (int i=0; i < jsonArray.length(); i++) {
+            try {
+                usersJson = jsonArray.getJSONObject(i);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+
+            Users users = Users.fromJson(usersJson);
+            if (users != null) {
+                listOfUsers.add(users);
+            }
+        }
+
+        return listOfUsers;
     }
 }

@@ -18,9 +18,12 @@ import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
 
+import java.util.List;
+
 import layout.ManageChild;
 
 public class activity_manage extends AppCompatActivity{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

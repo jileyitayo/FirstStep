@@ -22,7 +22,7 @@ import java.util.List;
 public class ChildInfoFull extends AppCompatActivity {
     TextView child_Name;
     TextView child_Age;
-    TextView child_DOB;
+    TextView child_gender;
     ItemObject newdata = new ItemObject();
     DAOMoreInformation daoMoreInformation;
     List<MoreInformationModel> model = new ArrayList<>();
@@ -45,11 +45,14 @@ public class ChildInfoFull extends AppCompatActivity {
         model = daoMoreInformation.getSingleChildInfo(child);
         //child_Name = (TextView)findViewById(R.id.sh_first_name);
         child_Age = (TextView)findViewById(R.id.child_age);
-        child_DOB = (TextView)findViewById(R.id.child_dOB);
+        child_gender = (TextView)findViewById(R.id.child_gender);
         //if you have a TextView, for example...
 
         //child_Name.setText(newdata.getName());
-        child_DOB.setText(newdata.getDescription());
+        String gender = newdata.getDescription().substring(newdata.getDescription().indexOf("Gender: ") + 8, newdata.getDescription().lastIndexOf("e") + 1);
+        String Age = newdata.getDescription().substring(newdata.getDescription().indexOf("Age: ") + 5, newdata.getDescription().lastIndexOf(","));
+        child_gender.setText(gender);
+        child_Age.setText(Age);
 
 
         linearLayout = new LinearLayoutManager(this);

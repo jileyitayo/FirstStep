@@ -102,7 +102,7 @@
                     android:entries="@array/gender"
                     android:prompt="@string/gender_prompt" />
 
-                <!-- Weight name EditText -->
+                <!-- Weight name EditText
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/input_weight"
                     android:layout_width="match_parent"
@@ -119,12 +119,12 @@
                     </EditText>
 
                 </android.support.design.widget.TextInputLayout>
-
+                -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:layout_below="@+id/input_weight"
+                    android:layout_below="@+id/spinnerGender"
                     android:layout_marginTop="15dp"
                     android:textColor="#165379"
                     android:id="@+id/bD"
@@ -142,7 +142,7 @@
                     android:background="@color/colorAccent"
                     android:id="@+id/btnShowDate"
                     android:padding="3dp"
-                    android:layout_below="@+id/input_weight"
+                    android:layout_below="@+id/spinnerGender"
                     android:layout_toEndOf="@+id/bD" />
 
                 <TextView

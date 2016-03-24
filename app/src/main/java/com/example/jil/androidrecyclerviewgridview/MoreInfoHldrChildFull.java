@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.Users.Child;
 import com.example.jil.Users.MoreInformationModel;
+import com.example.jil.firststep.ChildInfoFull;
 import com.example.jil.firststep.R;
 
 import java.util.Collections;
@@ -61,7 +64,10 @@ public class MoreInfoHldrChildFull extends RecyclerView.ViewHolder implements Vi
                 builder.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //itemList.remove(getAdapterPosition());
+                        activity.finish();
                         moreInformation.deleteChildInfo(child, itemList.get(getAdapterPosition()).getInfo_title(), itemList.get(getAdapterPosition()).getInfo_details());
+                        ItemObject newObject = (ItemObject)activity.getIntent().getExtras().getSerializable("DATA");
+                                activity.startActivity(new Intent(activity, ChildInfoFull.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION).putExtra("DATA", newObject));
                     }
                 });
                 builder.show();
