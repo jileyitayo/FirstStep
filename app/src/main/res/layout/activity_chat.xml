@@ -6,20 +6,32 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.jil.firststep.ChatActivity">
 
+    <Spinner
+        android:id="@+id/spinnerRecievers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/gender"
+        android:background="#b1b1b1"
+        android:padding="6dp"
+        android:layout_alignParentTop="true"
+        android:prompt="@string/gender_prompt" />
 
-    <EditText
+
+    <!--
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText_mail_id"
-        android:hint="Enter Reciever mail id"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/spinnerRecievers"
+        android:textSize="30sp"
 
+        android:layout_centerHorizontal="true" />
+-->
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText_chat_message"
-        android:hint="Enter Some thing"
+        android:hint="Enter Something"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -42,7 +54,7 @@
         android:id="@+id/listView_chat_messages"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText_mail_id"
+        android:layout_below="@+id/spinnerRecievers"
         android:layout_above="@+id/editText_chat_message"
         android:background="@android:color/transparent"
         android:divider="@null"

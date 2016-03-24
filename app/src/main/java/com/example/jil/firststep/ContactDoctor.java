@@ -1,5 +1,6 @@
 package com.example.jil.firststep;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,31 +38,38 @@ import okhttp3.OkUrlFactory;
 
 
 public class ContactDoctor extends AppCompatActivity {
-    EditText editText_user_name;
-    EditText editText_email;
+    TextView editText_user_name;
+    TextView editText_email;
     Button button_login;
     final static String TAG = "pavan";
     TextView mDisplay;
+    String username, email, role;
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
-    SharedPreferences prefs;
+    SharedPreferences prefs, pref;
     Context context;
     String regid;
     String msg;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_doctor);
         context = getApplicationContext();
-
+        pref = getSharedPreferences("loginRole", 0);
+        username = pref.getString("username", "missing username");
+        role = pref.getString("role", "missing role");
+        email = pref.getString("email", "missing email");
         if (isUserRegistered(context)) {
             startActivity(new Intent(ContactDoctor.this, ChatActivity.class));
             finish();
         } else {
-            editText_user_name = (EditText) findViewById(R.id.editText_user_name);
-            editText_email = (EditText) findViewById(R.id.editText_email);
+            editText_user_name = (TextView) findViewById(R.id.editText_user_name);
+            editText_email = (TextView) findViewById(R.id.editText_email);
             button_login = (Button) findViewById(R.id.button_login);
+            editText_email.setText(email);
+            editText_user_name.setText(username);
             button_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -227,13 +235,19 @@ public class ContactDoctor extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 // TODO Auto-generated method stub
+
+            pDialog = new ProgressDialog(ContactDoctor.this);
+            pDialog.setMessage("Attempting login...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
             super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(String... params) {
 // TODO Auto-generated method stub
-            String url = Util.register_url + "?username=" + editText_user_name.getText().toString() + "&email=" + editText_email.getText().toString() + "&regId=" + regid;
+            String url = Util.register_url + "?username=" + editText_user_name.getText().toString() + "&email=" + editText_email.getText().toString() + "&regId=" + regid + "&role=" + role;
             Log.i("pavan", "url" + url);
             OkHttpClient client_for_getMyFriends = new OkHttpClient();
             String response = null;
