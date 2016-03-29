@@ -108,6 +108,14 @@ public class DAOHealthApp {
         return existingUser;
     }
 
+    public long updateUsersPassword(Users user)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DBTables.HealthUsers.PASSWORD, user.getPassword());
+        contentValues.put(DBTables.HealthUsers.UPDATED_AT, getDateTime());
+        return database.update(DBTables.HealthUsers.TABLE_NAME, contentValues, DBTables.HealthUsers.USERNAME + "= '" + user.getUsername() + "'",null);
+    }
+
     public boolean isUserPresent(Users getUser1)
     {
         Users formUser = getUser1;

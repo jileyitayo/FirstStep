@@ -58,6 +58,7 @@ public class LoginFragment extends Fragment {
                             editor.putString("username", existingUser.getUsername());
                             editor.putString("role", existingUser.getRole());
                             editor.putString("email", existingUser.getEmailAddress());
+                            editor.putString(",", existingUser.getPassword());
                             editor.apply();
                             getActivity().finish();
                             Intent intent = new Intent(getActivity(), MainActivity.class);

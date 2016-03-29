@@ -28,22 +28,7 @@
         </receiver>
 
         <service android:name="com.example.jil.Chat.GcmIntentService" />
-        <!--
-        <service
-            android:name="com.example.jil.firststep.MyGcmListenerService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.example.MyInstanceIDListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-            </intent-filter>
-        </service>
-        -->
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -67,11 +52,6 @@
             android:name=".Login_Activity"
             android:label="Login"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AddChild_Activity"
@@ -99,7 +79,19 @@
         </activity>
         <activity android:name=".ViewMoreInfo" />
         <activity android:name=".ContactDoctor" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".Profile_Activity" />
+        <activity
+            android:name=".SplashScreen"
+            android:label="Splash"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

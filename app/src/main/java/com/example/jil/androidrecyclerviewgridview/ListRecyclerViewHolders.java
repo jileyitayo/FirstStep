@@ -99,6 +99,8 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
             builder.show();
         }
 
+
+
         else {
             Intent intent = new Intent(activity,ChildInfoFull.class);
             Bundle bundle = new Bundle();

@@ -126,6 +126,15 @@ public class DAOMoreInformation {
         return  database.delete(DBTables.MoreInfo.TABLE_NAME, DBTables.MoreInfo.CHILD_FIRST_NAME + " = ? AND " + DBTables.MoreInfo.CHILD_LAST_NAME + " = ? AND " + DBTables.MoreInfo.INFO_TITLE + " = ? AND " + DBTables.MoreInfo.INFO_DETAILS + " = ?", selectionArgs) > 0;
     }
 
+    public long updateChildInfo(MoreInformationModel info)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DBTables.MoreInfo.INFO_TITLE, info.getInfo_title());
+        contentValues.put(DBTables.MoreInfo.INFO_DETAILS, info.getInfo_details());
+        contentValues.put(DBTables.MoreInfo.UPDATED_AT, getDateTime());
+        return database.update(DBTables.MoreInfo.TABLE_NAME, contentValues, DBTables.MoreInfo.INFO_ID + "= '" + info.getInfo_id() + "' AND " + DBTables.MoreInfo.CHILD_FIRST_NAME + " = '" + info.getChild().getfirstName() + "' AND " + DBTables.MoreInfo.CHILD_LAST_NAME + " = '" + info.getChild().getLastName() + "'",null);
+    }
+
     public boolean deleteChildInfo(Child child)
     {
         String[] selectionArgs = {child.getfirstName(), child.getLastName()};
@@ -137,6 +146,7 @@ public class DAOMoreInformation {
         String firstName = cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.CHILD_FIRST_NAME));
         String lastName = cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.CHILD_LAST_NAME));
         existingInfo.setChildname(firstName, lastName);
+        existingInfo.setInfo_id(cursor.getLong(cursor.getColumnIndex(DBTables.MoreInfo.INFO_ID)));
         existingInfo.setInfo_details(cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.INFO_DETAILS)));
         existingInfo.setInfo_title(cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.INFO_TITLE)));
         existingInfo.setUsername(cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.USERNAME)));
