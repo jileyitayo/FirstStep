@@ -17,6 +17,7 @@ import layout.MainActivityFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int RESULT_SETTINGS = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, Settings.class);
+            startActivityForResult(i, RESULT_SETTINGS);
             return true;
         }
 
@@ -82,6 +85,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case RESULT_SETTINGS:
+                break;
+
+        }
+
     }
 /*
     public void setFragment(Fragment frag, String tag)

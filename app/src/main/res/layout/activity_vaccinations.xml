@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/vaccination1"
+            android:layout_width="wrap_content"
+            android:textSize="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:text="@string/vaccination1" />
+
+        <CheckBox
+            android:id="@+id/vaccination2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/vaccination2"
+            android:textSize="17dp" />
+
+        <CheckBox
+            android:id="@+id/vaccination3"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="@string/vaccination3" />
+
+        <CheckBox
+            android:id="@+id/vaccination4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="17dp"
+            android:text="@string/vaccination4" />
+        <CheckBox
+            android:id="@+id/vaccination5"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="@string/vaccination5" />
+        <CheckBox
+            android:id="@+id/vaccination6"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="@string/vaccination6" />
+        <CheckBox
+            android:id="@+id/vaccination7"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="17dp"
+            android:layout_height="wrap_content"
+            android:text="@string/vaccination7" />
+        <CheckBox
+            android:id="@+id/vaccination8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="17dp"
+            android:text="@string/vaccination8" />
+        <CheckBox
+            android:id="@+id/vaccination9"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="@string/vaccination9" />
+        <CheckBox
+            android:id="@+id/vaccination10"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="@string/vaccination10" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:layout_marginTop="5dp"
+            android:background="#af042f"
+            android:text="@string/saveVaccinations" />
+
+    </LinearLayout>
+
+
+</ScrollView>
+

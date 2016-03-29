@@ -26,6 +26,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +39,12 @@ import com.example.jil.SQLite.DAOHealthApp;
 import com.example.jil.SQLite.DAOInfoMini;
 import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.Users.Child;
+import com.example.jil.Users.ChildVaccination;
 import com.example.jil.Users.MoreInformationModel;
 import com.example.jil.Users.Users;
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,11 +54,13 @@ import layout.MainActivityFragment;
 
 public class AddChild_Activity extends AppCompatActivity {
     Child child = new Child();
-    Button btnShowDate, btnMoreInfo, btnMoreInfoFull;
+    Button btnShowDate, btnMoreInfo, btnMoreInfoFull, btnVaccination;
     EditText etFirstName, etLastName, etWeight;
+    ImageButton btnProfile;
     String etGender;
     int year_a, month_a, day_a;
-    Spinner spinGender;
+    RadioGroup spinGender;
+    private RadioButton radioSexButton;
     static final int DIALOG_ID = 0;
     DAOChildApp childApp;
     DAOHealthApp healthApp;
@@ -63,6 +71,7 @@ public class AddChild_Activity extends AppCompatActivity {
     ItemObject object = new ItemObject();
     TextView tvDate;
     Users owner = new Users();
+    //ArrayList<String> newData = new ArrayList<>();
     //SharedPreferences mSettings;
 
     @Override
@@ -77,11 +86,25 @@ public class AddChild_Activity extends AppCompatActivity {
         moreInformation = new DAOMoreInformation(this);
         mini = new DAOInfoMini(this);
         owner = healthApp.getExistingUsers();
-        spinGender = (Spinner) findViewById(R.id.spinnerGender);
+        spinGender = (RadioGroup) findViewById(R.id.radioSex);
         tvDate = (TextView) findViewById(R.id.lblDate);
         etFirstName = (EditText) findViewById(R.id.ETFName);
         etLastName = (EditText) findViewById(R.id.ETLName);
+        btnProfile = (ImageButton) findViewById(R.id.profilePic);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView myTExt = (TextView) findViewById(R.id.lblDate);
+                myTExt.setText(String.valueOf(Vaccinations.vaccines.size()));
+            }
+        });
         //etWeight = (EditText) findViewById(R.id.ETWeight);
+
+
+
+
+
+
         this.setTitle("New Child");
         FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit);
         final Calendar cal = Calendar.getInstance();
@@ -90,12 +113,14 @@ public class AddChild_Activity extends AppCompatActivity {
         day_a = cal.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
 
-        btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
+        //btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int selectedId = spinGender.getCheckedRadioButtonId();
+                radioSexButton = (RadioButton) findViewById(selectedId);
                 //String.valueOf(spinGender.getSelectedItem())
-                etGender = String.valueOf(spinGender.getSelectedItem());
+                etGender = radioSexButton.getText().toString();
                 child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(), etGender, tvDate.getText().toString().trim());
                 if (TextUtils.isEmpty(etFirstName.getText().toString().trim())) {
                     etFirstName.setError(getString(R.string.firstName_add));
@@ -143,23 +168,15 @@ public class AddChild_Activity extends AppCompatActivity {
                     }.execute(null,null,null);
 
                 }
-
-            }
-        });
-        btnMoreInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddChild_Activity.this, More_Info.class);
-                AddChild_Activity.this.startActivity(intent);
+                Vaccinations.vaccines.clear();
             }
         });
 
-        btnMoreInfoFull = (Button) findViewById(R.id.btnMoreInfoFull);
-        btnMoreInfoFull.setOnClickListener(new View.OnClickListener() {
+        btnVaccination = (Button) findViewById(R.id.vaccination);
+        btnVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddChild_Activity.this, ViewMoreInfo.class);
-                AddChild_Activity.this.startActivity(intent);
+                startActivity(new Intent(AddChild_Activity.this, Vaccinations.class));
             }
         });
 
@@ -199,7 +216,13 @@ public class AddChild_Activity extends AppCompatActivity {
         child1.setUsername(username);
         return child1;
     }
+/*
+    private ChildVaccination getVaccinations(ArrayList<String> vaccinations )
+    {
+        ChildVaccination vaccination = new ChildVaccination();
 
+    }
+*/
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID)

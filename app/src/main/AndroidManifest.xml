@@ -51,8 +51,7 @@
         <activity
             android:name=".Login_Activity"
             android:label="Login"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".AddChild_Activity"
             android:label="New Child"
@@ -81,6 +80,7 @@
         <activity android:name=".ContactDoctor" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".Profile_Activity" />
+        <activity android:name=".Settings" />
         <activity
             android:name=".SplashScreen"
             android:label="Splash"
@@ -92,6 +92,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Vaccinations"></activity>
     </application>
 
 </manifest>

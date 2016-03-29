@@ -16,7 +16,16 @@
     <string name="gender">Gender</string>
     <string name="Submit">Submit</string>
     <string name="MoreInfo">Add more Information</string>
-
+    <string name="Height">Height</string>
+    <string name="Weight">Weight</string>
+    <string name="location">Address Location</string>
+    <string name="Allergies">Allergies</string>
+    <string name="Allergies_eg">For Example - Dust, Smoke </string>
+    <string name="vaccinations">Select Vaccinations</string>
+    <string name="parentName">"Parent(s) Name"</string>
+    <string name="parent">Parent/Guardian</string>
+    <string name="HealthWorker">Health Worker</string>
+    <string name="parentNo">Parent Phone Number</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sh_first_name">Jerry</string>
@@ -57,6 +66,8 @@
 
     <!-- Spinner -->
     <string name="gender_prompt">Select Gender</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
@@ -81,4 +92,39 @@
         <item>Blood Group</item>
         <item>Health Condition</item>
     </string-array>
+
+    <string-array name="syncFrequency">
+        <item name="1">Once a day</item>
+        <item name="7">Once a week</item>
+        <item name="3">Once a year</item>
+        <item name="0">Never (Update maually)</item>
+    </string-array>
+    <string-array name="syncFrequencyValues">
+        <item name="1">1</item>
+        <item name="7">7</item>
+        <item name="30">30</item>
+        <item name="0">0</item>
+    </string-array>
+
+    <string name="pref_send_report">Send crash reports</string>
+    <string name="pref_send_report_summary">Helps to fix bugs</string>
+    <string name="pref_sync_frequency">Sync frequency</string>
+    <string name="pref_sync_frequency_summary">Set the sync frequency</string>
+    <string name="pref_user_name">Set username</string>
+    <string name="pref_user_name_summary">Set your username</string>
+
+    <string name="pref_user_profile">User Profile</string>
+    <string name="pref_update_setting">Update Settings</string>
+    <!-- Vaccinations-->
+    <string name="vaccination1">"Hepatitis B (HepB)"</string>
+    <string name="vaccination2">"Rotavirus (RV) RV1, RV5"</string>
+    <string name="vaccination3">"Diphtheria, tetanus and acellular pertussis"</string>
+    <string name="vaccination4">"Haemophilus Influenzae type b (HIb)"</string>
+    <string name="vaccination5">"Pneumococcal conjugate (PCV13)"</string>
+    <string name="vaccination6">"Inactivated Poliovirus (IPV)"</string>
+    <string name="vaccination7">"Influenza (IIV; LAIV)"</string>
+    <string name="vaccination8">"Measles, mumps, rubella (MMR)"</string>
+    <string name="vaccination9">"Varicella (VAR)"</string>
+    <string name="vaccination10">"Hepatitis A (HepA)"</string>
+    <string name="saveVaccinations">Save</string>
 </resources>
