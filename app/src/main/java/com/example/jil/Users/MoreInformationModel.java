@@ -69,4 +69,10 @@ public class MoreInformationModel {
         return child;
     }
 
+    public void setChild(String firstName, String lastName)
+    {
+        child.setFirstName(firstName);
+        child.setLastName(lastName);
+    }
+
 }

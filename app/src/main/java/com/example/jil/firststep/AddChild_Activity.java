@@ -96,7 +96,7 @@ public class AddChild_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 //String.valueOf(spinGender.getSelectedItem())
                 etGender = String.valueOf(spinGender.getSelectedItem());
-                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(), etGender, etWeight.getText().toString().trim(), tvDate.getText().toString().trim());
+                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(), etGender, tvDate.getText().toString().trim());
                 if (TextUtils.isEmpty(etFirstName.getText().toString().trim())) {
                     etFirstName.setError(getString(R.string.firstName_add));
                 } else if (TextUtils.isEmpty(etLastName.getText().toString().trim())) {
@@ -185,12 +185,11 @@ public class AddChild_Activity extends AppCompatActivity {
         tvDate.setText("");
         etFirstName.setText("");
         etLastName.setText("");
-        etWeight.setText("");
         //spinGender.setSelected(false);
     }
 
 
-    private Child getChildFromLayout(long userid, String username, String firstName, String lastName, String gender, String Weight, String DOB) {
+    private Child getChildFromLayout(long userid, String username, String firstName, String lastName, String gender, String DOB) {
         Child child1 = new Child();
         child1.setFirstName(firstName);
         child1.setLastName(lastName);
@@ -198,7 +197,6 @@ public class AddChild_Activity extends AppCompatActivity {
         child1.setDateOfBirth(DOB);
         child1.setUserId(userid);
         child1.setUsername(username);
-        child1.setWeight(Weight);
         return child1;
     }
 
@@ -237,6 +235,10 @@ public class AddChild_Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.profile) {
+            startActivity(new Intent(AddChild_Activity.this, Profile_Activity.class));
             return true;
         }
 

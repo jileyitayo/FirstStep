@@ -156,14 +156,12 @@ public class ChatActivity extends AppCompatActivity {
                 }
             } catch (MalformedURLException e) { // TODO Auto-generated catch block e.printStackTrace();
             } catch (IOException e) {
-// TODO Auto-generated catch block e.printStackTrace();
             }
             return response;
         }
 
         @Override
         protected void onPostExecute(String result) {
-// TODO Auto-generated method stub
             super.onPostExecute(result);
 //Toast.makeText(context,"response "+result,Toast.LENGTH_LONG).show();
         }

@@ -105,6 +105,7 @@ public class SignUpFragment extends Fragment {
                             editor.putString("username", firstTimeUser.getUsername());
                             editor.putString("email", firstTimeUser.getEmailAddress());
                             editor.putString("role", firstTimeUser.getRole());
+                            editor.putString("password", firstTimeUser.getPassword());
                             editor.apply();
                             Snackbar.make(v, "Added Successfully!", Snackbar.LENGTH_LONG)
                                     .setAction("No", null).show();

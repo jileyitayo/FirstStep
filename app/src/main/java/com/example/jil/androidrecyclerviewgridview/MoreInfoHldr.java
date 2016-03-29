@@ -42,6 +42,7 @@ public class MoreInfoHldr extends RecyclerView.ViewHolder implements View.OnClic
         btnEdit = (ImageButton)itemView.findViewById(R.id.editImageButton);
         btnDelete.setOnClickListener(this);
         btnEdit.setOnClickListener(this);
+        btnEdit.setVisibility(View.GONE);
     }
 
     @Override

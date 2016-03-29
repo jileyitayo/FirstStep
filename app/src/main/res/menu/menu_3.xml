@@ -1,7 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.jil.firststep.MainActivity">
+    tools:context="com.example.jil.firststep.ChildInfoFull">
+    <item
+    android:id="@+id/backup"
+    android:orderInCategory="100"
+    android:title="@string/action_new"
+    android:icon="@drawable/ic_cloud_upload_white_24dp"
+    app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/profile"

@@ -1,5 +1,6 @@
 package com.example.jil.firststep;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.jil.Dialog.DialogControl;
 import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.Users.Child;
 import com.example.jil.Users.MoreInformationModel;
