@@ -123,8 +123,19 @@
     <string name="vaccination5">"Pneumococcal conjugate (PCV13)"</string>
     <string name="vaccination6">"Inactivated Poliovirus (IPV)"</string>
     <string name="vaccination7">"Influenza (IIV; LAIV)"</string>
-    <string name="vaccination8">"Measles, mumps, rubella (MMR)"</string>
+    <string name="vaccination8">"Measles,Chicken Pox, mumps, rubella (MMR)"</string>
     <string name="vaccination9">"Varicella (VAR)"</string>
     <string name="vaccination10">"Hepatitis A (HepA)"</string>
+    <string name="vaccination11">"Yellow Fever"</string>
     <string name="saveVaccinations">Save</string>
+
+    <!-- Form view -->
+    <string name="genders">Gender:     </string>
+    <string name="dateOfb">Date of Birth: </string>
+
+    <string name="form_height">Height: </string>
+    <string name="form_weight">Weight: </string>
+    <string name="form_address">Address: </string>
+    <string name="form_allergies">Allergies: </string>
+    <string name="form_parents">Parents Name: </string>
 </resources>

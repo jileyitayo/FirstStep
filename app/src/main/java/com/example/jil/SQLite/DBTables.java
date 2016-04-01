@@ -40,6 +40,7 @@ public class DBTables {
                                     HEIGHT = "height",
                                     WEIGHT = "weight",
                                     ADDRESS_LOCATION = "address_location",
+        IMAGE_PATH ="image_path",
                 ALLERGIES = "allergies",
                 VACCINATION_DUE = "vaccination_due",
                 VACCINATION_TAKEN = "vaccination_taken",
@@ -52,7 +53,7 @@ public class DBTables {
         public static final String UPDATED_AT = "updated_at";
         //public static final String PRIMARY_KEY = "PRIMARY KEY (" + USER_ID + ")";
         public static final String[] ALL_COLUMNS =
-                {CHILD_ID, FIRST_NAME, LAST_NAME, GENDER, DOB,
+                {CHILD_ID, FIRST_NAME, LAST_NAME, GENDER, IMAGE_PATH, DOB,
                         HEIGHT, WEIGHT, ADDRESS_LOCATION, ALLERGIES,
                         VACCINATION_TAKEN,
                         VACCINATION_DUE,PARENT_NAMES,MOREINFO_COUNT, USER_ID, USERNAME, CREATED_AT, UPDATED_AT};

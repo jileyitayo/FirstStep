@@ -1,6 +1,7 @@
 package com.example.jil.androidrecyclerviewgridview;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.jil.firststep.R;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -33,10 +35,19 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
     public void onBindViewHolder(ListRecyclerViewHolders holder, int position) {
         holder.childName.setText(itemList.get(position).getName());
         holder.childDesc.setText(itemList.get(position).getDescription());
+        holder.proPic.setImageURI(retrievePath(itemList.get(position).getProfPic()));
     }
 
     @Override
     public int getItemCount() {
         return this.itemList.size();
+    }
+
+    public Uri retrievePath(String path) {
+        File imgFile = new File(path);
+        if (imgFile.exists()) {
+            return Uri.fromFile(imgFile);
+        } else
+            return null;
     }
 }

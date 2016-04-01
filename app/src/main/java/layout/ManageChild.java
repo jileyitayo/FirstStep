@@ -89,10 +89,11 @@ public class  ManageChild extends Fragment implements ListRecyclerViewHolders.My
         String[] descriptions = getChildListDesc();
         String[] firstName = getChildFN();
         String[] lastname = getChildLN();
+        String[] pics = getPics();
         List<Child> children = getChildren();
         List<ItemObject> allItems = new ArrayList<ItemObject>();
         for(int i = 0; i < children.size(); i++) {
-            allItems.add(new ItemObject(firstName[i] + " " + lastname[i], descriptions[i]));
+            allItems.add(new ItemObject(firstName[i] + " " + lastname[i], descriptions[i], pics[i]));
         }
 
         if(allItems == null)
@@ -133,6 +134,20 @@ public class  ManageChild extends Fragment implements ListRecyclerViewHolders.My
         for (int i = 0; i < alist.size(); i++) {
             String FN = alist.get(i).getfirstName();
             list[i] = FN;
+        }
+        childApp.close();
+        return list;
+    }
+
+    private String[] getPics()
+    {
+        childApp = new DAOChildApp(getActivity());
+        List<Child> alist = childApp.getAllChildren();
+        String[] list = new String[alist.size()];
+
+        for (int i = 0; i < alist.size(); i++) {
+            String pic = alist.get(i).getImg_path();
+            list[i] = pic;
         }
         childApp.close();
         return list;

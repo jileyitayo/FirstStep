@@ -156,14 +156,16 @@
                     android:id="@+id/lblDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textColor="#165379"
+                    android:layout_marginStart="3dp"
                     android:layout_marginTop="10dp"
                     android:text=""
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_below="@+id/radioSex"
                     android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@id/btnShowDate"
                     android:layout_alignEnd="@+id/radioSex" />
 
                 <!-- Height EditText -->

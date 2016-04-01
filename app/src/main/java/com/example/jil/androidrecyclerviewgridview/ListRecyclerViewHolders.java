@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
     Activity activity;
     DAOChildApp childApp;
     public TextView childName;
+    public ImageView proPic;
     String[] arrayName;
     public TextView childDesc;
     public ImageButton childDelete;
@@ -60,6 +62,7 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
         //myListerner = (MyListerner) this.activity;
         childName = (TextView)itemView.findViewById(R.id.child_name);
         childDesc = (TextView)itemView.findViewById(R.id.child_description);
+        proPic = (ImageView)itemView.findViewById(R.id.profilePiclist);
 
         //preferences  = activity.getSharedPreferences("ChildName", 0);
         childDelete = (ImageButton)itemView.findViewById(R.id.deleteImageButton);

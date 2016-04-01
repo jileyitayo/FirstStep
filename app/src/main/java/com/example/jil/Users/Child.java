@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Child {
     private String firstName;
-    private String lastName;
+    private String lastName, height, img_path, addLocation, allergies, vaccinationTaken, vaccination_due, parentName;
     private long child_id;
     private String dateOfBirth;
     private String gender, weight;
@@ -101,5 +101,61 @@ public class Child {
         this.child_id = child_id;
     }
 
+    public String getAddLocation() {
+        return addLocation;
+    }
+
+    public void setAddLocation(String addLocation) {
+        this.addLocation = addLocation;
+    }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getImg_path() {
+        return img_path;
+    }
+
+    public void setImg_path(String img_path) {
+        this.img_path = img_path;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public String getVaccination_due() {
+        return vaccination_due;
+    }
+
+    public void setVaccination_due(String vaccination_due) {
+        this.vaccination_due = vaccination_due;
+    }
+
+    public String getVaccinationTaken() {
+        return vaccinationTaken;
+    }
+
+    public void setVaccinationTaken(String vaccinationTaken) {
+        this.vaccinationTaken = vaccinationTaken;
+    }
 }
+
 

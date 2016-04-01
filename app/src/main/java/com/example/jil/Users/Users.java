@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by JIL on 03/03/16.
  */
 public class Users implements Serializable {
-    private String username;
+    private String username, img_path;
     private String password;
     private String emailAddress;
     private int phoneNo;
@@ -136,5 +136,21 @@ public class Users implements Serializable {
         }
 
         return listOfUsers;
+    }
+
+    public String getImg_path() {
+        return img_path;
+    }
+
+    public void setImg_path(String img_path) {
+        this.img_path = img_path;
+    }
+
+    public int getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(int phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }

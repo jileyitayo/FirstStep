@@ -35,6 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + DBTables.Children.FIRST_NAME + TEXT_TYPE + ", "
             + DBTables.Children.LAST_NAME + TEXT_TYPE + ", "
             + DBTables.Children.GENDER + TEXT_TYPE + ", "
+            + DBTables.Children.IMAGE_PATH + TEXT_TYPE + ", "
             + DBTables.Children.DOB + TEXT_TYPE + ", "
             + DBTables.Children.HEIGHT + TEXT_TYPE + ", "
             + DBTables.Children.WEIGHT + TEXT_TYPE + ", "

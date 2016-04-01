@@ -50,6 +50,20 @@ public class ChildInfoFull extends AppCompatActivity {
         child_gender = (TextView)findViewById(R.id.child_gender);
         //if you have a TextView, for example...
 
+
+        /*
+        BitmapDrawable background = new BitmapDrawable (BitmapFactory.decodeResource(getResources(), R.raw.actionbar_background));
+ background.setTileModeX(android.graphics.Shader.TileMode.REPEAT);
+ actionBar.setBackgroundDrawable(background);
+
+ Bitmap bMap = BitmapFactory.decodeResource(res, R.drawable.action_bar_bg);
+BitmapDrawable actionBarBackground = new BitmapDrawable(res, bMap);
+ActionBar bar = getActionBar();
+bar.setBackgroundDrawable(actionBarBackground);
+        */
+
+
+
         //child_Name.setText(newdata.getName());
         String gender = newdata.getDescription().substring(newdata.getDescription().indexOf("Gender: ") + 8, newdata.getDescription().lastIndexOf("e") + 1);
         String Age = newdata.getDescription().substring(newdata.getDescription().indexOf("Age: ") + 5, newdata.getDescription().lastIndexOf(","));

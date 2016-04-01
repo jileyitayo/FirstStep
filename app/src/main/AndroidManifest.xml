@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <permission
         android:name="com.example.jil.permission.C2D_MESSAGE"
@@ -51,7 +54,7 @@
         <activity
             android:name=".Login_Activity"
             android:label="Login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddChild_Activity"
             android:label="New Child"
@@ -92,7 +95,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vaccinations"></activity>
+        <activity android:name=".Vaccinations" />
+        <activity android:name=".Summary"></activity>
     </application>
 
 </manifest>

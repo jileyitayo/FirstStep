@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    app:popupTheme="@style/AppTheme.PopupOverlay">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/layout"
+            android:layout_below="@+id/toolbarContainer">
+            <ImageButton
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/profilePic"
+                android:layout_weight="1"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="24dp"
+                android:layout_weight="25"
+                >
+                <!-- First name TextView -->
+
+                    <TextView
+                        android:id="@+id/FName"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/first_name"
+                        android:textSize="15sp"
+                        android:inputType="textPersonName"
+                        android:layout_width="match_parent">
+                    </TextView>
+
+                <TextView
+                    android:id="@+id/TVFName"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name"
+                    android:textSize="17sp"
+                    android:inputType="textPersonName"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent">
+                </TextView>
+
+                <!-- Last name EditText -->
+                <TextView
+                    android:id="@+id/LName"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name"
+                    android:textSize="15sp"
+                    android:layout_marginTop="15dp"
+                    android:inputType="textPersonName"
+                    android:layout_width="match_parent">
+                </TextView>
+
+                    <TextView
+                        android:id="@+id/TVLName"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/last_name"
+                        android:textSize="17sp"
+                        android:gravity="center_horizontal"
+                        android:inputType="textPersonName"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent">
+                    </TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_below="@+id/layout"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/child_gender"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genders"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/radioSex"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/child_gender"
+                    android:layout_toEndOf="@+id/child_gender"/>
+
+                <TextView
+                    android:id="@+id/child_date"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dateOfb"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/child_gender"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/radioSex"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/child_date"
+                    android:layout_toEndOf="@+id/child_date"/>
+
+                <!-- Weight name EditText
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/spinnerGender">
+
+                    <EditText
+                        android:id="@+id/ETWeight"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/weight"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_width="match_parent">
+                    </EditText>
+
+                </android.support.design.widget.TextInputLayout>
+                -->
+
+                <!-- Height EditText -->
+
+                <TextView
+                    android:id="@+id/THeight"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_height"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/child_date"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/TVHeight"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_height"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/date"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/THeight"
+                    android:layout_toEndOf="@+id/THeight"/>
+
+
+                <TextView
+                    android:id="@+id/TWeight"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_weight"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/THeight"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/TVWeight"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_weight"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/TVHeight"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/TWeight"
+                    android:layout_toEndOf="@+id/TWeight"/>
+
+
+                <TextView
+                    android:id="@+id/TAddLocation"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_address"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/TWeight"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/TVAddLocation"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_address"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/TVWeight"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/TAddLocation"
+                    android:layout_toEndOf="@+id/TAddLocation"/>
+
+
+                <TextView
+                    android:id="@+id/TAllergies"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_allergies"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/TAddLocation"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/TVAllergies"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_allergies"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/TVAddLocation"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/TAllergies"
+                    android:layout_toEndOf="@+id/TAllergies"/>
+
+                <TextView
+                    android:id="@+id/TParents"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_parents"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/TAllergies"
+                    android:layout_width="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/TVParents"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_allergies"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/TVAllergies"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/TParents"
+                    android:layout_toEndOf="@+id/TParents"/>
+
+                <TextView
+                    android:id="@+id/list_viewtext"
+                    android:layout_height="wrap_content"
+                    android:text="Vaccinations"
+                    android:textSize="15sp"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/TParents"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listVIewVaccination"
+                    android:layout_below="@+id/list_viewtext"
+                    />
+
+
+                <!--
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/MoreInfo"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_below="@+id/lblDate"
+                                    android:textColor="#FFF"
+                                    android:id="@+id/btnMoreInfo"
+                                    android:background="#04af45"
+                                    android:fillViewport="false" />
+
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Show Information Added"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_below="@+id/btnMoreInfo"
+                                    android:textColor="#FFF"
+                                    android:id="@+id/btnMoreInfoFull"
+                                    android:background="#0462af"
+                                    android:fillViewport="false" />
+
+                                    -->
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+
+
+    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnSubmit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:background="#1976D2"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_done_white_24dp" >
+    </android.support.design.widget.FloatingActionButton>
+
+</android.support.design.widget.CoordinatorLayout>
+
