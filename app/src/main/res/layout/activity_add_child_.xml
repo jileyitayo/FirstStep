@@ -57,7 +57,7 @@
                 android:id="@+id/ETFName"
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:inputType="textPersonName"
                 android:layout_width="match_parent">
             </EditText>
@@ -74,7 +74,7 @@
                 android:id="@+id/ETLName"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:inputType="textPersonName"
                 android:layout_width="match_parent">
             </EditText>
@@ -110,14 +110,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Male"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:checked="true" />
 
                     <RadioButton
                         android:id="@+id/radioFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:text="@string/Female" />
 
                 </RadioGroup>
@@ -158,15 +158,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:textColor="#165379"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
                     android:text=""
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_below="@+id/radioSex"
                     android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@id/btnShowDate"
-                    android:layout_alignEnd="@+id/radioSex" />
+                    android:layout_toEndOf="@id/btnShowDate" />
 
                 <!-- Height EditText -->
                 <android.support.design.widget.TextInputLayout
@@ -179,7 +178,7 @@
                         android:id="@+id/ETHeight"
                         android:layout_height="wrap_content"
                         android:hint="@string/Height"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:inputType="text"
                         android:layout_width="match_parent">
                     </EditText>
@@ -196,7 +195,7 @@
                         android:id="@+id/ETWeight"
                         android:layout_height="wrap_content"
                         android:hint="@string/Weight"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:inputType="text"
                         android:layout_width="match_parent">
                     </EditText>
@@ -213,7 +212,7 @@
                         android:id="@+id/ETLocation"
                         android:layout_height="wrap_content"
                         android:hint="@string/location"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:inputType="text"
                         android:layout_width="match_parent">
                     </EditText>
@@ -230,7 +229,7 @@
                         android:id="@+id/ETAllergies"
                         android:layout_height="wrap_content"
                         android:hint="@string/Allergies"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:inputType="text"
                         android:layout_width="match_parent">
                     </EditText>
@@ -248,33 +247,35 @@
                     android:text="@string/Allergies_eg"
                     android:layout_below="@+id/input_allergies" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vaccinations"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/allergies_details"
-                    android:textColor="#FFF"
-                    android:id="@+id/vaccination"
-                    android:background="#2b5887"
-                    android:fillViewport="false" />
-
                 <!-- Parent EditText -->
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/input_parentname"
                     android:layout_width="match_parent"
-                    android:layout_below="@+id/vaccination"
+                    android:layout_below="@+id/allergies_details"
                     android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/ETParent"
                         android:layout_height="wrap_content"
                         android:hint="@string/parentName"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:inputType="text"
                         android:layout_width="match_parent">
                     </EditText>
                 </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vaccinations"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/input_parentname"
+                    android:textColor="#FFF"
+                    android:id="@+id/vaccination"
+                    android:background="#2b5887"
+                    android:fillViewport="false" />
+
+
                 <!--
                                 <Button
                                     android:layout_width="match_parent"

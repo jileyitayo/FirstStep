@@ -1,18 +1,23 @@
 package com.example.jil.Users;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by JIL on 03/03/16.
  */
-public class Child {
+public class Child implements Serializable {
     private String firstName;
     private String lastName, height, img_path, addLocation, allergies, vaccinationTaken, vaccination_due, parentName;
     private long child_id;
     private String dateOfBirth;
     private String gender, weight;
     private String moreInfo;
+    private String age;
+    private String profPic;
     private Users user = new Users();
 
     public Child(String firstName, String lastName, Users id) {
@@ -21,11 +26,29 @@ public class Child {
         this.user = id;
         this.child_id = 0;
     }
-
-    public Child() {
-
+    public Child(String firstName, String lastName, String gender, String age, String pic) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.profPic = pic;
+        this.child_id = 0;
     }
 
+    public Child() {
+    }
+
+    public String getAge() {
+        age = getAgeDifference(dateOfBirth);
+        return age;
+    }
+    public String getProfPic() {
+        return profPic;
+    }
+
+    public void setProfPic(String profPic) {
+        this.profPic = profPic;
+    }
     public long getUserId() {
         return user.getId();
     }
@@ -156,6 +179,79 @@ public class Child {
     public void setVaccinationTaken(String vaccinationTaken) {
         this.vaccinationTaken = vaccinationTaken;
     }
+
+
+    private String getAgeDifference(String DOB)
+    {
+        String diff = null;
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat("dd/mm/yyyy");
+        String strDate = simpleDateFormat.format(c.getTime());
+
+        try {
+
+            Date date1 = simpleDateFormat.parse(DOB);
+            Date date2 = simpleDateFormat.parse(strDate);
+            diff = printDifference(date1, date2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return diff;
+    }
+    public String printDifference(Date startDate, Date endDate){
+
+        //milliseconds
+        long different = endDate.getTime() - startDate.getTime();
+
+        System.out.println("startDate : " + startDate);
+        System.out.println("endDate : "+ endDate);
+        System.out.println("different : " + different);
+
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long daysInMilli = hoursInMilli * 24;
+        long monthInMilli = daysInMilli * 30;
+        long yearsInMilli = monthInMilli * 12;
+
+        long elapsedYears = different / yearsInMilli;
+        different = different % yearsInMilli;
+
+        long elapsedMonths = different / monthInMilli;
+        different = different % monthInMilli;
+
+        long elapsedDays = different / daysInMilli;
+        different = different % daysInMilli;
+
+        long elapsedHours = different / hoursInMilli;
+        different = different % hoursInMilli;
+
+        long elapsedMinutes = different / minutesInMilli;
+        different = different % minutesInMilli;
+
+        long elapsedSeconds = different / secondsInMilli;
+
+        String diff = null;
+        if(elapsedMonths <= 1 && elapsedYears <=1)
+        {
+            diff = elapsedYears + " year, " + elapsedMonths + " month old";
+        }
+        else if(elapsedYears <=1)
+        {
+            diff = elapsedYears + " year, " + elapsedMonths + " months old";
+        }
+        else if(elapsedMonths <=1)
+        {
+            diff = elapsedYears + " years, " + elapsedMonths + " month old";
+        }
+        else
+            diff = elapsedYears + " years, " + elapsedMonths + " months old";
+
+
+        return diff;
+    }
 }
+
 
 

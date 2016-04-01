@@ -62,7 +62,7 @@ public class activity_manage extends AppCompatActivity{
 
         //initialize what the fragment should be;
         //MainActivityFragment mainActivityFragment = new MainActivityFragment();
-        ft.add(R.id.fragmentActManage, new ManageChild());
+        ft.replace(R.id.fragmentActManage, new ManageChild());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 

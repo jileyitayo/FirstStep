@@ -41,27 +41,27 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
     DAOChildApp childApp;
     public TextView childName;
     public ImageView proPic;
-    String[] arrayName;
-    public TextView childDesc;
+    public TextView childDesc ,childGender;
     public ImageButton childDelete;
-    private List<ItemObject> itemList = Collections.emptyList();
+    private List<Child> itemList = Collections.emptyList();
 
     public interface MyListerner
     {
-        public void updateListView(List<ItemObject> itemObjects);
+        public void updateListView(List<Child> itemObjects);
         public void updateList();
     }
-
+    MyListerner myListerner;
     Fragment newFragment2;
 
-    public ListRecyclerViewHolders(View itemView, Activity activity,List<ItemObject> newItemList) {
+    public ListRecyclerViewHolders(View itemView, Activity activity,List<Child> newItemList) {
         super(itemView);
         itemView.setOnClickListener(this);
         this.activity = activity;
         itemList = newItemList;
         //myListerner = (MyListerner) this.activity;
         childName = (TextView)itemView.findViewById(R.id.child_name);
-        childDesc = (TextView)itemView.findViewById(R.id.child_description);
+        childDesc = (TextView)itemView.findViewById(R.id.child_description_age);
+        childGender = (TextView) itemView.findViewById(R.id.child_description_gender);
         proPic = (ImageView)itemView.findViewById(R.id.profilePiclist);
 
         //preferences  = activity.getSharedPreferences("ChildName", 0);
@@ -81,22 +81,19 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
         if(v.getId() == R.id.deleteImageButton) {
             AlertDialog.Builder builder=new AlertDialog.Builder(activity);
             builder.setTitle("Child Information");
-            arrayName = splitString(itemList.get(getAdapterPosition()).getName());
-            child.setFirstName(arrayName[0]);
-            child.setLastName(arrayName[1]);
+            child = itemList.get(getAdapterPosition());
             builder.setMessage("Are you sure you want to Delete " + child.getfirstName() + " " + child.getLastName() + " ?");
             final int positionToRemove = getAdapterPosition();
             builder.setNegativeButton("Cancel", null);
             builder.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    itemList.remove(getAdapterPosition());
+                    //itemList.remove(getAdapterPosition());
                     //myListerner.updateListView(itemList);
                     //myListerner = setOnclickDeleteListener(myListerner, activity);
                     //myListerner.updateList();
                     activity.finish();
                     childApp.deleteChild(child);
                     activity.startActivity(new Intent(activity, activity_manage.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-
                 }
             });
             builder.show();

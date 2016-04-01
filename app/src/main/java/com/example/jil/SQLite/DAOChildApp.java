@@ -111,9 +111,9 @@ public class DAOChildApp {
 
     public boolean deleteChild(Child child)
     {
-        moreInformation = new DAOMoreInformation(activityContext);
+        //moreInformation = new DAOMoreInformation(activityContext);
         String[] selectionArgs = {child.getfirstName(), child.getLastName()};
-        moreInformation.deleteChildInfo(child);
+        //moreInformation.deleteChildInfo(child);
         return  database.delete(DBTables.Children.TABLE_NAME, DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?", selectionArgs) > 0;
     }
 

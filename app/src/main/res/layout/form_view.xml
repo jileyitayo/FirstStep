@@ -299,7 +299,7 @@
                 <TextView
                     android:id="@+id/list_viewtext"
                     android:layout_height="wrap_content"
-                    android:text="Vaccinations"
+                    android:text=""
                     android:textSize="15sp"
                     android:gravity="center_horizontal"
                     android:inputType="textPersonName"

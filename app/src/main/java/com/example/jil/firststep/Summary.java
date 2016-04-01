@@ -40,7 +40,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Summary extends AppCompatActivity {
-String uriPath, tGender;
+    String uriPath, tGender;
     ListView lv;
     ArrayList<String> listV = new ArrayList<>();
     ImageButton img;
@@ -76,7 +76,7 @@ String uriPath, tGender;
         tParents = (TextView) findViewById(R.id.TVParents);
          lv = (ListView) findViewById(R.id.listVIewVaccination);
          img = (ImageButton) findViewById(R.id.profilePic);
-        listV =  getIntent().getExtras().getStringArrayList("lists");
+        //listV =  getIntent().getExtras().getStringArrayList("lists");
         FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit2);
         tFname.setText(getIntent().getExtras().getString("tFName").toUpperCase());
         tLname.setText(getIntent().getExtras().getString("tLName").toUpperCase());
@@ -88,9 +88,8 @@ String uriPath, tGender;
         tAllergies.setText(getIntent().getExtras().getString("tAllergies").toUpperCase());
         tParents.setText(getIntent().getExtras().getString("tParents").toUpperCase());
         uriPath = getIntent().getExtras().getString("uriPath");
-        itemsAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Vaccinations.vaccines);
-        lv.setAdapter(itemsAdapter);
+        //itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Vaccinations.vaccines);
+        //lv.setAdapter(itemsAdapter);
         if(uriPath != null)
         {
             retrievePath(uriPath);
