@@ -264,6 +264,7 @@
                     </EditText>
                 </android.support.design.widget.TextInputLayout>
 
+                <!--
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -272,17 +273,16 @@
                     android:layout_below="@+id/input_parentname"
                     android:textColor="#FFF"
                     android:id="@+id/vaccination"
-                    android:background="#2b5887"
+                     android:background="#2b5887"
                     android:fillViewport="false" />
+                -->
 
-
-                <!--
                                 <Button
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/MoreInfo"
                                     android:layout_marginTop="10dp"
-                                    android:layout_below="@+id/lblDate"
+                                    android:layout_below="@+id/input_parentname"
                                     android:textColor="#FFF"
                                     android:id="@+id/btnMoreInfo"
                                     android:background="#04af45"
@@ -296,10 +296,9 @@
                                     android:layout_below="@+id/btnMoreInfo"
                                     android:textColor="#FFF"
                                     android:id="@+id/btnMoreInfoFull"
-                                    android:background="#0462af"
+                                    android:background="#04a6af"
                                     android:fillViewport="false" />
 
-                                    -->
             </RelativeLayout>
 
 

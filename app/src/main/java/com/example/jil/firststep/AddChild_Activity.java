@@ -150,7 +150,21 @@ public class AddChild_Activity extends AppCompatActivity {
         day_a = cal.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
 
-        //btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
+        btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
+        btnMoreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddChild_Activity.this, More_Info.class));
+            }
+        });
+        btnMoreInfoFull = (Button) findViewById(R.id.btnMoreInfoFull);
+        btnMoreInfoFull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddChild_Activity.this, ViewMoreInfo.class));
+            }
+        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +203,7 @@ public class AddChild_Activity extends AppCompatActivity {
             }
 
         });
-
+/*
         btnVaccination = (Button) findViewById(R.id.vaccination);
         btnVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,6 +212,7 @@ public class AddChild_Activity extends AppCompatActivity {
             }
         });
         clearEtValues();
+        */
     }
 
     public void Submit1(View v)

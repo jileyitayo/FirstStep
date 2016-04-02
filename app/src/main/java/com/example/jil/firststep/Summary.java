@@ -134,7 +134,7 @@ public class Summary extends AppCompatActivity {
                                 finish();
                                 mini.delete();
                             } else {
-                                Snackbar.make(view, "Not Successfull!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                Snackbar.make(view, "Not Successfull, Child Already Exists!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                             }
                             super.onPostExecute(message);
                         }

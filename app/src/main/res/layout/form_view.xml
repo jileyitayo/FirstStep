@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="25"
                 >
                 <!-- First name TextView -->

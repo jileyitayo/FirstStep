@@ -23,7 +23,9 @@ import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.Users.Child;
 import com.example.jil.firststep.ChildInfoFull;
 import com.example.jil.firststep.R;
+import com.example.jil.firststep.activity_Schedules;
 import com.example.jil.firststep.activity_manage;
+import com.example.jil.firststep.schedule_menu;
 
 import java.util.Collections;
 import java.util.List;
@@ -66,6 +68,10 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
 
         //preferences  = activity.getSharedPreferences("ChildName", 0);
         childDelete = (ImageButton)itemView.findViewById(R.id.deleteImageButton);
+        if(activity.getClass() == activity_Schedules.class)
+        {
+            childDelete.setVisibility(View.INVISIBLE);
+        }
         childDelete.setOnClickListener(this);
         childApp = new DAOChildApp(activity);
     }
@@ -78,11 +84,13 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
  */
+
+
         if(v.getId() == R.id.deleteImageButton) {
             AlertDialog.Builder builder=new AlertDialog.Builder(activity);
             builder.setTitle("Child Information");
             child = itemList.get(getAdapterPosition());
-            builder.setMessage("Are you sure you want to Delete " + child.getfirstName() + " " + child.getLastName() + " ?");
+            builder.setMessage("Are you sure you want to Delete " + child.getfirstName().toLowerCase() + " " + child.getLastName().toLowerCase() + " ?");
             final int positionToRemove = getAdapterPosition();
             builder.setNegativeButton("Cancel", null);
             builder.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
@@ -99,7 +107,14 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
             builder.show();
         }
 
-
+        else if(activity.getClass() == activity_Schedules.class)
+        {
+            Intent intent = new Intent(activity,schedule_menu.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("DATA12", itemList.get(getAdapterPosition()));
+            intent.putExtras(bundle);
+            activity.startActivity(intent);
+        }
 
         else {
             Intent intent = new Intent(activity,ChildInfoFull.class);

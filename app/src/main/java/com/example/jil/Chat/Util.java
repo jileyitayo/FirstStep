@@ -13,7 +13,7 @@ public class Util {
     public final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     //public final static String SENDER_ID = "967868283752";
     public final static String SENDER_ID = "452894393183";
-    public final static String URL = "http://172.16.156.25/";
+    public final static String URL = "http://172.16.156.107/";
     //public static String base_url = "http://192.168.1.30/gcm_demo/";
     public static String base_url = URL + "gcmChat/";
     public final static String  register_url=base_url+"register.php";

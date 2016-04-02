@@ -96,7 +96,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vaccinations" />
-        <activity android:name=".Summary"></activity>
+        <activity android:name=".Summary" />
+        <activity android:name=".schedule_menu"></activity>
     </application>
 
 </manifest>

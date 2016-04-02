@@ -86,8 +86,6 @@
     <string name="information_prompt">Select Information or Input Information Title</string>
     <string-array name="installed_information">
         <item>Select Information or Input Information Title</item>
-        <item>Height</item>
-        <item>Weight</item>
         <item>Genotype</item>
         <item>Blood Group</item>
         <item>Health Condition</item>
@@ -138,4 +136,9 @@
     <string name="form_address">Address: </string>
     <string name="form_allergies">Allergies: </string>
     <string name="form_parents">Parents Name: </string>
+
+
+    <!-- schedules -->
+    <string name="setAppointmentDoctor">"Doctor's Appointment"</string>
+    <string name="vacinatio">Vaccinations</string>
 </resources>
