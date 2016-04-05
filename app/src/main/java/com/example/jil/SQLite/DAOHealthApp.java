@@ -121,7 +121,6 @@ public class DAOHealthApp {
         Users formUser = getUser1;
         formUser = getUsers();
         long userid = formUser.getId();
-
         return (userid > 0);
     }
     public boolean isUserPresent(Users getUsers, String username, String password)

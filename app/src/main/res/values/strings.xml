@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">First Step</string>
+    <string name="app_name">First Steps</string>
     <string name="action_settings">Settings</string>
     <string name="action_addChild">New Child</string>
 
@@ -127,6 +127,40 @@
     <string name="vaccination11">"Yellow Fever"</string>
     <string name="saveVaccinations">Save</string>
 
+
+    <!-- Array Vaccinations -->
+    <string-array name="vaccinations">
+        <item>"(BCG) Bacillus Calmette-Guerin vaccine"</item>
+        <item>"(OPV) Oral polio vaccine"</item>
+        <item>"(Hep B) Hepatitis B"</item>
+        <item>"Yellow Fever"</item>
+        <item>"Penta-1 (Hib+DTP+Hep B)"</item>
+        <item>"Rota – Rotavirus vaccine"</item>
+        <item>"Hepatitis A (HepA)"</item>
+        <item>"Haemophilus Influenza type b (HIb)"</item>
+        <item>"PCV13 – 13-valent Pneumococcal conjugate vaccine"</item>
+        <item>"Vit A – Vitamin A"</item>
+        <item>"DTaP – Diptheria, Tetanus and acellular Pertussis vaccine"</item>
+        <item>"Var - Varicella vaccine"</item>
+        <item>"MMRV - Measles, Mumps, Rubella and Varicella vaccine"</item>
+        <item>MMR – Measles, Mumps and Rubella vaccine</item>
+        <item>"Men A &amp; C – Meningococcal ACYW135 conjugate vaccine"</item>
+        <item>"Tdap – Infant dose of Tetanus and smaller doses of Diphtheria and acellular Pertussis vaccine"</item>
+        <item>"HPV – Human papiloma virus vaccine"</item>
+        <item>"TT – Tetanus toxoid vaccine"</item>
+    </string-array>
+    <string-array name="vaccination_period">
+        <item>0 month</item>
+        <item>6 weeks</item>
+        <item>10 weeks</item>
+        <item>6 months</item>
+        <item>9 months</item>
+        <item>12 months</item>
+        <item>15 months</item>
+        <item>18 months</item>
+        <item>2 years</item>
+        <item>5 years</item>123
+    </string-array>
     <!-- Form view -->
     <string name="genders">Gender:     </string>
     <string name="dateOfb">Date of Birth: </string>

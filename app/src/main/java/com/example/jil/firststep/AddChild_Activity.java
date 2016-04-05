@@ -193,7 +193,7 @@ public class AddChild_Activity extends AppCompatActivity {
                     bundle.putString("tAllergies", etAllergies.getText().toString().trim());
                     bundle.putString("tParents", etParents.getText().toString().trim());
                     bundle.putString("uriPath", uriPath);
-                    bundle.putStringArrayList("lists", Vaccinations.vaccines);
+                    //bundle.putStringArrayList("lists", Vaccinations.vaccines);
 
                     intent.putExtras(bundle);
                     startActivity(intent);

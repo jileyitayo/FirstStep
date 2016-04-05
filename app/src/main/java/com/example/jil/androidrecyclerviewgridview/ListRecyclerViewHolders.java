@@ -64,7 +64,7 @@ public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements 
         childName = (TextView)itemView.findViewById(R.id.child_name);
         childDesc = (TextView)itemView.findViewById(R.id.child_description_age);
         childGender = (TextView) itemView.findViewById(R.id.child_description_gender);
-        proPic = (ImageView)itemView.findViewById(R.id.profilePiclist);
+        proPic = (ImageView)itemView.findViewById(R.id.profilePiclist21);
 
         //preferences  = activity.getSharedPreferences("ChildName", 0);
         childDelete = (ImageButton)itemView.findViewById(R.id.deleteImageButton);

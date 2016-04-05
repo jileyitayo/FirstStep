@@ -62,7 +62,7 @@ public class DAOMoreInformation {
         return childrenInfoList;
     }
 
-    public int ChildInfoCount(Child child)
+    public String ChildInfoCount(Child child)
     {
         List<MoreInformationModel> childrenInfoList = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class DAOMoreInformation {
             cursor.moveToNext();
         }
         cursor.close();
-        return childrenInfoList.size();
+        return String.valueOf(childrenInfoList.size());
     }
 
 

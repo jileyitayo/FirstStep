@@ -1,5 +1,6 @@
 package com.example.jil.firststep;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,11 @@ public class schedule_menu extends AppCompatActivity {
         btnVacc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(schedule_menu.this, Vaccinations.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DATA123", newdata12);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

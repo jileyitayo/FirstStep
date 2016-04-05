@@ -17,72 +17,23 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarBluish"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             />
     </android.support.design.widget.AppBarLayout>
     <!-- First name and Last name-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/age_det"
-        android:id="@+id/textView"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_below="@+id/toolbarContainer"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/sh_gender"
-        android:id="@+id/child_age"
-        android:layout_above="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/gender_det"
-        android:id="@+id/textView2"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
-
-    <TextView
-        android:layout_marginStart="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/sh_dOB"
-        android:id="@+id/child_gender"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
 
 
-    <!-- More Information -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sh_MoreInfo"
-        android:id="@+id/more_Info"
-        android:textSize="20sp"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="10dp"
-        android:layout_alignStart="@+id/textView2" />
+    <!-- Vaccination -->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="3dp"
-        android:paddingEnd="3dp"
-        android:id="@+id/mChild_info_list"
-        android:layout_below="@id/more_Info">
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/toolbarContainer"
+        android:id="@+id/vacc_info_list">
 
     </android.support.v7.widget.RecyclerView>
 

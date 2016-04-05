@@ -8,7 +8,14 @@
         android:orderInCategory="100"
         android:title="@string/action_new"
         android:icon="@drawable/ic_person_black_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/backup"
+        android:orderInCategory="100"
+        android:title="backup"
+        android:icon="@drawable/ic_cloud_upload_white_24dp"
+        app:showAsAction="always" />
 
     <group>
         <item
@@ -20,6 +27,11 @@
             android:id="@+id/action_settings"
             android:orderInCategory="100"
             android:title="@string/action_settings"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/Logout"
+            android:orderInCategory="100"
+            android:title="Logout"
             app:showAsAction="never" />
     </group>
 </menu>

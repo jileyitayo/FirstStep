@@ -1,120 +1,130 @@
 package com.example.jil.firststep;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.jil.SQLite.DAOChildApp;
+import com.example.jil.Users.Child;
+import com.example.jil.Users.ChildVaccination;
+import com.example.jil.androidrecyclerviewgridview.ListRecyclerViewAdapter;
+import com.example.jil.androidrecyclerviewgridview.ListRecyclerViewHolders;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Vaccinations extends AppCompatActivity implements View.OnClickListener{
+public class Vaccinations extends AppCompatActivity {
 
-    private CheckBox vac1, vac2,vac3,vac4,vac5,vac6,vac7,vac8,vac9,vac10;
-    String va1, va2 ,va3,va4,va5,va6,va7,va8,va9,va10;
+    private CheckBox vac1, vac2, vac3, vac4, vac5, vac6, vac7, vac8, vac9, vac10;
+    String va1, va2, va3, va4, va5, va6, va7, va8, va9, va10;
     private Button btnSave1;
-    public static ArrayList<String> vaccines = new ArrayList<>();
+    Child newdata12 = new Child();
+
+    VaccRecyclerViewAdapter recyclerViewAdapterAdapter;
+    private LinearLayoutManager mylinearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vaccinations);
+        setContentView(R.layout.vaccination);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBluish);
+        setSupportActionBar(toolbar);
+        newdata12= (Child) getIntent().getExtras().getSerializable("DATA123");
 
-        vac1 = (CheckBox) findViewById(R.id.vaccination1);
-        vac2 = (CheckBox) findViewById(R.id.vaccination2);
-        vac3 = (CheckBox) findViewById(R.id.vaccination3);
-        vac4 = (CheckBox) findViewById(R.id.vaccination4);
-        vac5 = (CheckBox) findViewById(R.id.vaccination5);
-        vac6 = (CheckBox) findViewById(R.id.vaccination6);
-        vac7 = (CheckBox) findViewById(R.id.vaccination7);
-        vac8 = (CheckBox) findViewById(R.id.vaccination8);
-        vac9 = (CheckBox) findViewById(R.id.vaccination9);
-        vac10 = (CheckBox) findViewById(R.id.vaccination10);
-        vac1.setOnClickListener(this);
-        vac2.setOnClickListener(this);
-        vac3.setOnClickListener(this);
-        vac4.setOnClickListener(this);
-        vac5.setOnClickListener(this);
-        vac6.setOnClickListener(this);
-        vac7.setOnClickListener(this);
-        vac8.setOnClickListener(this);
-        vac9.setOnClickListener(this);
-        vac10.setOnClickListener(this);
-        btnSave1 = (Button) findViewById(R.id.btnSave);
-        btnSave1.setOnClickListener(this);
+        setTitle("Manage Child");
+        mylinearLayout = new LinearLayoutManager(this);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.vacc_info_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(mylinearLayout);
+        recyclerViewAdapterAdapter = new VaccRecyclerViewAdapter(this, newdata12.childVaccination(this));
+        recyclerView.setAdapter(recyclerViewAdapterAdapter);
+
     }
 
-    @Override
-    public void onClick(View v) {
+        public class VaccRecyclerViewAdapter extends RecyclerView.Adapter<VaccRecyclerViewHolders> {
 
-        switch (v.getId())
+        private Activity context;
+            List<String> itemList = new ArrayList<>();
+        public VaccRecyclerViewAdapter(Activity context, List<String> itemList) {
+            this.itemList = itemList;
+            this.context = context;
+        }
+
+        @Override
+        public VaccRecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+            View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_vaccination, null);
+            VaccRecyclerViewHolders rcv = new VaccRecyclerViewHolders(layoutView, context, itemList);
+            return rcv;
+        }
+
+        @Override
+        public void onBindViewHolder(VaccRecyclerViewHolders holder, int position) {
+            holder.childVacc.setText(itemList.get(position));
+            //holder.childVaccDate.setText(itemList.get(position).getAge());
+            //holder.childVaccDate2.setText(itemList.get(position).getGender());
+        }
+
+        @Override
+        public int getItemCount() {
+            return this.itemList.size();
+        }
+
+        public Uri retrievePath(String path) {
+            File imgFile = new File(path);
+            if (imgFile.exists()) {
+                return Uri.fromFile(imgFile);
+            } else
+                return null;
+        }
+    }
+
+    public class VaccRecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
+        Child child = new Child();
+        Activity activity;
+        DAOChildApp childApp;
+        public TextView childVacc;
+        public TextView childVaccDate ,childVaccDate2;
+        List<String> itemList = new ArrayList<>();
+        Fragment newFragment2;
+
+        public VaccRecyclerViewHolders(View itemView, Activity activity,List<String> newItemList) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+            this.activity = activity;
+            itemList = newItemList;
+            //myListerner = (MyListerner) this.activity;
+            childVacc = (TextView)itemView.findViewById(R.id.vacc_name);
+            childVaccDate = (TextView)itemView.findViewById(R.id.vac_due_date);
+            childVaccDate2 = (TextView) itemView.findViewById(R.id.vac_due_date2);
+            childApp = new DAOChildApp(activity);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        public String[] splitString(String word)
         {
-            case R.id.vaccination1:
-                va1 = getResources().getString(R.string.vaccination1);
-                break;
-            case R.id.vaccination2:
-                va2 = getResources().getString(R.string.vaccination2);
-                break;
-            case R.id.vaccination3:
-                va3 = getResources().getString(R.string.vaccination3);
-                break;
-            case R.id.vaccination4:
-                va4 = getResources().getString(R.string.vaccination4);
-                break;
-            case R.id.vaccination5:
-                va5 = getResources().getString(R.string.vaccination5);
-                break;
-            case R.id.vaccination6:
-                va6 = getResources().getString(R.string.vaccination6);
-                break;
-            case R.id.vaccination7:
-                va7 = getResources().getString(R.string.vaccination7);
-                break;
-            case R.id.vaccination8:
-                va8 = getResources().getString(R.string.vaccination8);
-                break;
-            case R.id.vaccination9:
-                va9 = getResources().getString(R.string.vaccination9);
-                break;
-            case R.id.vaccination10:
-                va10 = getResources().getString(R.string.vaccination10);
-                break;
-            case R.id.btnSave:
-                if (vac1.isChecked()) {
-                    vaccines.add(va1);
-                }
-                if (vac2.isChecked()) {
-                    vaccines.add(va2);
-                }
-                if (vac3.isChecked()) {
-                    vaccines.add(va3);
-                }
-                if (vac4.isChecked()) {
-                    vaccines.add(va4);
-                }
-                if (vac5.isChecked()) {
-                    vaccines.add(va5);
-                }
-                if (vac6.isChecked()) {
-                    vaccines.add(va6);
-                }
-                if (vac7.isChecked()) {
-                    vaccines.add(va7);
-                }
-                if (vac8.isChecked()) {
-                    vaccines.add(va8);
-                }
-                if (vac9.isChecked()) {
-                    vaccines.add(va9);
-                }
-                if (vac10.isChecked()) {
-                    vaccines.add(va10);
-                }
-
-               // btnSave1.setText(String.valueOf(vaccines.size()));
-                finish();
-                break;
-
+            String[] mystring = word.split(" ");
+            return mystring;
         }
     }
 }

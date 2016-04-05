@@ -55,6 +55,7 @@ public class Summary extends AppCompatActivity {
     DAOVaccination daoVaccination;
     TextView tFname, tLname, tDOB, tHeight, tWeight,tlocation,tAllergies,tParents;
     ArrayAdapter<String> itemsAdapter;
+    int drawable = R.drawable.ic_person_black_24dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,11 @@ public class Summary extends AppCompatActivity {
         {
             retrievePath(uriPath);
         }
+        else
+        {
+            img.setImageResource(drawable);
+            uriPath = String.valueOf(drawable);
+        }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +125,7 @@ public class Summary extends AppCompatActivity {
                                     }
                                 }
                                 //unsuccessful
-                                daoVaccination.InsertVaccinations(inputVaccinations(Vaccinations.vaccines), child);
+                                //daoVaccination.InsertVaccinations(inputVaccinations(Vaccinations.vaccines), child);
                                 insertedUser = childApp.InsertChild(child, owner);
                             }
                             return insertedUser;
@@ -130,7 +136,7 @@ public class Summary extends AppCompatActivity {
                             if (insertedUser > 0) {
                                 //message = "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!";
                                 Snackbar.make(view, "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                                Vaccinations.vaccines.clear();
+                                //Vaccinations.vaccines.clear();
                                 finish();
                                 mini.delete();
                             } else {
@@ -242,7 +248,7 @@ public class Summary extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
-        Vaccinations.vaccines.clear();
+        //Vaccinations.vaccines.clear();
         finish();
         super.onBackPressed();
     }

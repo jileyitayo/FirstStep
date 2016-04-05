@@ -148,6 +148,7 @@ public class DAOChildApp {
         existingChild.setUsername(cursor.getString(cursor.getColumnIndex(DBTables.Children.USERNAME)));
         existingChild.setAddLocation(cursor.getString(cursor.getColumnIndex(DBTables.Children.ADDRESS_LOCATION)));
         existingChild.setAllergies(cursor.getString(cursor.getColumnIndex(DBTables.Children.ALLERGIES)));
+        existingChild.setMoreInfo(cursor.getString(cursor.getColumnIndex(DBTables.Children.MOREINFO_COUNT)));
         existingChild.setHeight(cursor.getString(cursor.getColumnIndex(DBTables.Children.HEIGHT)));
         existingChild.setImg_path(cursor.getString(cursor.getColumnIndex(DBTables.Children.IMAGE_PATH)));
         existingChild.setParentName(cursor.getString(cursor.getColumnIndex(DBTables.Children.PARENT_NAMES)));

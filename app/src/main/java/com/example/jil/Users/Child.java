@@ -1,10 +1,17 @@
 package com.example.jil.Users;
 
+import android.content.Context;
+
+import com.example.jil.firststep.R;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by JIL on 03/03/16.
@@ -19,6 +26,7 @@ public class Child implements Serializable {
     private String age;
     private String profPic;
     private Users user = new Users();
+    private String month, year;
 
     public Child(String firstName, String lastName, Users id) {
         this.firstName = firstName;
@@ -36,6 +44,38 @@ public class Child implements Serializable {
     }
 
     public Child() {
+    }
+
+    public List<String> childVaccination(Context activity){
+        List<String> vacc_list = new ArrayList<String>();
+        List<String> duration = new ArrayList<>();
+        String[] listOfVaccinations = activity.getResources().getStringArray(R.array.vaccinations);
+        String[] listOfDurations = activity.getResources().getStringArray(R.array.vaccination_period);
+
+        String childs_age = getAge();
+        for (int i = 0; i < listOfVaccinations.length; i++) {
+            vacc_list.add(listOfVaccinations[i]);
+
+            /*
+            if(year.equals("0")){
+                if(month.equals("0"))
+                {
+
+                }
+                else if(month.equals("6"))
+                {
+
+                }
+                else if(month.equals("9"))
+                {
+
+                }
+            } */
+
+        }
+
+
+return vacc_list;
     }
 
     public String getAge() {
@@ -200,7 +240,8 @@ public class Child implements Serializable {
         return diff;
     }
     public String printDifference(Date startDate, Date endDate){
-
+        long diffInYears, diffInMonths, diffInWeeks;
+        String diff = null;
         //milliseconds
         long different = endDate.getTime() - startDate.getTime();
 
@@ -208,6 +249,48 @@ public class Child implements Serializable {
         System.out.println("endDate : "+ endDate);
         System.out.println("different : " + different);
 
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(different);
+        long diffInHours = TimeUnit.MILLISECONDS.toHours(different);
+        long diffInMin = TimeUnit.MILLISECONDS.toMinutes(different);
+        long diffInSec = TimeUnit.MILLISECONDS.toSeconds(different);
+
+        if(diffInDays >= 365)
+        {
+             diffInYears = (diffInDays / 365);
+             diffInMonths = (long) Math.round ((diffInYears * 12) / 30.455);
+
+            if(diffInMonths <=1 && diffInYears <= 1)
+            {
+                diff = diffInYears + " year, " + diffInMonths + " month old";
+            }
+            else if(diffInMonths <=1)
+            {
+                diff = diffInYears + " years, " + diffInMonths + " month old";
+            }
+
+            else
+            {
+                diff = diffInYears + " years, " + diffInMonths + " months old";;
+            }
+            month = String.valueOf(diffInMonths);
+            year = String.valueOf(diffInYears);
+        }
+
+        else if(diffInDays < 365)
+        {
+             diffInYears = 0;
+            diffInMonths = (long) Math.round(diffInDays / 30.455);
+            if(diffInMonths <=1)
+            {
+                diff = diffInYears + " year, " + diffInMonths + " month old";
+            }
+            else
+                diff = diffInYears + " year, " + diffInMonths + " months old";
+            month = String.valueOf(diffInMonths);
+            year = String.valueOf(diffInYears);
+        }
+        return diff;
+        /*
         long secondsInMilli = 1000;
         long minutesInMilli = secondsInMilli * 60;
         long hoursInMilli = minutesInMilli * 60;
@@ -219,7 +302,7 @@ public class Child implements Serializable {
         different = different % yearsInMilli;
 
         long elapsedMonths = different / monthInMilli;
-        different = different % monthInMilli;
+        different = (different % monthInMilli);
 
         long elapsedDays = different / daysInMilli;
         different = different % daysInMilli;
@@ -250,6 +333,7 @@ public class Child implements Serializable {
 
 
         return diff;
+        */
     }
 }
 

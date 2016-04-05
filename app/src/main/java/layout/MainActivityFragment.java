@@ -77,7 +77,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
     private List<ItemObject> getAllItemListDoctors(){
 
-        String[] descriptions = {"You can add a new child here", "You can edit your child here", "You can communicate with your doctor", "View your schedules and add Reminders"};
+        String[] descriptions = {"You can add a new child here", "You can view all users and their children added", "You can communicate with Patients", "Set schedules and add Reminders"};
         List<ItemObject> allItems = new ArrayList<ItemObject>();
         allItems.add(new ItemObject("View Children", R.drawable.african_american_children, descriptions[1]));
         allItems.add(new ItemObject("Contact Patients", R.drawable.black_mother_child_healthcare_doctor, descriptions[2]));

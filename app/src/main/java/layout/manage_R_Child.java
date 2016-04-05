@@ -25,7 +25,7 @@ public class manage_R_Child extends Fragment {
     {
 
     }
-
+/*
     TextView child_Name;
     TextView child_Age;
     TextView child_DOB;
@@ -33,10 +33,12 @@ public class manage_R_Child extends Fragment {
     DAOChildApp childApp;
     LinearLayoutManager linearLayout;
     List<ItemObject> objectList = new ArrayList<>();
+    */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.vaccination, container, false);
         getActivity().setTitle("First Name");
+        /*
         childApp = new DAOChildApp(getActivity());
         moreInformation = new DAOMoreInformation(getActivity());
 
