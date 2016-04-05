@@ -1,27 +1,19 @@
 package layout;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.jil.SQLite.DAOChildApp;
-import com.example.jil.SQLite.DAOInfoMini;
 import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
-import com.example.jil.androidrecyclerviewgridview.MoreInfoAdpt;
 import com.example.jil.firststep.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,7 +25,7 @@ public class manage_R_Child extends Fragment {
     {
 
     }
-
+/*
     TextView child_Name;
     TextView child_Age;
     TextView child_DOB;
@@ -41,10 +33,12 @@ public class manage_R_Child extends Fragment {
     DAOChildApp childApp;
     LinearLayoutManager linearLayout;
     List<ItemObject> objectList = new ArrayList<>();
+    */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manage_child_full, container, false);
+        View view = inflater.inflate(R.layout.vaccination, container, false);
         getActivity().setTitle("First Name");
+        /*
         childApp = new DAOChildApp(getActivity());
         moreInformation = new DAOMoreInformation(getActivity());
 

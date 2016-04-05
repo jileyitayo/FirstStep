@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <permission
         android:name="com.example.jil.permission.C2D_MESSAGE"
@@ -13,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/group_4"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -51,8 +54,7 @@
         <activity
             android:name=".Login_Activity"
             android:label="Login"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddChild_Activity"
             android:label="New Child"
@@ -81,9 +83,9 @@
         <activity android:name=".ContactDoctor" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".Profile_Activity" />
+        <activity android:name=".Settings" />
         <activity
             android:name=".SplashScreen"
-            android:label="Splash"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -92,6 +94,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Vaccinations"
+            android:theme="@style/AppTheme.BluishActionBar"/>
+        <activity android:name=".Summary" />
+        <activity android:name=".schedule_menu"></activity>
     </application>
 
 </manifest>

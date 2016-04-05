@@ -35,8 +35,16 @@ public class DBHelper extends SQLiteOpenHelper {
             + DBTables.Children.FIRST_NAME + TEXT_TYPE + ", "
             + DBTables.Children.LAST_NAME + TEXT_TYPE + ", "
             + DBTables.Children.GENDER + TEXT_TYPE + ", "
+            + DBTables.Children.IMAGE_PATH + TEXT_TYPE + ", "
             + DBTables.Children.DOB + TEXT_TYPE + ", "
+            + DBTables.Children.HEIGHT + TEXT_TYPE + ", "
+            + DBTables.Children.WEIGHT + TEXT_TYPE + ", "
+            + DBTables.Children.ADDRESS_LOCATION + TEXT_TYPE + ", "
+            + DBTables.Children.ALLERGIES + TEXT_TYPE + ", "
+            + DBTables.Children.VACCINATION_DUE + TEXT_TYPE + ", "
+            + DBTables.Children.VACCINATION_TAKEN + TEXT_TYPE + ", "
             + DBTables.Children.MOREINFO_COUNT + TEXT_TYPE + ", "
+            + DBTables.Children.PARENT_NAMES + TEXT_TYPE + ", "
             + DBTables.Children.USER_ID + TEXT_TYPE + ", "
             + DBTables.Children.USERNAME + TEXT_TYPE + ", "
             + DBTables.Children.CREATED_AT + TEXT_TYPE + ", "
@@ -73,12 +81,34 @@ public class DBHelper extends SQLiteOpenHelper {
             + DBTables.SchedulesAlarm.UPDATED_AT + TEXT_TYPE
             + ");";
 
+    private static final String CREATE_CHILD_VACCINATION_DB_TABLE = "CREATE TABLE "
+            + DBTables.Vaccinations.TABLE_NAME
+            + " ("
+            + DBTables.Vaccinations.vaccine_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + DBTables.Vaccinations.vaccination1 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination2 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination3 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination4 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination5 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination6 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination7 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination8 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination9 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.vaccination10 + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.childFirstName + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.childLastName + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.BYUSER + TEXT_TYPE + ", "
+            + DBTables.Vaccinations.DUEDATE + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.CREATED_AT + TEXT_TYPE + ", "
+            + DBTables.SchedulesAlarm.UPDATED_AT + TEXT_TYPE
+            + ");";
     private static final String CREATE_MoreinfoMini_DB_TABLE = "CREATE TABLE "
             + DBTables.MoreinfoMini.TABLE_NAME
             + " ("
             + DBTables.MoreinfoMini.infoTitle + TEXT_TYPE + ", "
             + DBTables.MoreinfoMini.infoDetails + TEXT_TYPE
             + ");";
+    private static final String DELETE_CHILD_VACCINATION_TABLE = "DROP TABLE IF EXISTS " + DBTables.Vaccinations.TABLE_NAME;
     private static final String DELETE_CHILDDB_TABLE = "DROP TABLE IF EXISTS " + DBTables.Children.TABLE_NAME;
     private static final String DELETE_CHILD_MOREINFO_DB_TABLE = "DROP TABLE IF EXISTS " + DBTables.MoreInfo.TABLE_NAME;
     private static final String DELETE_HEALTHDB_TABLE = "DROP TABLE IF EXISTS " + DBTables.HealthUsers.TABLE_NAME;
@@ -95,6 +125,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_CHILD_MOREINFO_DB_TABLE);
         db.execSQL(CREATE_CHILD_SCHEDULE_DB_TABLE);
         db.execSQL(CREATE_MoreinfoMini_DB_TABLE);
+        db.execSQL(CREATE_CHILD_VACCINATION_DB_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -103,6 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DELETE_CHILD_MOREINFO_DB_TABLE);
         db.execSQL(DELETE_CHILD_SCHEDULE_TABLE);
         db.execSQL(DELETE_MOREINFOMINI_TABLE);
+        db.execSQL(DELETE_CHILD_VACCINATION_TABLE);
         onCreate(db);
     }
 }

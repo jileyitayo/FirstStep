@@ -25,7 +25,7 @@ import android.util.Log;
 
 public class JSONParser {
     static InputStream is = null;
-    static JSONObject jObj = null;
+    JSONObject jObj = null;
     StringBuilder result;
     public static final String SERVER_ADDRESS = "http://172.16.156.26:80/";
 
@@ -102,7 +102,7 @@ public class JSONParser {
 
         try{
             //Receive the response from the server
-            is = new BufferedInputStream(conn.getInputStream());
+           is = new BufferedInputStream(conn.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             result = new StringBuilder();
             String line;

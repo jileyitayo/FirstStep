@@ -11,6 +11,7 @@ public class ItemObject implements Serializable {
 
     private String name;
     private int photo;
+    private String profPic;
     private String description;
 
     public ItemObject(String name, int photo, String description) {
@@ -22,10 +23,24 @@ public class ItemObject implements Serializable {
         this.name = name;
         this.description = description;
     }
+    public ItemObject(String name,String description, String profPic) {
+        this.name = name;
+        this.description = description;
+        this.profPic =profPic;
+    }
     public ItemObject()
     {
 
     }
+
+    public String getProfPic() {
+        return profPic;
+    }
+
+    public void setProfPic(String profPic) {
+        this.profPic = profPic;
+    }
+
     public String getName() {
         return name;
     }

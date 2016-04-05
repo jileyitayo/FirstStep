@@ -44,6 +44,14 @@ public class DAOChildApp {
         contentValues.put(DBTables.Children.FIRST_NAME, child.getfirstName());
         contentValues.put(DBTables.Children.LAST_NAME, child.getLastName());
         contentValues.put(DBTables.Children.GENDER, child.getGender());
+        contentValues.put(DBTables.Children.IMAGE_PATH, child.getImg_path());
+        contentValues.put(DBTables.Children.ADDRESS_LOCATION, child.getAddLocation());
+        contentValues.put(DBTables.Children.ALLERGIES, child.getAllergies());
+        contentValues.put(DBTables.Children.HEIGHT, child.getHeight());
+        contentValues.put(DBTables.Children.WEIGHT, child.getWeight());
+        contentValues.put(DBTables.Children.PARENT_NAMES, child.getParentName());
+        contentValues.put(DBTables.Children.VACCINATION_DUE, child.getVaccination_due());
+        contentValues.put(DBTables.Children.VACCINATION_TAKEN, child.getVaccinationTaken());
         contentValues.put(DBTables.Children.DOB, child.getDateOfBirth());
         contentValues.put(DBTables.Children.MOREINFO_COUNT, moreInformation.ChildInfoCount(child));
         contentValues.put(DBTables.Children.USER_ID, user.getId()); // gets userid for the user that added the child
@@ -71,20 +79,7 @@ public class DAOChildApp {
 
     public int ChildInfoCount(Child child)
     {
-        List<Child> childrenInfoList = new ArrayList<>();
-
-        String[] selectionArgs = {child.getfirstName(), child.getLastName()};
-        Cursor cursor =
-                database.query(DBTables.Children.TABLE_NAME, DBTables.Children.ALL_COLUMNS,
-                        DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?", selectionArgs, null, null, null);
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            Child existingChild = cursorToChildren(cursor);
-            childrenInfoList.add(existingChild);
-            cursor.moveToNext();
-        }
-        cursor.close();
+        List<Child> childrenInfoList = getAllChildren();
         return childrenInfoList.size();
     }
 
@@ -116,9 +111,9 @@ public class DAOChildApp {
 
     public boolean deleteChild(Child child)
     {
-        moreInformation = new DAOMoreInformation(activityContext);
+        //moreInformation = new DAOMoreInformation(activityContext);
         String[] selectionArgs = {child.getfirstName(), child.getLastName()};
-        moreInformation.deleteChildInfo(child);
+        //moreInformation.deleteChildInfo(child);
         return  database.delete(DBTables.Children.TABLE_NAME, DBTables.Children.FIRST_NAME + " = ? AND " + DBTables.Children.LAST_NAME + " = ?", selectionArgs) > 0;
     }
 
@@ -151,6 +146,16 @@ public class DAOChildApp {
         existingChild.setDateOfBirth(cursor.getString(cursor.getColumnIndex(DBTables.Children.DOB)));
         existingChild.setUserId(cursor.getInt(cursor.getColumnIndex(DBTables.Children.USER_ID)));
         existingChild.setUsername(cursor.getString(cursor.getColumnIndex(DBTables.Children.USERNAME)));
+        existingChild.setAddLocation(cursor.getString(cursor.getColumnIndex(DBTables.Children.ADDRESS_LOCATION)));
+        existingChild.setAllergies(cursor.getString(cursor.getColumnIndex(DBTables.Children.ALLERGIES)));
+        existingChild.setMoreInfo(cursor.getString(cursor.getColumnIndex(DBTables.Children.MOREINFO_COUNT)));
+        existingChild.setHeight(cursor.getString(cursor.getColumnIndex(DBTables.Children.HEIGHT)));
+        existingChild.setImg_path(cursor.getString(cursor.getColumnIndex(DBTables.Children.IMAGE_PATH)));
+        existingChild.setParentName(cursor.getString(cursor.getColumnIndex(DBTables.Children.PARENT_NAMES)));
+        existingChild.setVaccination_due(cursor.getString(cursor.getColumnIndex(DBTables.Children.VACCINATION_DUE)));
+        existingChild.setVaccinationTaken(cursor.getString(cursor.getColumnIndex(DBTables.Children.VACCINATION_TAKEN)));
+        existingChild.setWeight(cursor.getString(cursor.getColumnIndex(DBTables.Children.WEIGHT)));
+
 
         // here we convert int to boolean
         //existingUser.setIsreported(cursor.getInt(cursor.getColumnIndex(DBtables.TextReport.COLUMN_ISREPOETED)) > 0);

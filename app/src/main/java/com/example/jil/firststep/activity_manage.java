@@ -16,6 +16,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import com.example.jil.Chat.Util;
 import com.example.jil.Dialog.MyMoreInfoDialog;
@@ -28,9 +37,11 @@ import com.example.jil.androidrecyclerviewgridview.ItemObject;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,10 +57,15 @@ public class activity_manage extends AppCompatActivity{
 
     JSONParser jsonParser = new JSONParser();
     private ProgressDialog pDialog;
-    DAOHealthApp userHelper;
+
     DAOChildApp childHelper;
     DAOMoreInformation childInfoHelper;
     private static final String TAG_SUCCESS = "success";
+    InputStream is=null;
+    String result=null;
+    String line=null;
+    int code;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +78,9 @@ public class activity_manage extends AppCompatActivity{
 
         //initialize what the fragment should be;
         //MainActivityFragment mainActivityFragment = new MainActivityFragment();
-        ft.add(R.id.fragmentActManage, new ManageChild());
+        ft.replace(R.id.fragmentActManage, new ManageChild());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-
-        userHelper = new DAOHealthApp(this);
-        childHelper = new DAOChildApp(this);
-        childInfoHelper = new DAOMoreInformation(this);
 
     }
 
@@ -90,10 +102,7 @@ public class activity_manage extends AppCompatActivity{
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.backup) {
-            new sendUsersDataToDB().execute();
-            return true;
-        }
+
         if (id == R.id.profile) {
             startActivity(new Intent(activity_manage.this, Profile_Activity.class));
             return true;
@@ -173,5 +182,72 @@ public class activity_manage extends AppCompatActivity{
         return out.toByteArray();
     }
 
+    public void insert()
+    {
+        Users sqliteUsers = new Users();
+        //sqliteUsers = userHelper.getUsers();
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("username",sqliteUsers.getUsername()));
+        nameValuePairs.add(new BasicNameValuePair("password",sqliteUsers.getPassword()));
+        nameValuePairs.add(new BasicNameValuePair("email", sqliteUsers.getEmailAddress()));
+        nameValuePairs.add(new BasicNameValuePair("role", sqliteUsers.getRole()));
+
+        try
+        {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(Util.backupUsers);
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("pass 1", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 1", e.toString());
+            Toast.makeText(getApplicationContext(), "Invalid IP Address",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        try
+        {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();
+            Log.e("pass 2", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 2", e.toString());
+        }
+
+        try
+        {
+            JSONObject json_data = new JSONObject(result);
+            code=(json_data.getInt("code"));
+
+            if(code==1)
+            {
+                Toast.makeText(getBaseContext(), "Inserted Successfully",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(getBaseContext(), "Sorry, Try Again",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 3", e.toString());
+        }
+    }
 
 }

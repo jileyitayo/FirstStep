@@ -261,7 +261,7 @@ public class ChatActivity extends AppCompatActivity {
         ArrayList<String> adaper12 = new ArrayList<>();
         for(Users user : listsOfUsers )
         {
-            if(!user.getRole().equals("Doctor") )
+            if(user.getRole().equals("Doctor") )
             {
                 adaper12.add("Dr " + user.getUsername());
             }

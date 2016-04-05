@@ -9,49 +9,80 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/child_name"
-            android:paddingStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
+        <ImageView
+            android:contentDescription="@string/descriptions"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_person_black_24dp"
+            android:id="@+id/profilePiclist21"
+            android:layout_gravity="start"
+            android:background="#00ffffff"
+            android:layout_marginStart="5dp"
             android:layout_alignParentTop="true"
-            android:text="@string/activity"
-            android:textStyle="bold"
-            android:textColor="#363636"
-            android:gravity="center"
-            android:paddingBottom="3dp"
-            android:paddingTop="5dp"
-            android:background="#fff"/>
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/profilePiclist21">
+            <TextView
+                android:id="@+id/child_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/activity"
+                android:textStyle="bold"
+                android:textColor="#363636"
+                android:gravity="center"
+                android:paddingBottom="3dp"
+                android:paddingTop="5dp"
+                android:background="#fff"
+                 />
+            <TextView
+                android:id="@+id/child_description_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="@string/descriptions"
+                android:textColor="#5e5e5e"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:background="#fff"
+                android:singleLine="false" />
+
+            <TextView
+                android:id="@+id/child_description_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:layout_marginTop="3dp"
+                android:text="@string/descriptions"
+                android:textColor="#5e5e5e"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:background="#fff"
+                android:singleLine="false" />
+        </LinearLayout>
+
+
 
         <ImageButton
             android:contentDescription="@string/descriptions"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_delete_black_24dp"
             android:id="@+id/deleteImageButton"
             android:layout_gravity="end"
             android:background="#00ffffff"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
 
 
-        <TextView
-            android:id="@+id/child_description"
-            android:layout_width="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:text="@string/descriptions"
-            android:textColor="#5e5e5e"
-            android:gravity="center"
-            android:layout_below="@+id/child_name"
-            android:paddingTop="2dp"
-            android:background="#fff"/>
+
 
     </RelativeLayout>
 
