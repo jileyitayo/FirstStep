@@ -115,7 +115,6 @@ public class activity_manage extends AppCompatActivity{
         DialogFragment dialog = new MyMoreInfoDialog();
         dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
-
     private class sendUsersDataToDB extends AsyncTask<String, Void, String> {
         //Users sqliteUsers = new Users();
         @Override
@@ -181,6 +180,74 @@ public class activity_manage extends AppCompatActivity{
             out.write(buffer, 0, count);
         }
         return out.toByteArray();
+    }
+
+    public void insert()
+    {
+        Users sqliteUsers = new Users();
+        //sqliteUsers = userHelper.getUsers();
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        nameValuePairs.add(new BasicNameValuePair("username",sqliteUsers.getUsername()));
+        nameValuePairs.add(new BasicNameValuePair("password",sqliteUsers.getPassword()));
+        nameValuePairs.add(new BasicNameValuePair("email", sqliteUsers.getEmailAddress()));
+        nameValuePairs.add(new BasicNameValuePair("role", sqliteUsers.getRole()));
+
+        try
+        {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(Util.backupUsers);
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("pass 1", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 1", e.toString());
+            Toast.makeText(getApplicationContext(), "Invalid IP Address",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        try
+        {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();
+            Log.e("pass 2", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 2", e.toString());
+        }
+
+        try
+        {
+            JSONObject json_data = new JSONObject(result);
+            code=(json_data.getInt("code"));
+
+            if(code==1)
+            {
+                Toast.makeText(getBaseContext(), "Inserted Successfully",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(getBaseContext(), "Sorry, Try Again",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 3", e.toString());
+        }
     }
 
 }

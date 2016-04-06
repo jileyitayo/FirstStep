@@ -25,7 +25,7 @@ import android.util.Log;
 
 public class JSONParser {
     static InputStream is = null;
-    static JSONObject jObj = null;
+    JSONObject jObj = null;
     StringBuilder result;
     public static final String SERVER_ADDRESS = "http://172.16.156.26:80/";
 
@@ -45,22 +45,18 @@ public class JSONParser {
         // make HTTP request
         sbParams = new StringBuilder();
         int i =0;
-        if(params != null)
-        {
-            for(String key : params.keySet()){
-                try{
-                    if(i != 0){
-                        sbParams.append("&");
-                    }
-                    sbParams.append(key).append("=").append(URLEncoder.encode(params.get(key), charset));
+        for(String key : params.keySet()){
+            try{
+                if(i != 0){
+                    sbParams.append("&");
                 }
-                catch (UnsupportedEncodingException e){
-                    e.printStackTrace();
-                }
-                i++;
+                sbParams.append(key).append("=").append(URLEncoder.encode(params.get(key), charset));
             }
+            catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
+            i++;
         }
-
 
         // method is POST
 
@@ -106,7 +102,7 @@ public class JSONParser {
 
         try{
             //Receive the response from the server
-            is = new BufferedInputStream(conn.getInputStream());
+           is = new BufferedInputStream(conn.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             result = new StringBuilder();
             String line;
