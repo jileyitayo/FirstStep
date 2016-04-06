@@ -13,7 +13,11 @@ public class Util {
     public final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     //public final static String SENDER_ID = "967868283752";
     public final static String SENDER_ID = "452894393183";
+<<<<<<< HEAD
     public final static String URL = "http://172.16.66.60/";
+=======
+    public final static String URL = "http://172.16.156.10/";
+>>>>>>> newFeatures
     //public final static String URL = "http://localhost/";
 
     //public static String base_url = "http://192.168.1.30/gcm_demo/";
@@ -23,4 +27,5 @@ public class Util {
     public final static String  fetchUsers = base_url+"fetchUsers.php";
     public final static String  backupUsers = base_url+"backupData.php";
     public final static String  backupChild = base_url+"backUpchild.php";
+    public final static String getAllUsers = base_url+"getAllUsers.php";
 }
