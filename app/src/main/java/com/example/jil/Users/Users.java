@@ -17,6 +17,7 @@ public class Users implements Serializable {
     private int phoneNo;
     private String Role;
     private long id;
+    private String created_at;
 
     public Users(String username, String password)
     {
@@ -46,6 +47,14 @@ public class Users implements Serializable {
     public Users()
     {
 
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
     public long getId()
