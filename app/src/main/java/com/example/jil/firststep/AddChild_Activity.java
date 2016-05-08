@@ -37,6 +37,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -80,11 +81,12 @@ import layout.MainActivityFragment;
 import me.drakeet.materialdialog.MaterialDialog;
 
 public class AddChild_Activity extends AppCompatActivity {
-    Child child = new Child();
     Button btnShowDate, btnMoreInfo, btnMoreInfoFull, btnVaccination;
-    EditText etFirstName, etLastName, etWeight, etHeight, etAddLocation, etAllergies, etParents;
+    EditText etFirstName, etLastName, etWeight, etHeight, etAllergies, etParents;
     ImageButton btnProfile;
     String etGender;
+    AutoCompleteTextView etAddLocation;
+    String[] languages = { "Canaanland, Ota, Ogun State" };
 
     int year_a, month_a, day_a;
     RadioGroup spinGender;
@@ -99,6 +101,7 @@ public class AddChild_Activity extends AppCompatActivity {
     List<ItemObject> myList = new ArrayList<>();
     ItemObject object = new ItemObject();
     TextView tvDate;
+    Child child = new Child();
     Users owner = new Users();
     private static int REQUEST_CAMERA = 1;
     private static int SELECT_FILE = 2;
@@ -119,13 +122,24 @@ public class AddChild_Activity extends AppCompatActivity {
         moreInformation = new DAOMoreInformation(this);
         mini = new DAOInfoMini(this);
         owner = healthApp.getExistingUsers();
+
+        //Create Array Adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, languages);
+        //Find TextView control
+        etAddLocation = (AutoCompleteTextView) findViewById(R.id.ETLocation);
+        //Set the number of characters the user must type before the drop down list is shown
+        etAddLocation.setThreshold(1);
+        //Set the adapter
+        etAddLocation.setAdapter(adapter);
+
+
         spinGender = (RadioGroup) findViewById(R.id.radioSex);
         tvDate = (TextView) findViewById(R.id.lblDate);
         etFirstName = (EditText) findViewById(R.id.ETFName);
         etLastName = (EditText) findViewById(R.id.ETLName);
         etWeight = (EditText) findViewById(R.id.ETWeight);
         etHeight = (EditText) findViewById(R.id.ETHeight);
-        etAddLocation = (EditText) findViewById(R.id.ETLocation);
+        //etAddLocation = (EditText) findViewById(R.id.ETLocation);
         etAllergies = (EditText) findViewById(R.id.ETAllergies);
         etParents = (EditText) findViewById(R.id.ETParent);
         //lvVaccinations = (ListView) findViewById(R.id.listVIewVaccination);
@@ -168,7 +182,10 @@ public class AddChild_Activity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                child = getChildFromLayout(owner.getId(), owner.getUsername(), etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(),
+                        etGender, tvDate.getText().toString().trim(), uriPath, etHeight.getText().toString().trim(), etWeight.getText().toString().trim(),
+                        etAddLocation.getText().toString().trim(), etAllergies.getText().toString().trim(),
+                        etParents.getText().toString().trim());
                 if (TextUtils.isEmpty(etFirstName.getText().toString().trim())) {
                     etFirstName.setError(getString(R.string.firstName_add));
                 } else if (TextUtils.isEmpty(etLastName.getText().toString().trim())) {
@@ -176,7 +193,7 @@ public class AddChild_Activity extends AppCompatActivity {
                 } else if (tvDate.getText().toString().isEmpty()) {
                     Snackbar.make(v, getString(R.string.dOB_add), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
-                else {
+                else if(!childApp.isChildPresent(child)) {
                     int selectedId = spinGender.getCheckedRadioButtonId();
                     radioSexButton = (RadioButton) findViewById(selectedId);
                     selectedRadioGender = radioSexButton.getText().toString();
@@ -199,6 +216,10 @@ public class AddChild_Activity extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
                 }
+                else
+                {
+
+                }
 
             }
 
@@ -214,14 +235,6 @@ public class AddChild_Activity extends AppCompatActivity {
         clearEtValues();
         */
     }
-
-    public void Submit1(View v)
-    {
-
-
-    }
-
-
 
     @Override
     protected void onDestroy() {
@@ -404,13 +417,13 @@ public class AddChild_Activity extends AppCompatActivity {
             if (requestCode == REQUEST_CAMERA) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 200, bytes);//90
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);//200
                 String path=Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/";
                 String fileName =  String.format(System.currentTimeMillis()+".jpg");
                 //Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
-                //File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpg");
+                File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpg");
 
-                File destination = new File(path, fileName);
+                //File destination = new File(path, fileName);
                 FileOutputStream fo;
                 try {
                     destination.createNewFile();

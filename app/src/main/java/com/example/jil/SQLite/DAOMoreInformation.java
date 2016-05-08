@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.jil.Users.Child;
 import com.example.jil.Users.MoreInformationModel;
 import com.example.jil.Users.Users;
+import com.example.jil.androidrecyclerviewgridview.ItemObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,6 +56,24 @@ public class DAOMoreInformation {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             MoreInformationModel existingChildInfo = cursorToInfo(cursor);
+            childrenInfoList.add(existingChildInfo);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return childrenInfoList;
+    }
+
+    public List<ItemObject> getAllChildInfoPat(Child child)
+    {
+        List<ItemObject> childrenInfoList = new ArrayList<>();
+        String[] selectionArgs = {child.getfirstName(), child.getLastName()};
+        Cursor cursor =
+                database.query(DBTables.MoreInfo.TABLE_NAME, DBTables.MoreInfo.ALL_COLUMNS,
+                        DBTables.MoreInfo.CHILD_FIRST_NAME + " = ? AND " + DBTables.MoreInfo.CHILD_LAST_NAME + " = ?", selectionArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ItemObject existingChildInfo = cursorToObject(cursor);
             childrenInfoList.add(existingChildInfo);
             cursor.moveToNext();
         }
@@ -156,7 +175,12 @@ public class DAOMoreInformation {
         //existingUser.setIsreported(cursor.getInt(cursor.getColumnIndex(DBtables.TextReport.COLUMN_ISREPOETED)) > 0);
         return existingInfo;
     }
-
+    private ItemObject cursorToObject(Cursor cursor) {
+        ItemObject existingObj = new ItemObject();
+        existingObj.setName(cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.INFO_TITLE)));
+        existingObj.setDescription(cursor.getString(cursor.getColumnIndex(DBTables.MoreInfo.INFO_DETAILS)));
+        return existingObj;
+    }
 
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(

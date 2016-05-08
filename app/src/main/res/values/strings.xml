@@ -16,8 +16,8 @@
     <string name="gender">Gender</string>
     <string name="Submit">Submit</string>
     <string name="MoreInfo">Add more Information</string>
-    <string name="Height">Height</string>
-    <string name="Weight">Weight</string>
+    <string name="Height">Height in meters (m)</string>
+    <string name="Weight">Weight in kilograms (kg)</string>
     <string name="location">Address Location</string>
     <string name="Allergies">Allergies</string>
     <string name="Allergies_eg">For Example - Dust, Smoke </string>
@@ -159,7 +159,7 @@
         <item>15 months</item>
         <item>18 months</item>
         <item>2 years</item>
-        <item>5 years</item>123
+        <item>5 years</item>
     </string-array>
     <!-- Form view -->
     <string name="genders">Gender:     </string>

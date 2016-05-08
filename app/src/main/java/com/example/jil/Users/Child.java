@@ -1,8 +1,20 @@
 package com.example.jil.Users;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.content.PeriodicSync;
+import android.util.Log;
 
+import com.example.jil.firststep.Age;
+import com.example.jil.firststep.AgeCalculator;
 import com.example.jil.firststep.R;
+
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -24,9 +36,12 @@ public class Child implements Serializable {
     private String gender, weight;
     private String moreInfo;
     private String age;
+    private Age realAge;
     private String profPic;
+    private String DueDate;
+    private String HasTaken;
     private Users user = new Users();
-    private String month, year;
+    private int month, realmonth, year, week, day, hours;
 
     public Child(String firstName, String lastName, Users id) {
         this.firstName = firstName;
@@ -44,6 +59,15 @@ public class Child implements Serializable {
     }
 
     public Child() {
+
+    }
+
+    public String getDueDate() {
+        return DueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        DueDate = dueDate;
     }
 
     public List<String> childVaccination(Context activity){
@@ -52,28 +76,126 @@ public class Child implements Serializable {
         String[] listOfVaccinations = activity.getResources().getStringArray(R.array.vaccinations);
         String[] listOfDurations = activity.getResources().getStringArray(R.array.vaccination_period);
 
+
+
         String childs_age = getAge();
-        for (int i = 0; i < listOfVaccinations.length; i++) {
-            vacc_list.add(listOfVaccinations[i]);
-
-            /*
-            if(year.equals("0")){
-                if(month.equals("0"))
+            if(year == 0){
+                if((hours <= 24))
                 {
+                    vacc_list.add("(BCG) Bacillus Calmette-Guerin vaccine");
+                    vacc_list.add("(Hep B) Hepatitis B vaccine");
+                    ///////////////////////////////
+                    vacc_list.add("Polio vaccine");
+                    vacc_list.add("DTP - Diptheria, Tetanus and acellular Pertussis vaccine");
+                    vacc_list.add("Haemophilus Influenzae Type B vaccine");
+                    vacc_list.add("Pneumococcal vaccine");
+                    vacc_list.add("Rotavirus vaccine");
+                    vacc_list.add("Measles vaccine");
+                    vacc_list.add("Rubella vaccine");
+                    vacc_list.add("Seasonal Influenza vaccine");
+                    vacc_list.add("Yellow Fever");
+                    vacc_list.add("Mumps vaccine");
+                    vacc_list.add("Varicella vaccine");
+                }
+                if((week >= 6 && week <= 8))
+                {
+                    vacc_list.clear();
+                    ////////////
+                    vacc_list.add("Polio vaccine");
+                    vacc_list.add("DTP - Diptheria, Tetanus and acellular Pertussis vaccine");
 
                 }
-                else if(month.equals("6"))
+                if((week >= 6 && week <= 59))
                 {
+                    vacc_list.remove("(BCG) Bacillus Calmette-Guerin vaccine");
+                    vacc_list.remove("(Hep B) Hepatitis B vaccine");
+                    vacc_list.add("Haemophilus Influenzae Type B vaccine");
+                }
+                if(week >= 6)
+                {
+                    vacc_list.remove("(BCG) Bacillus Calmette-Guerin vaccine");
+                    vacc_list.remove("(Hep B) Hepatitis B vaccine");
+                    vacc_list.add("Pneumococcal vaccine");
+                    vacc_list.add("Rotavirus vaccine");
+                }
+                if(month >= 6 || (realmonth >= 9  && realmonth <= 12))
+                {
+                    vacc_list.add("Measles vaccine");
+                    vacc_list.add("Rubella vaccine");
+                    vacc_list.add("Seasonal Influenza vaccine");
+
+                    if(realmonth >= 9  && realmonth <= 12)
+                    {
+                        vacc_list.add("Yellow Fever");
+                    }
 
                 }
-                else if(month.equals("9"))
+                if(getGender().toUpperCase().equals("FEMALE"))
                 {
-
+                    if(realmonth >= 9 )
+                    {
+                        vacc_list.add("HPV - Human papiloma virus vaccine");
+                    }
                 }
-            } */
+                if(realmonth >= 12 && realmonth <= 18)
+                {
+                    vacc_list.add("Mumps vaccine");
+                    vacc_list.add("Varicella vaccine");
+                }
 
+            }
+        if(year >= 2 )
+        {
+            vacc_list.add("Typhoid vaccine");
+        }
+        if(year >= 1 )
+        {
+            vacc_list.add("Cholera vaccine");
+            vacc_list.add("Hepatitis A");
         }
 
+        for (String vacc : vacc_list)
+        {
+            if(vacc == "(BCG) Bacillus Calmette-Guerin vaccine")
+            {
+                setDueDate("Now");
+            }
+            if(vacc == "(Hep B) Hepatitis B vaccine")
+            {
+                setDueDate("Now");
+            }
+            if(vacc == "Polio vaccine" || vacc == "DTP - Diptheria, Tetanus and acellular Pertussis vaccine")
+            {
+                setDueDate("Due in 2 months");
+            }
+
+            if(vacc == "Haemophilus Influenzae Type B vaccine")
+            {
+                 setDueDate("Due in 10 months");
+            }
+            if(vacc == "Pneumococcal vaccine" || vacc == "Rotavirus vaccine")
+            {
+                setDueDate("Give your child this vaccine NOW");
+            }
+            if(vacc == "Measles vaccine" || vacc == "Rubella vaccine" || vacc == "Seasonal Influenza vaccine")
+            {
+                setDueDate("Give your child this vaccine NOW");
+            }
+
+            if(vacc == "Mumps vaccine") {
+                setDueDate("Give your child this vaccine NOW");
+            }
+            if(vacc == "Varicella vaccine")
+            {
+                setDueDate("Due in 6 months");
+            }
+            if(vacc == "Yellow Fever")
+            {
+                setDueDate("Due in 3 months");
+            }
+
+
+        }
 
 return vacc_list;
     }
@@ -223,32 +345,61 @@ return vacc_list;
 
     private String getAgeDifference(String DOB)
     {
+        AgeCalculator calculator = new AgeCalculator();
+        Age age = new Age();
         String diff = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date birthDate = sdf.parse(DOB);
+            age = calculator.calculateAge(birthDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        realAge = age;
+        day = age.getDays();
+        hours = ((age.getYears() * 365) + (month*30)) * 24;
+        month =  age.getMonths();
+        realmonth = (age.getYears() * 12) + month;
+        week = ((age.getYears() * 365) + (month*30)) / 7;
+        year = age.getYears();
+
+
+        /*
         Calendar c = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat =
                 new SimpleDateFormat("dd/mm/yyyy");
         String strDate = simpleDateFormat.format(c.getTime());
+        java.sql.Date javaSqlDate = java.sql.Date.valueOf(DOB);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(javaSqlDate);
+        LocalDate birthdate = new LocalDate (calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));          //Birth date
+        LocalDate now = new LocalDate();                    //Today's date
+        Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+        day = period.getDays();
+        hours = period.getHours();
+        month =  period.getMonths();
+        week = period.getWeeks();
+        year = period.getYears();
 
-        try {
-
-            Date date1 = simpleDateFormat.parse(DOB);
-            Date date2 = simpleDateFormat.parse(strDate);
-            diff = printDifference(date1, date2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Log.d("day", String.valueOf(day));
+        Log.d("day", String.valueOf(day));
+        */
+        diff = printDifference();
         return diff;
     }
+
     public String printDifference(Date startDate, Date endDate){
-        long diffInYears, diffInMonths, diffInWeeks;
+
+
+        double diffInYears, diffInMonths, diffInWeeks;
         String diff = null;
         //milliseconds
-        long different = endDate.getTime() - startDate.getTime();
+        double different = endDate.getTime() - startDate.getTime();
 
         System.out.println("startDate : " + startDate);
         System.out.println("endDate : "+ endDate);
         System.out.println("different : " + different);
-
+        /*
         long diffInDays = TimeUnit.MILLISECONDS.toDays(different);
         long diffInHours = TimeUnit.MILLISECONDS.toHours(different);
         long diffInMin = TimeUnit.MILLISECONDS.toMinutes(different);
@@ -259,6 +410,11 @@ return vacc_list;
              diffInYears = (diffInDays / 365);
              diffInMonths = (long) Math.round ((diffInYears * 12) / 30.455);
 
+            while(diffInMonths >= 12)
+            {
+                double myYears = diffInMonths / 12;
+                 diffInYears  = diffInYears + (long)Math.ceil(myYears);
+            }
             if(diffInMonths <=1 && diffInYears <= 1)
             {
                 diff = diffInYears + " year, " + diffInMonths + " month old";
@@ -274,6 +430,8 @@ return vacc_list;
             }
             month = String.valueOf(diffInMonths);
             year = String.valueOf(diffInYears);
+            hours = String.valueOf(diffInHours);
+            day = String.valueOf(diffInDays);
         }
 
         else if(diffInDays < 365)
@@ -288,34 +446,40 @@ return vacc_list;
                 diff = diffInYears + " year, " + diffInMonths + " months old";
             month = String.valueOf(diffInMonths);
             year = String.valueOf(diffInYears);
+            hours = String.valueOf(diffInHours);
+            day = String.valueOf(diffInDays);
         }
+        long elapsedWeeks = diffInDays / 7;
+        week = String.valueOf(elapsedWeeks);
         return diff;
-        /*
+        */
+
+
+
         long secondsInMilli = 1000;
         long minutesInMilli = secondsInMilli * 60;
         long hoursInMilli = minutesInMilli * 60;
-        long daysInMilli = hoursInMilli * 24;
-        long monthInMilli = daysInMilli * 30;
-        long yearsInMilli = monthInMilli * 12;
+        double daysInMilli = (hoursInMilli * 24);
+        double monthInMilli = daysInMilli * 30.44;
+        double yearsInMilli = monthInMilli * 12;
 
-        long elapsedYears = different / yearsInMilli;
+        int elapsedYears = (int) (different / yearsInMilli);
         different = different % yearsInMilli;
 
-        long elapsedMonths = different / monthInMilli;
+        int elapsedMonths = (int) Math.floor(different / monthInMilli);
         different = (different % monthInMilli);
 
-        long elapsedDays = different / daysInMilli;
+        double elapsedDays = different / daysInMilli;
         different = different % daysInMilli;
 
-        long elapsedHours = different / hoursInMilli;
+        double elapsedHours = different / hoursInMilli;
         different = different % hoursInMilli;
 
-        long elapsedMinutes = different / minutesInMilli;
+        double elapsedMinutes = different / minutesInMilli;
         different = different % minutesInMilli;
 
-        long elapsedSeconds = different / secondsInMilli;
+        double elapsedSeconds = different / secondsInMilli;
 
-        String diff = null;
         if(elapsedMonths <= 1 && elapsedYears <=1)
         {
             diff = elapsedYears + " year, " + elapsedMonths + " month old";
@@ -332,8 +496,32 @@ return vacc_list;
             diff = elapsedYears + " years, " + elapsedMonths + " months old";
 
 
+        double[] dates = {year, month, };
         return diff;
-        */
+
+    }
+
+    public String printDifference()
+    {
+        String diff = null;
+        if(month <= 1 && year <=1)
+        {
+            diff = year + " year, " + month + " month old";
+        }
+        else if(year <=1)
+        {
+            diff = year + " year, " + month + " months old";
+        }
+        else if(month <=1)
+        {
+            diff = year + " years, " + month + " month old";
+        }
+        else
+            diff = year + " years, " + month + " months old";
+
+
+        return diff;
+
     }
 }
 

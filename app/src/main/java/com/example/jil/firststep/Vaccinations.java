@@ -48,7 +48,7 @@ public class Vaccinations extends AppCompatActivity {
         setSupportActionBar(toolbar);
         newdata12= (Child) getIntent().getExtras().getSerializable("DATA123");
 
-        setTitle("Manage Child");
+        setTitle("Vaccinations");
         mylinearLayout = new LinearLayoutManager(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.vacc_info_list);
         recyclerView.setHasFixedSize(true);

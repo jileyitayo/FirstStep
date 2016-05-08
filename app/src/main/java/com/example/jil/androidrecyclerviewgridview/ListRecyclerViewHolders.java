@@ -38,14 +38,15 @@ import layout.manage_R_Child;
  * Created by JIL on 01/03/16.
  */
 public class ListRecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
-    Child child = new Child();
     Activity activity;
+
     DAOChildApp childApp;
     public TextView childName;
     public ImageView proPic;
     public TextView childDesc ,childGender;
     public ImageButton childDelete;
     private List<Child> itemList = Collections.emptyList();
+    Child child = new Child();
 
     public interface MyListerner
     {

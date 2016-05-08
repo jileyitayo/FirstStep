@@ -2,6 +2,8 @@ package com.example.jil.firststep;
 
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +14,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +24,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.SQLite.DAOHealthApp;
@@ -31,6 +36,7 @@ import com.example.jil.Users.ChildVaccination;
 import com.example.jil.Users.MoreInformationModel;
 import com.example.jil.Users.Users;
 import com.example.jil.androidrecyclerviewgridview.ItemObject;
+import com.example.jil.androidrecyclerviewgridview.MoreInfoAdpt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,7 +46,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Summary extends AppCompatActivity {
-    String uriPath, tGender;
+    String uriPath, tGender1;
     ListView lv;
     ArrayList<String> listV = new ArrayList<>();
     ImageButton img;
@@ -48,13 +54,14 @@ public class Summary extends AppCompatActivity {
     DAOChildApp childApp;
     DAOHealthApp healthApp;
     DAOInfoMini mini;
-    List<ItemObject> myList = new ArrayList<>();
+    LinearLayoutManager linearLayout;
+    List<ItemObject> myList = new ArrayList<ItemObject>();
     Users owner = new Users();
     MoreInformationModel infoModel = new MoreInformationModel();
     DAOMoreInformation moreInformation;
     DAOVaccination daoVaccination;
-    TextView tFname, tLname, tDOB, tHeight, tWeight,tlocation,tAllergies,tParents;
-    ArrayAdapter<String> itemsAdapter;
+    TextView tFname, tLname, tDOB, tHeight, tWeight,tlocation,tAllergies,tParents,tGender, ltVText;
+    ArrayAdapter<MoreInformationModel> itemsAdapter;
     int drawable = R.drawable.ic_person_black_24dp;
 
     @Override
@@ -68,6 +75,7 @@ public class Summary extends AppCompatActivity {
         mini = new DAOInfoMini(this);
         owner = healthApp.getExistingUsers();
         tFname  =(TextView) findViewById(R.id.TVFName);
+        tGender = (TextView) findViewById(R.id.radioSex);
         tLname = (TextView) findViewById(R.id.TVLName);
         tDOB = (TextView) findViewById(R.id.date);
         tHeight = (TextView) findViewById(R.id.TVHeight);
@@ -75,13 +83,14 @@ public class Summary extends AppCompatActivity {
         tlocation = (TextView) findViewById(R.id.TVAddLocation);
         tAllergies = (TextView) findViewById(R.id.TVAllergies);
         tParents = (TextView) findViewById(R.id.TVParents);
-         lv = (ListView) findViewById(R.id.listVIewVaccination);
+         //lv = (ListView) findViewById(R.id.listVIewVaccination);
          img = (ImageButton) findViewById(R.id.profilePic);
+        ltVText = (TextView) findViewById(R.id.list_viewtext);
         //listV =  getIntent().getExtras().getStringArrayList("lists");
         FloatingActionButton btnSubmit = (FloatingActionButton) findViewById(R.id.btnSubmit2);
         tFname.setText(getIntent().getExtras().getString("tFName").toUpperCase());
         tLname.setText(getIntent().getExtras().getString("tLName").toUpperCase());
-        tGender = getIntent().getExtras().getString("tGender").toUpperCase() ;
+        tGender.setText(getIntent().getExtras().getString("tGender").toUpperCase());
         tDOB.setText(getIntent().getExtras().getString("tDOB").toUpperCase());
         tHeight.setText(getIntent().getExtras().getString("tHeight").toUpperCase());
         tWeight.setText(getIntent().getExtras().getString("tWeight").toUpperCase());
@@ -100,13 +109,71 @@ public class Summary extends AppCompatActivity {
             img.setImageResource(drawable);
             uriPath = String.valueOf(drawable);
         }
+
+        mini = new DAOInfoMini(this);
+        myList = mini.getAll();
+        if(myList == null)
+        {
+            myList = new ArrayList<>();
+            ltVText.setText("");
+        }
+        else if(mini.getAll().isEmpty())
+        {
+            myList = new ArrayList<>();
+            ltVText.setText("");
+        }
+        else
+        {
+            ltVText.setText("More Information");
+        }
+        linearLayout = new LinearLayoutManager(this);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_list_view_info);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayout);
+        MoreInfoAdpt recyclerViewAdapterAdapter = new MoreInfoAdpt(this, myList);
+        recyclerView.setAdapter(recyclerViewAdapterAdapter);
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId() == R.id.profilePic)
+                {
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("uriPath", uriPath.trim());
+                    Intent intent = new Intent(Summary.this, ViewProfPic.class);
+                    intent.putExtras(bundle1);
+                    startActivity(intent);
+                }
+            }
+        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                child = getChildFromLayout(owner.getId(), owner.getUsername(), tFname.getText().toString().trim(), tLname.getText().toString().trim(),
-                        tGender, tDOB.getText().toString().trim(), uriPath, tHeight.getText().toString().trim(), tWeight.getText().toString().trim(),
+                if(!tHeight.getText().toString().trim().isEmpty())
+                {
+                    child = getChildFromLayout(owner.getId(), owner.getUsername(), tFname.getText().toString().trim(), tLname.getText().toString().trim(),
+                            tGender.getText().toString().trim(), tDOB.getText().toString().trim(), uriPath, tHeight.getText().toString().trim() + "m", tWeight.getText().toString().trim(),
+                            tlocation.getText().toString().trim(), tAllergies.getText().toString().trim(),
+                            tParents.getText().toString().trim());
+                }
+                if(!tWeight.getText().toString().trim().isEmpty())
+                {
+                    child = getChildFromLayout(owner.getId(), owner.getUsername(), tFname.getText().toString().trim(), tLname.getText().toString().trim(),
+                            tGender.getText().toString().trim(), tDOB.getText().toString().trim(), uriPath, tHeight.getText().toString().trim(), tWeight.getText().toString().trim() + "kg",
+                            tlocation.getText().toString().trim(), tAllergies.getText().toString().trim(),
+                            tParents.getText().toString().trim());
+                }
+                else if(tHeight.getText().toString().trim().isEmpty() && tWeight.getText().toString().trim().isEmpty())
+                {
+                    child = getChildFromLayout(owner.getId(), owner.getUsername(), tFname.getText().toString().trim(), tLname.getText().toString().trim(),
+                            tGender.getText().toString().trim(), tDOB.getText().toString().trim(), uriPath, tHeight.getText().toString().trim(), tWeight.getText().toString().trim(),
+                            tlocation.getText().toString().trim(), tAllergies.getText().toString().trim(),
+                            tParents.getText().toString().trim());
+                }
+                /*child = getChildFromLayout(owner.getId(), owner.getUsername(), tFname.getText().toString().trim(), tLname.getText().toString().trim(),
+                        tGender.getText().toString().trim(), tDOB.getText().toString().trim(), uriPath, tHeight.getText().toString().trim() + "m", tWeight.getText().toString().trim() + "kg",
                         tlocation.getText().toString().trim(), tAllergies.getText().toString().trim(),
-                        tParents.getText().toString().trim());
+                        tParents.getText().toString().trim());*/
                     final View view = v;
                     new AsyncTask<Void, Void, Long>() {
                         long insertedUser;
@@ -128,6 +195,7 @@ public class Summary extends AppCompatActivity {
                                 //daoVaccination.InsertVaccinations(inputVaccinations(Vaccinations.vaccines), child);
                                 insertedUser = childApp.InsertChild(child, owner);
                             }
+
                             return insertedUser;
                         }
 
@@ -135,7 +203,7 @@ public class Summary extends AppCompatActivity {
                         protected void onPostExecute(Long message) {
                             if (insertedUser > 0) {
                                 //message = "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!";
-                                Snackbar.make(view, "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                Toast.makeText(Summary.this, "Successfully Added " + child.getfirstName() + " " + child.getLastName() + "!", Toast.LENGTH_SHORT).show();
                                 //Vaccinations.vaccines.clear();
                                 finish();
                                 mini.delete();
@@ -234,7 +302,7 @@ public class Summary extends AppCompatActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(path, options);
-        final int REQUIRED_SIZE = 200;
+        final int REQUIRED_SIZE = 200;//200
         int scale = 1;
         while (options.outWidth / scale / 2 >= REQUIRED_SIZE
                 && options.outHeight / scale / 2 >= REQUIRED_SIZE)
@@ -252,6 +320,9 @@ public class Summary extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
+
+
 }
 
 

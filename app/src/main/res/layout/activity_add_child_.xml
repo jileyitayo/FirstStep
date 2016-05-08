@@ -208,6 +208,18 @@
                     android:layout_below="@+id/input_weight"
                     android:layout_height="wrap_content">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/ETLocation"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/location"
+                        android:textSize="15sp"
+                        android:inputType="text"
+                        android:layout_width="match_parent">
+
+                    </AutoCompleteTextView>
+
+
+                    <!--
                     <EditText
                         android:id="@+id/ETLocation"
                         android:layout_height="wrap_content"
@@ -215,7 +227,7 @@
                         android:textSize="15sp"
                         android:inputType="text"
                         android:layout_width="match_parent">
-                    </EditText>
+                    </EditText>-->
                 </android.support.design.widget.TextInputLayout>
 
                 <!-- Allergies EditText -->
@@ -295,6 +307,7 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_below="@+id/btnMoreInfo"
                                     android:textColor="#FFF"
+                                    android:visibility="gone"
                                     android:id="@+id/btnMoreInfoFull"
                                     android:background="#04a6af"
                                     android:fillViewport="false" />

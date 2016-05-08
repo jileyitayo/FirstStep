@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,5 +17,13 @@
         android:id="@+id/desc"
         android:layout_marginTop="40dp"
         android:hint="Confirm Password"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/desc2"
+        android:layout_marginTop="40dp"
+        android:hint="Enter Detail"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

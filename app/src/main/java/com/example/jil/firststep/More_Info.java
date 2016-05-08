@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -27,13 +29,18 @@ import java.util.List;
 public class More_Info extends AppCompatActivity {
 
 
-    EditText etitle, edetails;
     Button bViewInfo, bSave;
     ItemObject itemObject = new ItemObject();
     LinearLayoutManager linearLayout;
     DAOInfoMini infoMini;
     Spinner spinInfo;
     String etTitle;
+    EditText edetails, etitle;
+    //AutoCompleteTextView edetails, etitle;
+
+    String[] titlesMain = { "Genotype", "Bloodgroup" };
+    String[] detailsMainGenotype = { "AA", "AS", "SS", "SC","AC", "CC" };
+    String[] detailsMainBloodgroup = {"A", "O", "AB", "B"};
     //SharedPreferences mSettings;
 
     @Override
@@ -43,9 +50,34 @@ public class More_Info extends AppCompatActivity {
         this.setTitle("Add More Information");
         Toolbar toolbarBluish = (Toolbar) findViewById(R.id.toolbarBluish);
         setSupportActionBar(toolbarBluish);
-
-        etitle = (EditText) findViewById(R.id.ETitle);
+//Create Array Adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, titlesMain);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, detailsMainGenotype);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, detailsMainBloodgroup);
+        //Find TextView control
         edetails = (EditText) findViewById(R.id.ETDetails);
+        etitle = (EditText) findViewById(R.id.ETitle);
+        /*
+        //Set the number of characters the user must type before the drop down list is shown
+        edetails.setThreshold(1);
+        etitle.setThreshold(1);
+        //Set the adapter
+        etitle.setAdapter(adapter);
+
+        if(etitle.getText().toString().equals("Genotype"))
+        {
+            edetails.setAdapter(adapter2);
+        }
+        else if(etitle.getText().toString().equals("Bloodgroup"))
+        {
+            edetails.setAdapter(adapter3);
+        }
+        */
+
+
+
+        //etitle = (EditText) findViewById(R.id.ETitle);
+        //edetails = (EditText) findViewById(R.id.ETDetails);
         bSave = (Button) findViewById(R.id.btnMoreInfoFull);
         spinInfo = (Spinner) findViewById(R.id.spinnerInformation);
         infoMini = new DAOInfoMini(this);
@@ -61,7 +93,7 @@ public class More_Info extends AppCompatActivity {
                     edetails.setFocusable(true);
                 }else{
                     etitle.setText("");
-                    Toast.makeText(More_Info.this, "Select a title or type in the title", Toast.LENGTH_LONG).show();
+                    Toast.makeText(More_Info.this, "Select a title or type in the title", Toast.LENGTH_SHORT).show();
                 }
 
             }

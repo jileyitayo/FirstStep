@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.jil.SQLite.DAOChildApp;
 import com.example.jil.SQLite.DAOHealthApp;
+import com.example.jil.SQLite.DAOMoreInformation;
 import com.example.jil.Users.Child;
 import com.example.jil.Users.Users;
 import com.example.jil.firststep.R;
@@ -22,32 +23,32 @@ import com.example.jil.firststep.R;
 /**
  * Created by JIL on 16/03/16.
  */
-public class DialogControl extends DialogFragment {
-    Users user = new Users();
+public class SummaryEditDControl extends DialogFragment {
+    Child child = new Child();
     SharedPreferences preferences;
-    DAOHealthApp healthUser;
+    DAOChildApp childApp;
     EditText title, desc, desc2;
-    String[] childName;
-    public interface DialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+    String info,childFN, childLN, name, childDOB;
+    public interface TDialogListener {
+        public void onDialogPositiveClick(DialogFragment dialog, String data);
         public void onDialogNegativeClick(DialogFragment dialog);
     }
 
-    public DialogControl()
+    public SummaryEditDControl()
     {
 
     }
 
-    DialogListener dListener;
+    TDialogListener dListener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        healthUser = new DAOHealthApp(activity);
+        childApp = new DAOChildApp(activity);
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            dListener = (DialogListener) activity;
+            dListener = (TDialogListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
@@ -60,56 +61,49 @@ public class DialogControl extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View layout = inflater.inflate(R.layout.dialog_control, null);
-        preferences = getActivity().getSharedPreferences("loginRole", 0);
-        String userRole = preferences.getString("role", "missing Role");
-        String username = preferences.getString("username", "missing Username");
-        String email = preferences.getString("email", "missing email");
-        user.setEmailAddress(email);
-        user.setRole(userRole);
-        user.setUsername(username);
+        preferences = getActivity().getSharedPreferences("dialogg", 0);
+        name = preferences.getString("name", "missing text");
+        info = preferences.getString("info", "missing text2");
+        childFN = preferences.getString("childFN", "missing childFirstName");
+        childLN = preferences.getString("childLN", "missing childLastName");
+        childDOB = preferences.getString("childDOB", "missing DOB");
         title = (EditText) layout.findViewById(R.id.title);
         desc = (EditText) layout.findViewById(R.id.desc);
         desc2 = (EditText) layout.findViewById(R.id.desc2);
-        desc2.setVisibility(View.GONE);
+        title.setVisibility(View.GONE);
+
+        desc.setVisibility(View.GONE);
         //Building dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(layout);
-        builder.setTitle("Password Reset");
+        builder.setTitle("Edit " + info + "");
         //builder.setMessage("Are you sure you want to Delete " + child.getfirstName() + " " + child.getLastName() + " ?");
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (TextUtils.isEmpty(title.getText().toString().trim())) {
-                    title.setError("Enter Password");
-                } else if (TextUtils.isEmpty(desc.getText().toString().trim())) {
-                    desc.setError("Enter Password Again!");
-                }
-                else if (!isPasswordConfirmed(title.getText().toString().trim(), desc.getText().toString().trim())) {
-                    desc.setError(getString(R.string.error_field_confirmed_required));
+                /*if (TextUtils.isEmpty(desc2.getText().toString().trim())) {
+                    desc.setError("Enter correct Detail");
                 }
                 else
-                {
-                    user.setPassword(title.getText().toString().trim());
-                    healthUser.updateUsersPassword(user);
-                    dialog.dismiss();
-                    dListener.onDialogPositiveClick(DialogControl.this);
-                }
-
+                {*/
+                child.setFirstName(childFN);
+                child.setLastName(childLN);
+                child.setDateOfBirth(childDOB);
+                childApp.updateChildDetails(child, name, desc2.getText().toString().trim());
+                dialog.dismiss();
+                //String childnew = childApp.getSingleChild(child).getfirstName();
+                //dListener.onDialogPositiveClick(SummaryEditDControl.this, childnew +" 09");
+                preferences.edit().clear().apply();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                dListener.onDialogNegativeClick(DialogControl.this);
+                dListener.onDialogNegativeClick(SummaryEditDControl.this);
             }
         });
         return builder.create();
-    }
-
-    private boolean isPasswordConfirmed(String password, String confirmPassword) {
-        //TODO: Replace this with your own logic
-        return password.equals(confirmPassword);
     }
 
 }

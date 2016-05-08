@@ -46,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"
                     android:textSize="17sp"
+                    android:clickable="true"
                     android:inputType="textPersonName"
                     android:gravity="center_horizontal"
                     android:textStyle="bold"
@@ -68,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/last_name"
                         android:textSize="17sp"
+                        android:clickable="true"
                         android:gravity="center_horizontal"
                         android:inputType="textPersonName"
                         android:textStyle="bold"
@@ -107,6 +109,7 @@
                     android:id="@+id/radioSex"
                     android:layout_height="wrap_content"
                     android:text="@string/gender"
+                    android:clickable="true"
                     android:textSize="16sp"
                     android:gravity="center_horizontal"
                     android:layout_marginStart="10dp"
@@ -135,6 +138,7 @@
                     android:textSize="16sp"
                     android:gravity="center_horizontal"
                     android:inputType="textPersonName"
+                    android:clickable="true"
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/radioSex"
                     android:layout_marginStart="10dp"
@@ -181,6 +185,7 @@
                     android:text="@string/form_height"
                     android:textSize="16sp"
                     android:gravity="center_horizontal"
+                    android:clickable="true"
                     android:inputType="textPersonName"
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/date"
@@ -207,6 +212,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/form_weight"
                     android:textSize="16sp"
+                    android:clickable="true"
                     android:gravity="center_horizontal"
                     android:inputType="textPersonName"
                     android:layout_width="wrap_content"
@@ -239,6 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/TVWeight"
                     android:layout_marginStart="10dp"
+                    android:clickable="true"
                     android:textStyle="bold"
                     android:layout_alignTop="@+id/TAddLocation"
                     android:layout_toEndOf="@+id/TAddLocation"/>
@@ -264,6 +271,7 @@
                     android:gravity="center_horizontal"
                     android:inputType="textPersonName"
                     android:layout_width="wrap_content"
+                    android:clickable="true"
                     android:layout_below="@+id/TVAddLocation"
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
@@ -293,6 +301,7 @@
                     android:layout_below="@+id/TVAllergies"
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
+                    android:clickable="true"
                     android:layout_alignTop="@+id/TParents"
                     android:layout_toEndOf="@+id/TParents"/>
 
@@ -300,47 +309,57 @@
                     android:id="@+id/list_viewtext"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:gravity="center_horizontal"
                     android:inputType="textPersonName"
                     android:layout_width="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/TParents"/>
 
-                <ListView
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_list_view_info"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/listVIewVaccination"
+                    android:scrollbars="vertical"
                     android:layout_below="@+id/list_viewtext"
                     />
 
+                <!--<ListView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/listVIewVaccination"
+                   android:layout_below="@+id/list_viewtext"
 
-                <!--
-                                <Button
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/MoreInfo"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_below="@+id/lblDate"
-                                    android:textColor="#FFF"
-                                    android:id="@+id/btnMoreInfo"
-                                    android:background="#04af45"
-                                    android:fillViewport="false" />
+                   />
 
-                                <Button
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Show Information Added"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_below="@+id/btnMoreInfo"
-                                    android:textColor="#FFF"
-                                    android:id="@+id/btnMoreInfoFull"
-                                    android:background="#0462af"
-                                    android:fillViewport="false" />
 
-                                    -->
+                               <Button
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:text="@string/MoreInfo"
+                                   android:layout_marginTop="10dp"
+                                   android:layout_below="@+id/lblDate"
+                                   android:textColor="#FFF"
+                                   android:id="@+id/btnMoreInfo"
+                                   android:background="#04af45"
+                                   android:fillViewport="false" />
+
+                               <Button
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:text="Show Information Added"
+                                   android:layout_marginTop="10dp"
+                                   android:layout_below="@+id/btnMoreInfo"
+                                   android:textColor="#FFF"
+                                   android:id="@+id/btnMoreInfoFull"
+                                   android:background="#0462af"
+                                   android:fillViewport="false" />
+
+                                   -->
             </RelativeLayout>
 
 
